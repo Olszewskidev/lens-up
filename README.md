@@ -1,35 +1,13 @@
 # LensUp
+![lens-up-logo](/docs/lens-up-logo.png)
 
-Have you ever been on wedding or birthday party? If yes, you probably saw photo booth there. You get in, take a photo and paste it in the guest book. Simple and fun. What if we wanted to move this fun to the digital world? Here **LensUp** comes to help. This web application is a virtual gallery, where party guests can add their photos from event and write down wishes as well.
+---
 
-
+Have you ever attended a wedding or a birthday party? If yes, you probably saw photo booth there. You get in, take a photo and paste it in the guest book - simple and fun. But what if we could bring this fun into the digital world? This is where **LensUp** comes to the rescue. **LensUp** is a web application that serves as a virtual gallery, allowing party guests to upload their photos from the event and also write down their wishes.
 
 # 100 days roadmap
 
 **Conclusion:** The main goal of 100 days plan is to deliver [core functionality](#core-functionality) related to adding photos and wishes. I also want to do that without any extra cost for Azure services. So whole app should works on local environment with azure simulators like Azurite. This fact forces certain application architecture decisions, because not all Azure services can be simulated locally. Additionally MVP version doesn't focus on authentication, authorization and security.
-
-#### LensUp big picture:
-
-![lens-up-big-picture](/docs/lens-up-big-picture.svg)
-
-
-
-Description:
-
-- Backend services:
-  - Photo Collector Service *(.NET Web API)*
-  - Gallery Service *(.NET Web API + Azure Functions)*
-  - Back Office Service *(.NET Web API)*
-- UI applications:
-  - Photo Collector UI *(React.js)*
-  - Gallery UI *(React.js)*
-  - Back Office UI *(React.js)*
-- Azure Services:
-  - Table Storage
-  - Queue Storage
-  - Blob Storage
-
-
 
 #### Core functionality
 
@@ -51,20 +29,49 @@ Description:
 
 8. `Gallery Service` push notification about new photo in the gallery for `Gallery UI`, and then `Gallery UI` adds new guest photo to gallery collection.
 
-   
+
+
+
+#### LensUp big picture:
+
+![lens-up-big-picture](/docs/lens-up-big-picture.svg)
+
+
+
+Description:
+
+- Backend services:
+
+  - Photo Collector Service *(.NET Web API)*
+  - Gallery Service *(.NET Web API + Azure Functions)*
+  - Back Office Service *(.NET Web API)*
+
+- UI applications:
+
+  - Photo Collector UI *(React.js)*
+  - Gallery UI *(React.js)*
+  - Back Office UI *(React.js)*
+
+- Azure Services:
+
+  - Table Storage
+  - Queue Storage
+  - Blob Storage
+
+  
 
 ## TODO list (100 days)
 
 #### General aspects:
 
-- [ ] Set up monorepo infrastructure for backend
+- [x] Set up monorepo infrastructure for backend
 - [ ] Set up monorepo infrastructure for frontend 
 
 
 
 #### Backend aspects:
 
-- [ ] Create shared common backend project
+- [x] Create shared common backend project
 - [ ] Create coding rule set for backend services
 - [ ] Create Queue package in shared common project
 - [ ] Create Table Storage package in shared common project
