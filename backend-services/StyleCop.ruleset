@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="LensUp project rules" ToolsVersion="10.0">
+  <Localization ResourceAssembly="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.dll" ResourceBaseName="Microsoft.VisualStudio.CodeAnalysis.RuleSets.Strings.Localized">
+    <Name Resource="MinimumRecommendedRules_Name" />
+    <Description Resource="MinimumRecommendedRules_Description" />
+  </Localization>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+  
+  	<Rule Id="SA1000" Action="Error" /> <!-- The keyword should be followed by a space -->
+	<Rule Id="SA1001" Action="Error" /> <!-- Commas should be followed by whitespace -->
+	<Rule Id="SA1003" Action="Error" /> <!-- Operator = should be preceded by whitespace -->
+	<Rule Id="SA1008" Action="Error" /> <!-- Opening parenthesis should begin with a space -->
+	<Rule Id="SA1009" Action="Error" /> <!-- Closing parenthesis should begin with a space -->
+	
+	<Rule Id="SA1101" Action="Error" /> <!-- Prefix local calls with this  -->
+	<Rule Id="SA1122" Action="Error" /> <!-- Use string empty for empty strings  -->
+	<Rule Id="SA1124" Action="Error" /> <!-- Do not use regions  -->
+	<Rule Id="SA1116" Action="Error" /> <!-- Split parameters must start on line after declaration -->
+	
+	<Rule Id="SA1302" Action="Error" /> <!-- Interface names must begin with I   -->
+	<Rule Id="SA1305" Action="Error" /> <!-- Field names must not use hungarian notation   -->
+	<Rule Id="SA1309" Action="Error" /> <!-- Field names must not begin with underscore  -->
+	
+	<Rule Id="SA1400" Action="Error" /> <!-- Access modifier must be declared    -->
+	<Rule Id="SA1403" Action="Error" /> <!-- File may only contain a single namespace     -->	
+	
+	<Rule Id="SA1500" Action="Error" /> <!-- Curly brackets for multi line statements must not share line   -->
+	<Rule Id="SA1503" Action="Error" /> <!-- Curly brackets must not be omitted   -->
+	<Rule Id="SA1517" Action="Error" /> <!-- Code must not contain blank lines at start of file   -->
+	<Rule Id="SA1518" Action="Error" /> <!-- Code must not contain blank lines at end of file  -->
+	<Rule Id="SA1520" Action="Error" /> <!-- The opening and closing braces of a chained if/else if/else construct were included for some clauses, but omitted for others  -->
+  
+  </Rules>
+</RuleSet>
