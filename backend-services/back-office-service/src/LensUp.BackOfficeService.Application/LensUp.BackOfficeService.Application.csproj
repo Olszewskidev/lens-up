@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LensUp.BackOfficeService.Domain\LensUp.BackOfficeService.Domain.csproj" />
+  </ItemGroup>
+</Project>

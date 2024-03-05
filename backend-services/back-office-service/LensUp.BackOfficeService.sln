@@ -7,9 +7,45 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A6DCD9E8-5A0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9FB7AA3E-0F06-4C6E-8566-469A86509DEF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.BackOfficeService.API", "src\LensUp.BackOfficeService.API\LensUp.BackOfficeService.API.csproj", "{FE120B73-F68F-409F-AD50-B2B34FE715F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.BackOfficeService.Domain", "src\LensUp.BackOfficeService.Domain\LensUp.BackOfficeService.Domain.csproj", "{B220991C-C6DB-4812-8DDD-7CE9C49FF6BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.BackOfficeService.Infrastructure", "src\LensUp.BackOfficeService.Infrastructure\LensUp.BackOfficeService.Infrastructure.csproj", "{B54DF78F-08A9-4F01-9CB5-6F0AA4574319}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.BackOfficeService.Application", "src\LensUp.BackOfficeService.Application\LensUp.BackOfficeService.Application.csproj", "{5DDD3102-0137-4C6E-B661-26E91B78A19E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE120B73-F68F-409F-AD50-B2B34FE715F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE120B73-F68F-409F-AD50-B2B34FE715F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE120B73-F68F-409F-AD50-B2B34FE715F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE120B73-F68F-409F-AD50-B2B34FE715F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B220991C-C6DB-4812-8DDD-7CE9C49FF6BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B220991C-C6DB-4812-8DDD-7CE9C49FF6BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B220991C-C6DB-4812-8DDD-7CE9C49FF6BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B220991C-C6DB-4812-8DDD-7CE9C49FF6BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B54DF78F-08A9-4F01-9CB5-6F0AA4574319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B54DF78F-08A9-4F01-9CB5-6F0AA4574319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B54DF78F-08A9-4F01-9CB5-6F0AA4574319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B54DF78F-08A9-4F01-9CB5-6F0AA4574319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DDD3102-0137-4C6E-B661-26E91B78A19E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DDD3102-0137-4C6E-B661-26E91B78A19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DDD3102-0137-4C6E-B661-26E91B78A19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DDD3102-0137-4C6E-B661-26E91B78A19E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FE120B73-F68F-409F-AD50-B2B34FE715F1} = {A6DCD9E8-5A0B-4CDA-8D3D-BE00387930B0}
+		{B220991C-C6DB-4812-8DDD-7CE9C49FF6BC} = {A6DCD9E8-5A0B-4CDA-8D3D-BE00387930B0}
+		{B54DF78F-08A9-4F01-9CB5-6F0AA4574319} = {A6DCD9E8-5A0B-4CDA-8D3D-BE00387930B0}
+		{5DDD3102-0137-4C6E-B661-26E91B78A19E} = {A6DCD9E8-5A0B-4CDA-8D3D-BE00387930B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35CB7969-9AD1-42D8-B03C-C802B94FB3F2}
