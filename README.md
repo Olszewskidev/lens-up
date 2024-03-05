@@ -44,7 +44,7 @@ Description:
 
   - Photo Collector Service *(.NET Web API)*
   - Gallery Service *(.NET Web API + Azure Functions)*
-  - Back Office Service *(.NET Web API)*
+  - [BackOffice Service (.NET Web API)](backend-services/back-office-service) 
 
 - UI applications:
 
@@ -72,24 +72,27 @@ Description:
 #### Backend aspects:
 
 - [x] Create shared common backend project
-- [ ] Create coding rule set for backend services
+- [x] Create coding rule set for backend services
 - [ ] Create Queue package in shared common project
 - [ ] Create Table Storage package in shared common project
 - [ ] Crate Blob Package in shared common project
 
 ##### Back Office Service:
 
+- [x] Create project structure
 - [ ] Create add user endpoint
 - [ ] Create add gallery endpoint
 - [ ] Create activate gallery endpoint
 
 ##### Gallery Service:
 
+- [ ] Create project structure
 - [ ] Create get gallery info endpoint
 - [ ] Create gallery notification hub
 
 ##### Photo Collector Service:
 
+- [ ] Create project structure
 - [ ] Create add photo and wishes endpoint
 
 
