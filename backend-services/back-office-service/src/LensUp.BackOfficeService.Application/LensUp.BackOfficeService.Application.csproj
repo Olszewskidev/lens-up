@@ -1,8 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" />
+    <PackageReference Include="MediatR" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\common\src\LensUp.Common.Types\LensUp.Common.Types.csproj" />
     <ProjectReference Include="..\LensUp.BackOfficeService.Domain\LensUp.BackOfficeService.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Queries\" />
   </ItemGroup>
 </Project>

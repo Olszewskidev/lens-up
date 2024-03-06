@@ -13,7 +13,6 @@
 		<Rule Id="SA1001" Action="Error" /> <!-- Commas should be followed by whitespace -->
 		<Rule Id="SA1003" Action="Error" /> <!-- Operator = should be preceded by whitespace -->
 		<Rule Id="SA1008" Action="Error" /> <!-- Opening parenthesis should begin with a space -->
-		<Rule Id="SA1009" Action="Error" /> <!-- Closing parenthesis should begin with a space -->
 
 		<Rule Id="SA1101" Action="Error" /> <!-- Prefix local calls with this  -->
 		<Rule Id="SA1122" Action="Error" /> <!-- Use string empty for empty strings  -->
@@ -21,7 +20,6 @@
 		<Rule Id="SA1116" Action="Error" /> <!-- Split parameters must start on line after declaration -->
 
 		<Rule Id="SA1302" Action="Error" /> <!-- Interface names must begin with I   -->
-		<Rule Id="SA1305" Action="Error" /> <!-- Field names must not use hungarian notation   -->
 		<Rule Id="SA1309" Action="Error" /> <!-- Field names must not begin with underscore  -->
 
 		<Rule Id="SA1400" Action="Error" /> <!-- Access modifier must be declared    -->
@@ -38,6 +36,7 @@
 		<Rule Id="SA0001" Action="None" /> <!-- XML comments -->
 
 		<Rule Id="SA1005" Action="None" /> <!-- Single line comment should begin with a space -->
+		<Rule Id="SA1009" Action="None" /> <!-- Closing parenthesis should begin with a space -->
 		<Rule Id="SA1012" Action="None" /> <!-- Opening brace should begin with a space -->
 		<Rule Id="SA1013" Action="None" /> <!-- Closing brace should begin with a space -->
 		<Rule Id="SA1015" Action="None" /> <!-- Closing generic bracket should not be followed by a space -->
@@ -63,6 +62,7 @@
 		<Rule Id="SA1210" Action="None" /> <!-- Using directives should be ordered alphabetically by the namespaces -->
 		<Rule Id="SA1214" Action="None" /> <!-- Readonly fields should appear before non-readonly fields -->
 
+		<Rule Id="SA1305" Action="None" /> <!-- Field names must not use hungarian notation   -->
 		<Rule Id="SA1306" Action="None" /> <!-- Private field should begin with lower-case letter -->
 		<Rule Id="SA1310" Action="None" /> <!-- Field should not contain an underscore -->
 		<Rule Id="SA1311" Action="None" /> <!-- Static readonly fields should begin with upper-case letter -->

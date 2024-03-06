@@ -1,12 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using LensUp.Common.Types;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace LensUp.BackOfficeService.Application
+namespace LensUp.BackOfficeService.Application;
+
+public static class DependencyInjection
 {
-    public static class DependencyInjection
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
-        {
-            return services;
-        }
+        services.AddMediatR(configuration => 
+            configuration.RegisterServicesFromAssemblies(
+                typeof(DependencyInjection).Assembly));
+
+        services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);
+
+        services.AddIdGenerator();
+
+        return services;
     }
 }
