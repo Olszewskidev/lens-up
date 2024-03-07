@@ -7,7 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FE803267-D28
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6E306A6D-FA41-4132-82E4-781E0E112170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.Common.Types", "src\LensUp.Common.Types\LensUp.Common.Types.csproj", "{793EB961-FDD6-45C3-B2AE-842B7CC1DEA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.Types", "src\LensUp.Common.Types\LensUp.Common.Types.csproj", "{793EB961-FDD6-45C3-B2AE-842B7CC1DEA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.Common.AzureTableStorage", "src\LensUp.Common.AzureTableStorage\LensUp.Common.AzureTableStorage.csproj", "{F7308916-9AF1-4CEA-B7CF-B8FB38A6ECA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,12 +21,17 @@ Global
 		{793EB961-FDD6-45C3-B2AE-842B7CC1DEA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{793EB961-FDD6-45C3-B2AE-842B7CC1DEA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{793EB961-FDD6-45C3-B2AE-842B7CC1DEA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7308916-9AF1-4CEA-B7CF-B8FB38A6ECA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7308916-9AF1-4CEA-B7CF-B8FB38A6ECA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7308916-9AF1-4CEA-B7CF-B8FB38A6ECA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7308916-9AF1-4CEA-B7CF-B8FB38A6ECA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{793EB961-FDD6-45C3-B2AE-842B7CC1DEA2} = {FE803267-D28C-40F6-98A7-299B7BDD327F}
+		{F7308916-9AF1-4CEA-B7CF-B8FB38A6ECA5} = {FE803267-D28C-40F6-98A7-299B7BDD327F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A42E4F04-FC29-42C3-AC72-E9A3BEEA657B}
