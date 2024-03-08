@@ -2,5 +2,5 @@
 
 public interface IIdGenerator
 {
-    Guid Generate();
+    string Generate();
 }
