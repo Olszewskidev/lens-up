@@ -2,5 +2,5 @@
 
 public sealed class IdGenerator : IIdGenerator
 {
-    public Guid Generate() => Guid.NewGuid();
+    public string Generate() => Guid.NewGuid().ToString();
 }

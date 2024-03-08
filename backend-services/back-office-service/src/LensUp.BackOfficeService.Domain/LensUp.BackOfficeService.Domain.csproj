@@ -1,3 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\common\src\LensUp.Common.AzureTableStorage\LensUp.Common.AzureTableStorage.csproj" />
+  </ItemGroup>
 </Project>

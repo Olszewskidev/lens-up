@@ -2,4 +2,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\common\src\LensUp.Common.AzureTableStorage\LensUp.Common.AzureTableStorage.csproj" />
+    <ProjectReference Include="..\LensUp.BackOfficeService.Application\LensUp.BackOfficeService.Application.csproj" />
+  </ItemGroup>
 </Project>

@@ -2,4 +2,4 @@
 
 namespace LensUp.BackOfficeService.Application.Commands.AddUser;
 
-public record AddUserRequest(string Name) : IRequest<Guid>;
+public record AddUserRequest(string Name) : IRequest<string>;

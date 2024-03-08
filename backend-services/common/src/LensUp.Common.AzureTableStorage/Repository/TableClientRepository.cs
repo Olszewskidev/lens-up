@@ -8,6 +8,7 @@ namespace LensUp.Common.AzureTableStorage.Repository
 
         public TableClientRepository(TableServiceClient tableServiceClient)
         {
+            // TODO: change to better option.
             this.tableClient = tableServiceClient.GetTableClient(typeof(TEntity).Name);
         }
 
