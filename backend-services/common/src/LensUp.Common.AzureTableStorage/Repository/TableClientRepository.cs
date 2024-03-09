@@ -1,4 +1,5 @@
 ﻿using Azure.Data.Tables;
+using LensUp.Common.AzureTableStorage.TableConfiguration;
 
 namespace LensUp.Common.AzureTableStorage.Repository
 {
@@ -6,10 +7,9 @@ namespace LensUp.Common.AzureTableStorage.Repository
     {
         private readonly TableClient tableClient;
 
-        public TableClientRepository(TableServiceClient tableServiceClient)
+        public TableClientRepository(TableServiceClient tableServiceClient, ITableConfiguration<TEntity> tableConfiguration)
         {
-            // TODO: change to better option.
-            this.tableClient = tableServiceClient.GetTableClient(typeof(TEntity).Name);
+            this.tableClient = tableServiceClient.GetTableClient(tableConfiguration.TableName);
         }
 
         public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
