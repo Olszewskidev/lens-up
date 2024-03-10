@@ -5,7 +5,7 @@ using MediatR;
 
 namespace LensUp.BackOfficeService.Application.Commands.AddUser;
 
-internal sealed class AddUserRequestHandler : IRequestHandler<AddUserRequest, string>
+public sealed class AddUserRequestHandler : IRequestHandler<AddUserRequest, string>
 {
     private readonly IIdGenerator idGenerator;
     private readonly IUserRepository userRepository;

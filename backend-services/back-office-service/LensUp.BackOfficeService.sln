@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.Types", "..\c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.AzureTableStorage", "..\common\src\LensUp.Common.AzureTableStorage\LensUp.Common.AzureTableStorage.csproj", "{7001EAED-3354-4000-86B4-43C47964EEB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.BackOfficeService.UnitTests", "tests\LensUp.BackOfficeService.UnitTests\LensUp.BackOfficeService.UnitTests.csproj", "{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{7001EAED-3354-4000-86B4-43C47964EEB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7001EAED-3354-4000-86B4-43C47964EEB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7001EAED-3354-4000-86B4-43C47964EEB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{45BBB491-93B4-4997-B9C4-A44296D6F93F} = {A6DCD9E8-5A0B-4CDA-8D3D-BE00387930B0}
 		{B1868F37-FD4B-4747-9A97-56D771C44EB8} = {45BBB491-93B4-4997-B9C4-A44296D6F93F}
 		{7001EAED-3354-4000-86B4-43C47964EEB3} = {45BBB491-93B4-4997-B9C4-A44296D6F93F}
+		{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916} = {9FB7AA3E-0F06-4C6E-8566-469A86509DEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35CB7969-9AD1-42D8-B03C-C802B94FB3F2}
