@@ -17,6 +17,7 @@ public static class DependencyInjection
         services.AddAzureTables(azureTablesConnectionString);  
 
         services.AddUserRepository();
+        services.AddGalleryRepository();
 
         return services;
     }
@@ -25,6 +26,14 @@ public static class DependencyInjection
     {
         services.AddAzureTableRepository(new UserTableConfiguration());
         services.AddScoped<IUserRepository, UserRepository>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddGalleryRepository(this IServiceCollection services)
+    {
+        services.AddAzureTableRepository(new GalleryTableConfiguration());
+        services.AddScoped<IGalleryRepository, GalleryRepository>();
 
         return services;
     }
