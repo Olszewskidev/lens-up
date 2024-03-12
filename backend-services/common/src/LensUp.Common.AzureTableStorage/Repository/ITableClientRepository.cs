@@ -7,5 +7,7 @@
         Task UpdateAsync(TEntity entity, CancellationToken cancellationToken);
 
         Task<TEntity?> GetAsync(string partitionKey, string rowKey, CancellationToken cancellationToken);
+
+        Task<bool> ExistsAsync(string partitionKey, string rowKey, CancellationToken cancellationToken);
     }
 }

@@ -17,9 +17,5 @@ public sealed class UserRepository : IUserRepository
         => await this.repostiory.AddAsync(user, cancellationToken);
 
     public async Task<bool> UserExists(string userId, CancellationToken cancellationToken)
-    {
-        var user = await this.repostiory.GetAsync(userId, userId, cancellationToken);
-
-        return user != null ? true : false;
-    }
+        => await this.repostiory.ExistsAsync(userId, userId, cancellationToken);
 }
