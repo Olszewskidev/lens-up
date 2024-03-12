@@ -15,9 +15,15 @@ namespace LensUp.Common.AzureTableStorage.Repository
         public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
             => await this.tableClient.AddEntityAsync(entity, cancellationToken);
 
+        public async Task<bool> ExistsAsync(string partitionKey, string rowKey, CancellationToken cancellationToken)
+        {
+            var result = await this.GetAsync(partitionKey, rowKey, cancellationToken);
+
+            return result == null ? false : true;
+        }
+
         public async Task<TEntity?> GetAsync(string partitionKey, string rowKey, CancellationToken cancellationToken)
         {
-            // TODO: Fix - exception occured and can't create c# entity.
             var result = await this.tableClient.GetEntityIfExistsAsync<TEntity>(partitionKey, rowKey, cancellationToken: cancellationToken);
 
             return result.HasValue ? result.Value : null;

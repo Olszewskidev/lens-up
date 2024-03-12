@@ -11,5 +11,9 @@ public sealed class UserEntity : AzureTableEntityBase
         this.Name = name;
     }
 
-    public string Name { get; init; } 
+    public UserEntity()
+    {
+    }
+
+    public string Name { get; init; } = string.Empty;
 }

@@ -11,6 +11,10 @@ public class AzureTableEntityBase : ITableEntity
         this.RowKey = rowKey;
     }
 
+    public AzureTableEntityBase()
+    {     
+    }
+
     public string PartitionKey { get; set; } = string.Empty;
     public string RowKey { get; set; } = string.Empty;
     public DateTimeOffset? Timestamp { get; set; }
