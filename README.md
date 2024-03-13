@@ -74,14 +74,14 @@ Description:
 - [x] Create shared common backend project
 - [x] Create coding rule set for backend services
 - [ ] Create Queue package in shared common project
-- [ ] Create Table Storage package in shared common project
+- [x] Create Table Storage package in shared common project
 - [ ] Crate Blob Package in shared common project
 
 ##### Back Office Service:
 
 - [x] Create project structure
-- [ ] Create add user endpoint
-- [ ] Create add gallery endpoint
+- [x] Create add user endpoint
+- [x] Create add gallery endpoint
 - [ ] Create activate gallery endpoint
 
 ##### Gallery Service:
