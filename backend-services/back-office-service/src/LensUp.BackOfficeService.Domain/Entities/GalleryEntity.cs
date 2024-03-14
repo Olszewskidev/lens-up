@@ -16,6 +16,12 @@ public sealed class GalleryEntity : AzureTableEntityBase
 
     public string UserId { get; init; }
 
+    public DateTimeOffset? StartDate { get; private set; }
+
+    public DateTimeOffset? EndDate { get; private set; }
+
+    public int? EnterCode { get; private set; }
+
     public static async Task<GalleryEntity> Create(string id, string name, string userId, IUserRepository userRepository, CancellationToken cancellationToken)
     {
         bool userExists = await userRepository.UserExists(userId, cancellationToken);
@@ -27,4 +33,16 @@ public sealed class GalleryEntity : AzureTableEntityBase
         return new GalleryEntity(id, name, userId);
     }
 
+    public void Activate(string userId, DateTimeOffset startDate, DateTimeOffset endDate, int enterCode) 
+    { 
+        bool isGalleryOwner = this.UserId == userId;
+        if (!isGalleryOwner)
+        {
+            throw new UserIsNotGalleryOwnerException(userId);
+        }
+
+        this.StartDate = startDate;
+        this.EndDate = endDate;
+        this.EnterCode = enterCode;
+    }
 }

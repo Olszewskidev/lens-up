@@ -1,4 +1,6 @@
-﻿using LensUp.BackOfficeService.Domain.Repositories;
+﻿using LensUp.BackOfficeService.Application.Abstractions;
+using LensUp.BackOfficeService.Domain.Repositories;
+using LensUp.BackOfficeService.Infrastructure.Generators;
 using LensUp.BackOfficeService.Infrastructure.Repositories;
 using LensUp.BackOfficeService.Infrastructure.TableConfigurations;
 using LensUp.Common.AzureTableStorage;
@@ -19,6 +21,8 @@ public static class DependencyInjection
         services.AddUserRepository();
         services.AddGalleryRepository();
 
+        services.AddEnterCodeGenerator();
+
         return services;
     }
 
@@ -34,6 +38,13 @@ public static class DependencyInjection
     {
         services.AddAzureTableRepository(new GalleryTableConfiguration());
         services.AddScoped<IGalleryRepository, GalleryRepository>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddEnterCodeGenerator(this IServiceCollection services)
+    {
+        services.AddScoped<IEnterCodeGenerator, EnterCodeGenerator>();
 
         return services;
     }
