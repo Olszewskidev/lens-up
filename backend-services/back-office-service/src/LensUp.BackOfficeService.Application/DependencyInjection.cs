@@ -16,6 +16,16 @@ public static class DependencyInjection
 
         services.AddIdGenerator();
 
+        services.AddExceptionHandler();
+
+        return services;
+    }
+
+    private static IServiceCollection AddExceptionHandler(this IServiceCollection services)
+    {
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
+
         return services;
     }
 }
