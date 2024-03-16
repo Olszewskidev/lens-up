@@ -1,3 +1,4 @@
+using LensUp.BackOfficeService.API;
 using LensUp.BackOfficeService.Application;
 using LensUp.BackOfficeService.Infrastructure;
 
@@ -7,6 +8,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddHealthApplicationChecks();
 
 builder.Services
     .AddApplication()
@@ -21,6 +24,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapHealthChecks("/_health");
 
 app.UseExceptionHandler();
 
