@@ -6,6 +6,7 @@
   <ItemGroup>
 	<PackageVersion Include="Microsoft.Extensions.Azure" Version="1.7.2" />
 	<PackageVersion Include="Azure.Data.Tables" Version="12.8.3" />
+	<PackageVersion Include="Azure.Storage.Queues" Version="12.17.1" />
     <PackageVersion Include="MediatR" Version="12.2.0" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageVersion Include="FluentValidation.AspNetCore" Version="11.3.0" />
