@@ -3,6 +3,7 @@ using LensUp.BackOfficeService.Domain.Repositories;
 using LensUp.BackOfficeService.Infrastructure.Generators;
 using LensUp.BackOfficeService.Infrastructure.Repositories;
 using LensUp.BackOfficeService.Infrastructure.TableConfigurations;
+using LensUp.Common.AzureBlobStorage;
 using LensUp.Common.AzureTableStorage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ public static class DependencyInjection
         var azureTablesConnectionString = configuration.GetConnectionString(AzureStorageKey) 
             ?? throw new Exception($"Value for key '{AzureStorageKey}' is null or not found in the configuration.");
         services.AddAzureTables(azureTablesConnectionString);  
+        services.AddAzureBlobStorage(azureTablesConnectionString);
 
         services.AddUserRepository();
         services.AddGalleryRepository();

@@ -1,4 +1,7 @@
-﻿namespace LensUp.Common.AzureBlobStorage.Models;
+﻿using LensUp.Common.AzureBlobStorage.Constants;
+using LensUp.Common.AzureBlobStorage.Extensions;
+
+namespace LensUp.Common.AzureBlobStorage.Models;
 
 public sealed class PhotoToUpload
 {
@@ -17,7 +20,11 @@ public sealed class PhotoToUpload
 
     public static PhotoToUpload Create(string id, string fileName, Stream content)
     {
-        // TODO: validation
+        var photoExtension = Path.GetExtension(fileName).ToLower();
+        if (!PhotoFileExtensions.AllowedToUpload.Contains(photoExtension))
+        {
+            throw new PhotoExtenionIsNotAllowedException(photoExtension);
+        }
         return new PhotoToUpload(id, fileName, content);
     }
 }
