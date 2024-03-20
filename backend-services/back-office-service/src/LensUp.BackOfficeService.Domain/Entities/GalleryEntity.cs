@@ -12,15 +12,21 @@ public sealed class GalleryEntity : AzureTableEntityBase
         this.UserId = userId;
     }
 
-    public string Name { get; init; }
+    public GalleryEntity()
+    {
+    }
 
-    public string UserId { get; init; }
+    public string Name { get; init; } = string.Empty;
+
+    public string UserId { get; init; } = string.Empty;
 
     public DateTimeOffset? StartDate { get; private set; }
 
     public DateTimeOffset? EndDate { get; private set; }
 
     public int? EnterCode { get; private set; }
+
+    public string? QRCodeUri { get; private set; }
 
     public static async Task<GalleryEntity> Create(string id, string name, string userId, IUserRepository userRepository, CancellationToken cancellationToken)
     {
@@ -33,7 +39,7 @@ public sealed class GalleryEntity : AzureTableEntityBase
         return new GalleryEntity(id, name, userId);
     }
 
-    public void Activate(string userId, DateTimeOffset startDate, DateTimeOffset endDate, int enterCode) 
+    public void Activate(string userId, DateTimeOffset endDate, int enterCode, string qrCodeUri) 
     { 
         bool isGalleryOwner = this.UserId == userId;
         if (!isGalleryOwner)
@@ -41,8 +47,9 @@ public sealed class GalleryEntity : AzureTableEntityBase
             throw new UserIsNotGalleryOwnerException(userId);
         }
 
-        this.StartDate = startDate;
+        this.StartDate = DateTimeOffset.UtcNow;
         this.EndDate = endDate;
         this.EnterCode = enterCode;
+        this.QRCodeUri = qrCodeUri;
     }
 }

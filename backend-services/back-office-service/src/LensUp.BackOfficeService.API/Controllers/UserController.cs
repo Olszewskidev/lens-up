@@ -16,7 +16,7 @@ public sealed class UserController : Controller
         this.mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost(RouteVerbs.Create)]
     public async Task<IActionResult> CreateUser([FromBody] AddUserRequest request)
     {
         var response = await this.mediator.Send(request);

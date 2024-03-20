@@ -1,5 +1,5 @@
 ﻿using Azure.Storage.Blobs;
-using LensUp.Common.AzureBlobStorage.Models;
+using LensUp.Common.Types.BlobStorage.Models;
 
 namespace LensUp.Common.AzureBlobStorage.BlobStorage;
 
@@ -21,7 +21,7 @@ public sealed class BlobStorageService : IBlobStorageService
         {
             var blobContainerClient = this.blobServiceClient.GetBlobContainerClient(containerName);
 
-            string blobName = photo.Id;
+            string blobName = photo.FileName;
             BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
             await blobClient.UploadAsync(photo.Content, cancellationToken);
 

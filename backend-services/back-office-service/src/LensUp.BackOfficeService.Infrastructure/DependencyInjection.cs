@@ -1,5 +1,6 @@
 ﻿using LensUp.BackOfficeService.Application.Abstractions;
 using LensUp.BackOfficeService.Domain.Repositories;
+using LensUp.BackOfficeService.Infrastructure.BlobStorage;
 using LensUp.BackOfficeService.Infrastructure.Generators;
 using LensUp.BackOfficeService.Infrastructure.Repositories;
 using LensUp.BackOfficeService.Infrastructure.TableConfigurations;
@@ -22,6 +23,9 @@ public static class DependencyInjection
 
         services.AddUserRepository();
         services.AddGalleryRepository();
+
+        services.AddScoped<IQRGenerator, QRGenerator>();
+        services.AddScoped<IGalleryStorageService, GalleryStorageService>();
 
         services.AddEnterCodeGenerator();
 

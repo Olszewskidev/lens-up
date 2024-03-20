@@ -9,7 +9,4 @@
     <PackageReference Include="Microsoft.Extensions.Azure" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LensUp.Common.Types\LensUp.Common.Types.csproj" />
-  </ItemGroup>
 </Project>

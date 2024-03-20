@@ -1,4 +1,4 @@
-﻿using LensUp.Common.AzureBlobStorage.Models;
+﻿using LensUp.Common.Types.BlobStorage.Models;
 
 namespace LensUp.Common.AzureBlobStorage.BlobStorage;
 
