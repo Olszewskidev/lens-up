@@ -1,4 +1,5 @@
-﻿using LensUp.BackOfficeService.Application.Commands.AddGallery;
+﻿using LensUp.BackOfficeService.Application.Commands.ActivateGallery;
+using LensUp.BackOfficeService.Application.Commands.AddGallery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,8 +17,15 @@ public sealed class GalleryController : Controller
         this.mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost(RouteVerbs.Create)]
     public async Task<IActionResult> AddGallery([FromBody] AddGalleryRequest request)
+    {
+        var response = await this.mediator.Send(request);
+        return this.Ok(response);
+    }
+
+    [HttpPost(RouteVerbs.Activate)]
+    public async Task<IActionResult> ActivateGallery([FromBody] ActivateGalleryRequest request)
     {
         var response = await this.mediator.Send(request);
         return this.Ok(response);

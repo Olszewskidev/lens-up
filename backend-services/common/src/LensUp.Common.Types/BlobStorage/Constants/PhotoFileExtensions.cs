@@ -1,4 +1,4 @@
-﻿namespace LensUp.Common.AzureBlobStorage.Constants;
+﻿namespace LensUp.Common.Types.BlobStorage.Constants;
 
 public static class PhotoFileExtensions
 {

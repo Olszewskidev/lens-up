@@ -1,3 +1,3 @@
-﻿namespace LensUp.Common.AzureBlobStorage.Models;
+﻿namespace LensUp.Common.Types.BlobStorage.Models;
 
 public record UploadedPhotoInfo(string BlobName, Uri Uri);
