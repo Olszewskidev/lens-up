@@ -8,6 +8,5 @@ public sealed class AddGalleryRequestValidator : AbstractValidator<AddGalleryReq
     {
         this.RuleFor(x => x).NotNull();
         this.RuleFor(x => x.Name).NotEmpty();
-        this.RuleFor(x => x.UserId).NotEmpty();
     }
 }

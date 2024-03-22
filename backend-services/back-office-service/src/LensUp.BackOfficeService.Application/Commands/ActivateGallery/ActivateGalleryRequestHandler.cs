@@ -11,6 +11,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     private readonly IQRGenerator qrGenerator;
     private readonly IGalleryStorageService galleryStorageService;
     private readonly IGalleryRepository galleryRepository;
+    private readonly IUserClaims userClaims;
 
     private readonly string galleryUIUrl;
 
@@ -19,12 +20,14 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         IQRGenerator qrGenerator, 
         IGalleryStorageService galleryStorageService,
         IGalleryRepository galleryRepository,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        IUserClaims userClaims)
     {
         this.enterCodeGenerator = enterCodeGenerator;
         this.qrGenerator = qrGenerator;
         this.galleryStorageService = galleryStorageService;
         this.galleryRepository = galleryRepository;
+        this.userClaims = userClaims;
 
         this.galleryUIUrl = configuration.GetValue<string>("GalleryUIUrl") ?? throw new ArgumentNullException(); // TODO: refactor
     }
@@ -40,7 +43,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         var containerName = this.galleryStorageService.CreateGalleryBlobContainer(request.GalleryId, cancellationToken);
         var uploadedPhotoInfo = await this.galleryStorageService.UploadQRCodeToGalleryContainer(containerName, qrCode, cancellationToken);
 
-        galleryEntity.Activate(request.UserId, request.EndDate, galleryEnterCode, uploadedPhotoInfo.Uri.AbsoluteUri);
+        galleryEntity.Activate(this.userClaims.Id, request.EndDate, galleryEnterCode, uploadedPhotoInfo.Uri.AbsoluteUri);
         await this.galleryRepository.UpdateAsync(galleryEntity, cancellationToken);
 
         return new ActivateGalleryResponse(galleryEntity.RowKey, galleryEnterCode);

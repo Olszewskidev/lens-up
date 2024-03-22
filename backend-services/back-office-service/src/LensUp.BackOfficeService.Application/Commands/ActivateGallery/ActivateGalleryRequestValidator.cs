@@ -8,7 +8,6 @@ public sealed class ActivateGalleryRequestValidator : AbstractValidator<Activate
     {
         this.RuleFor(x => x).NotNull();
         this.RuleFor(x => x.GalleryId).NotEmpty();
-        this.RuleFor(x => x.UserId).NotEmpty();
         this.RuleFor(x => x.EndDate)
             .NotEmpty()
             .GreaterThan(DateTimeOffset.UtcNow);

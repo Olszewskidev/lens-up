@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LensUp.BackOfficeService.Application.Abstractions;
 using LensUp.Common.Types;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +18,8 @@ public static class DependencyInjection
         services.AddIdGenerator();
 
         services.AddExceptionHandler();
+
+        services.AddScoped<IUserClaims, UserClaims>();
 
         return services;
     }
