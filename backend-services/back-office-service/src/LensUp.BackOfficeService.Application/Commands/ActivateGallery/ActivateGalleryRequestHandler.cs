@@ -1,4 +1,5 @@
 ﻿using LensUp.BackOfficeService.Application.Abstractions;
+using LensUp.BackOfficeService.Domain.Exceptions;
 using LensUp.BackOfficeService.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     private readonly IQRGenerator qrGenerator;
     private readonly IGalleryStorageService galleryStorageService;
     private readonly IGalleryRepository galleryRepository;
+    private readonly IActiveGalleryRepository activeGalleryRepository;
     private readonly IUserClaims userClaims;
 
     private readonly string galleryUIUrl;
@@ -20,6 +22,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         IQRGenerator qrGenerator, 
         IGalleryStorageService galleryStorageService,
         IGalleryRepository galleryRepository,
+        IActiveGalleryRepository activeGalleryRepository,
         IConfiguration configuration,
         IUserClaims userClaims)
     {
@@ -27,6 +30,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         this.qrGenerator = qrGenerator;
         this.galleryStorageService = galleryStorageService;
         this.galleryRepository = galleryRepository;
+        this.activeGalleryRepository = activeGalleryRepository;
         this.userClaims = userClaims;
 
         this.galleryUIUrl = configuration.GetValue<string>("GalleryUIUrl") ?? throw new ArgumentNullException(); // TODO: refactor
@@ -35,21 +39,28 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     public async Task<ActivateGalleryResponse> Handle(ActivateGalleryRequest request, CancellationToken cancellationToken)
     {
         // TODO: Check transaction possibilitty
-        var userId = this.userClaims.Id;
+        string userId = this.userClaims.Id;
         var galleryEntity = await this.galleryRepository.GetAsync(request.GalleryId, userId, cancellationToken);
 
-        var galleryEnterCode = this.enterCodeGenerator.Generate();
-        var qrCode = this.qrGenerator.Generate(this.BuildGalleryUIUri(galleryEntity.RowKey, galleryEnterCode));
+        if (galleryEntity.EnterCode != null)
+        {
+            throw new GalleryAlreadyActivatedException(request.GalleryId);
+        }
 
-        var containerName = this.galleryStorageService.CreateGalleryBlobContainer(request.GalleryId, cancellationToken);
+        int galleryEnterCode = this.enterCodeGenerator.Generate();
+        var qrCode = this.qrGenerator.Generate(this.BuildGalleryUIUri(galleryEnterCode));
+
+        string containerName = this.galleryStorageService.CreateGalleryBlobContainer(request.GalleryId, cancellationToken);
         var uploadedPhotoInfo = await this.galleryStorageService.UploadQRCodeToGalleryContainer(containerName, qrCode, cancellationToken);
 
-        galleryEntity.Activate(userId, request.EndDate, galleryEnterCode, uploadedPhotoInfo.Uri.AbsoluteUri);
+        var activeGalleryEntity = galleryEntity.Activate(userId, request.EndDate, galleryEnterCode, uploadedPhotoInfo.Uri.AbsoluteUri);
+
         await this.galleryRepository.UpdateAsync(galleryEntity, cancellationToken);
+        await this.activeGalleryRepository.AddAsync(activeGalleryEntity, cancellationToken);
 
         return new ActivateGalleryResponse(galleryEntity.RowKey, galleryEnterCode);
     }
 
-    private Uri BuildGalleryUIUri(string galleryId, int enterCode)
-        => new Uri($"{this.galleryUIUrl}/{galleryId}/{enterCode}");
+    private Uri BuildGalleryUIUri(int enterCode)
+        => new Uri($"{this.galleryUIUrl}/{enterCode}");
 }
