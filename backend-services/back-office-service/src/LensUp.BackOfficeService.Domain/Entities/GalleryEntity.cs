@@ -25,14 +25,12 @@ public sealed class GalleryEntity : AzureTableEntityBase
 
     public int? EnterCode { get; private set; }
 
-    public string? QRCodeUri { get; private set; }
-
     public static GalleryEntity Create(string id, string name, string userId)
     {
         return new GalleryEntity(id, name, userId);
     }
 
-    public void Activate(string userId, DateTimeOffset endDate, int enterCode, string qrCodeUri)
+    public ActiveGalleryEntity Activate(string userId, DateTimeOffset endDate, int enterCode, string qrCodeUri)
     {
         bool isGalleryOwner = this.UserId == userId;
         if (!isGalleryOwner)
@@ -43,6 +41,7 @@ public sealed class GalleryEntity : AzureTableEntityBase
         this.StartDate = DateTimeOffset.UtcNow;
         this.EndDate = endDate;
         this.EnterCode = enterCode;
-        this.QRCodeUri = qrCodeUri;
+
+        return ActiveGalleryEntity.Create(enterCode, this.RowKey, endDate, qrCodeUri);
     }
 }

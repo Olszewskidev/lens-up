@@ -18,16 +18,18 @@ public static class DependencyInjection
     {
         var azureTablesConnectionString = configuration.GetConnectionString(AzureStorageKey) 
             ?? throw new Exception($"Value for key '{AzureStorageKey}' is null or not found in the configuration.");
-        services.AddAzureTables(azureTablesConnectionString);  
-        services.AddAzureBlobStorage(azureTablesConnectionString);
+        services.AddAzureTables(azureTablesConnectionString)
+                .AddAzureBlobStorage(azureTablesConnectionString);
 
-        services.AddUserRepository();
-        services.AddGalleryRepository();
+        services
+            .AddUserRepository()
+            .AddGalleryRepository()
+            .AddActiveGalleryRepository();
 
-        services.AddScoped<IQRGenerator, QRGenerator>();
-        services.AddScoped<IGalleryStorageService, GalleryStorageService>();
-
-        services.AddEnterCodeGenerator();
+        services
+            .AddScoped<IQRGenerator, QRGenerator>()
+            .AddScoped<IGalleryStorageService, GalleryStorageService>()
+            .AddScoped<IEnterCodeGenerator, EnterCodeGenerator>();
 
         return services;
     }
@@ -48,9 +50,10 @@ public static class DependencyInjection
         return services;
     }
 
-    private static IServiceCollection AddEnterCodeGenerator(this IServiceCollection services)
+    private static IServiceCollection AddActiveGalleryRepository(this IServiceCollection services)
     {
-        services.AddScoped<IEnterCodeGenerator, EnterCodeGenerator>();
+        services.AddAzureTableRepository(new ActiveGalleryTableConfiguration());
+        services.AddScoped<IActiveGalleryRepository, ActiveGalleryRepository>();
 
         return services;
     }
