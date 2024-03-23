@@ -17,9 +17,9 @@ public sealed class GalleryRepository : IGalleryRepository
     public async Task AddAsync(GalleryEntity gallery, CancellationToken cancellationToken)
         => await this.repostiory.AddAsync(gallery, cancellationToken);
 
-    public async Task<GalleryEntity> GetAsync(string id, CancellationToken cancellationToken)
+    public async Task<GalleryEntity> GetAsync(string id, string userId, CancellationToken cancellationToken)
     {
-        var entity = await this.repostiory.GetAsync(partitionKey: id, rowKey: id, cancellationToken);
+        var entity = await this.repostiory.GetAsync(partitionKey: userId, rowKey: id, cancellationToken);
 
         return entity ?? throw new GalleryNotFoundException(id);
     }

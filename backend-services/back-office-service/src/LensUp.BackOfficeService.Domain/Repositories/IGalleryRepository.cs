@@ -6,7 +6,7 @@ public interface IGalleryRepository
 {
     Task AddAsync(GalleryEntity gallery, CancellationToken cancellationToken);
 
-    Task<GalleryEntity> GetAsync(string id, CancellationToken cancellationToken);
+    Task<GalleryEntity> GetAsync(string id, string userId, CancellationToken cancellationToken);
 
     Task UpdateAsync(GalleryEntity gallery, CancellationToken cancellationToken);
 }
