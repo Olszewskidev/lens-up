@@ -35,7 +35,8 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     public async Task<ActivateGalleryResponse> Handle(ActivateGalleryRequest request, CancellationToken cancellationToken)
     {
         // TODO: Check transaction possibilitty
-        var galleryEntity = await this.galleryRepository.GetAsync(request.GalleryId, cancellationToken);
+        var userId = this.userClaims.Id;
+        var galleryEntity = await this.galleryRepository.GetAsync(request.GalleryId, userId, cancellationToken);
 
         var galleryEnterCode = this.enterCodeGenerator.Generate();
         var qrCode = this.qrGenerator.Generate(this.BuildGalleryUIUri(galleryEntity.RowKey, galleryEnterCode));
@@ -43,7 +44,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         var containerName = this.galleryStorageService.CreateGalleryBlobContainer(request.GalleryId, cancellationToken);
         var uploadedPhotoInfo = await this.galleryStorageService.UploadQRCodeToGalleryContainer(containerName, qrCode, cancellationToken);
 
-        galleryEntity.Activate(this.userClaims.Id, request.EndDate, galleryEnterCode, uploadedPhotoInfo.Uri.AbsoluteUri);
+        galleryEntity.Activate(userId, request.EndDate, galleryEnterCode, uploadedPhotoInfo.Uri.AbsoluteUri);
         await this.galleryRepository.UpdateAsync(galleryEntity, cancellationToken);
 
         return new ActivateGalleryResponse(galleryEntity.RowKey, galleryEnterCode);

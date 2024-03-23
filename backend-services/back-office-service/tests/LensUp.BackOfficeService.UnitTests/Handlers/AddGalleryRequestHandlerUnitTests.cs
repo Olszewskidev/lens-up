@@ -56,7 +56,7 @@ public sealed class AddGalleryRequestHandlerUnitTests
         result.Should().NotBeNull().And.Be(expectedGalleryId);
         addedGallery.Should().NotBeNull();
         addedGallery!.RowKey.Should().Be(expectedGalleryId);
-        addedGallery!.PartitionKey.Should().Be(expectedGalleryId);
+        addedGallery!.PartitionKey.Should().Be(userId);
         addedGallery!.Name.Should().Be(request.Name);
         addedGallery!.UserId.Should().Be(userId);
 

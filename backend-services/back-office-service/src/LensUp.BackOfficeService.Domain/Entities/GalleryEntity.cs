@@ -5,7 +5,7 @@ namespace LensUp.BackOfficeService.Domain.Entities;
 
 public sealed class GalleryEntity : AzureTableEntityBase
 {
-    private GalleryEntity(string id, string name, string userId) : base(partitionKey: id, rowKey: id)
+    private GalleryEntity(string id, string name, string userId) : base(partitionKey: userId, rowKey: id)
     {
         this.Name = name;
         this.UserId = userId;
