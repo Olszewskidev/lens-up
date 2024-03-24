@@ -7,9 +7,34 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8E73C51B-915
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A2350187-7B0D-447E-8E23-3F61EC68CF57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.PhotoCollectorService.API", "src\LensUp.PhotoCollectorService.API\LensUp.PhotoCollectorService.API.csproj", "{D332D993-9281-427C-8890-57D3C0A7BA6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{744BCB9F-BDF9-4B8C-9D95-BD00D7C90B01}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.Types", "..\common\src\LensUp.Common.Types\LensUp.Common.Types.csproj", "{599A4938-7CE2-4C6C-93D9-E08870405563}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D332D993-9281-427C-8890-57D3C0A7BA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D332D993-9281-427C-8890-57D3C0A7BA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D332D993-9281-427C-8890-57D3C0A7BA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D332D993-9281-427C-8890-57D3C0A7BA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599A4938-7CE2-4C6C-93D9-E08870405563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599A4938-7CE2-4C6C-93D9-E08870405563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599A4938-7CE2-4C6C-93D9-E08870405563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599A4938-7CE2-4C6C-93D9-E08870405563}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D332D993-9281-427C-8890-57D3C0A7BA6E} = {8E73C51B-9158-4DA6-B7D6-015D9B534F66}
+		{744BCB9F-BDF9-4B8C-9D95-BD00D7C90B01} = {8E73C51B-9158-4DA6-B7D6-015D9B534F66}
+		{599A4938-7CE2-4C6C-93D9-E08870405563} = {744BCB9F-BDF9-4B8C-9D95-BD00D7C90B01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FEC62160-1B06-4122-910F-103BAD7D0C60}
