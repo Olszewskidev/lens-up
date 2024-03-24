@@ -1,5 +1,5 @@
 ﻿using LensUp.Common.Types.BlobStorage.Constants;
-using LensUp.Common.Types.BlobStorage.Extensions;
+using LensUp.Common.Types.BlobStorage.Exceptions;
 
 namespace LensUp.Common.Types.BlobStorage.Models;
 
@@ -20,7 +20,7 @@ public sealed class PhotoToUpload
         var photoExtension = Path.GetExtension(fileName).ToLower();
         if (!PhotoFileExtensions.AllowedToUpload.Contains(photoExtension))
         {
-            throw new PhotoExtenionIsNotAllowedException(photoExtension);
+            throw new PhotoExtensionIsNotAllowedException(photoExtension);
         }
 
         return new PhotoToUpload(fileName, content);

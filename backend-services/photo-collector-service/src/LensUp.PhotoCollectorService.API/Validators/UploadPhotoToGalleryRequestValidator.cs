@@ -1,5 +1,5 @@
 ﻿using LensUp.Common.Types.BlobStorage.Constants;
-using LensUp.Common.Types.BlobStorage.Extensions;
+using LensUp.Common.Types.BlobStorage.Exceptions;
 using LensUp.PhotoCollectorService.API.Exceptions;
 
 namespace LensUp.PhotoCollectorService.API.Validators;
@@ -22,7 +22,7 @@ public sealed class UploadPhotoToGalleryRequestValidator : IUploadPhotoToGallery
         var extension = Path.GetExtension(photoFile.FileName).ToLower();
         if (!PhotoFileExtensions.AllowedToUpload.Contains(extension))
         {
-            throw new PhotoExtenionIsNotAllowedException(extension);
+            throw new PhotoExtensionIsNotAllowedException(extension);
         }
     }
 
