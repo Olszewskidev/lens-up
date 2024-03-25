@@ -1,6 +1,6 @@
+using LensUp.PhotoCollectorService.API;
 using LensUp.PhotoCollectorService.API.Channels;
 using LensUp.PhotoCollectorService.API.Requests;
-using LensUp.PhotoCollectorService.API.Services;
 using LensUp.PhotoCollectorService.API.Validators;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +11,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddAntiforgery()
-    .AddScoped<IUploadPhotoToGalleryRequestValidator, UploadPhotoToGalleryRequestValidator>()
-    .AddSingleton<IPhotoProcessor, PhotoProcessor>()
-    .AddSingleton<IPhotoChannel, PhotoChannel>()
-    .AddHostedService<BackgroundPhotoProcessor>();
+    .AddValidators()
+    .AddChannels()
+    .AddServices();
 
 var app = builder.Build();
 
@@ -37,7 +36,7 @@ app.MapPost("/upload-photo/{enterCode}", async (
     validator.EnsureThatPhotoFileIsValid(request.PhotoFile);
     // await validator.EnsureThatGalleryIsActivated(enterCode);    
 
-    await channel.PublishAsync(request);
+    await channel.PublishAsync(new PhotoProcessorRequest(GalleryId: string.Empty, request.PhotoFile));
     return Results.Accepted();
 }) 
 .DisableAntiforgery() // Need this when you want to upload without a token
