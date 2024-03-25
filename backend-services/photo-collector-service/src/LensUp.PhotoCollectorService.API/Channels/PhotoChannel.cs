@@ -5,18 +5,18 @@ namespace LensUp.PhotoCollectorService.API.Channels;
 
 public interface IPhotoChannel
 {
-    ValueTask PublishAsync(UploadPhotoToGalleryRequest request);
+    ValueTask PublishAsync(PhotoProcessorRequest request);
 
-    IAsyncEnumerable<UploadPhotoToGalleryRequest> SubscribeAsync(CancellationToken cancellationToken);
+    IAsyncEnumerable<PhotoProcessorRequest> SubscribeAsync(CancellationToken cancellationToken);
 }
 
 public sealed class PhotoChannel : IPhotoChannel
 {
-    private readonly Channel<UploadPhotoToGalleryRequest> channel = Channel.CreateUnbounded<UploadPhotoToGalleryRequest>();
+    private readonly Channel<PhotoProcessorRequest> channel = Channel.CreateUnbounded<PhotoProcessorRequest>();
 
-    public ValueTask PublishAsync(UploadPhotoToGalleryRequest request) 
+    public ValueTask PublishAsync(PhotoProcessorRequest request) 
         => this.channel.Writer.WriteAsync(request);
 
-    public IAsyncEnumerable<UploadPhotoToGalleryRequest> SubscribeAsync(CancellationToken cancellationToken) 
+    public IAsyncEnumerable<PhotoProcessorRequest> SubscribeAsync(CancellationToken cancellationToken) 
         => this.channel.Reader.ReadAllAsync(cancellationToken);
 }

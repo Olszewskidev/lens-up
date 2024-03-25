@@ -4,13 +4,16 @@ namespace LensUp.PhotoCollectorService.API.Services;
 
 public interface IPhotoProcessor
 {
-    Task ProcessAsync(UploadPhotoToGalleryRequest request);
+    Task ProcessAsync(PhotoProcessorRequest request);
 }
 
 public sealed class PhotoProcessor : IPhotoProcessor
 {
-    public async Task ProcessAsync(UploadPhotoToGalleryRequest request)
+    public async Task ProcessAsync(PhotoProcessorRequest request)
     {
-        await Task.Delay(2000);
+        // 1. Upload to blob
+        // 2. Upload to table
+        // 3. Publish event
+        await Task.Delay(1000);
     }
 }
