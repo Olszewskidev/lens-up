@@ -11,9 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services
     .AddAntiforgery()
-    .AddValidators()
-    .AddChannels()
-    .AddServices();
+    .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -30,13 +28,13 @@ app.MapPost("/upload-photo/{enterCode}", async (
     int enterCode,
     [FromForm] UploadPhotoToGalleryRequest request, 
     IUploadPhotoToGalleryRequestValidator validator, 
-    IPhotoChannel channel) =>
+    IPhotoChannel channel,
+    CancellationToken cancellationToken) =>
 {
-
     validator.EnsureThatPhotoFileIsValid(request.PhotoFile);
-    // await validator.EnsureThatGalleryIsActivated(enterCode);    
+    string galleryId = await validator.EnsureThatGalleryIsActivated(enterCode, cancellationToken);    
 
-    await channel.PublishAsync(new PhotoProcessorRequest(GalleryId: string.Empty, request.PhotoFile));
+    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, request.PhotoFile));
     return Results.Accepted();
 }) 
 .DisableAntiforgery() // Need this when you want to upload without a token

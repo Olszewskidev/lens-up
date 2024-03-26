@@ -4,6 +4,9 @@ using LensUp.PhotoCollectorService.API.Validators;
 using LensUp.Common.AzureQueueStorage;
 using LensUp.Common.AzureBlobStorage;
 using LensUp.Common.AzureTableStorage;
+using LensUp.PhotoCollectorService.API.DataAccess.ActiveGallery;
+using LensUp.PhotoCollectorService.API.DataAccess.GalleryPhoto;
+using LensUp.Common.Types;
 
 namespace LensUp.PhotoCollectorService.API;
 
@@ -11,7 +14,27 @@ internal static class ServiceCollectionExtensions
 {
     private const string AzureStorageKey = "AzureStorage";
 
-    public static IServiceCollection AddChannels(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    {
+        var azureStorageConnectionString = configuration.GetConnectionString(AzureStorageKey)
+            ?? throw new Exception($"Value for key '{AzureStorageKey}' is null or not found in the configuration.");
+
+        services
+            .AddAzureTables(azureStorageConnectionString)
+            .AddAzureQueue(azureStorageConnectionString)
+            .AddAzureBlobStorage(azureStorageConnectionString);
+
+        services
+            .AddChannels()
+            .AddServices()
+            .AddValidators()
+            .AddDataAccess()
+            .AddIdGenerator();
+
+        return services;
+    }
+
+    private static IServiceCollection AddChannels(this IServiceCollection services)
     {
         services
             .AddSingleton<IPhotoChannel, PhotoChannel>();
@@ -19,16 +42,17 @@ internal static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    private static IServiceCollection AddServices(this IServiceCollection services)
     {
         services
-            .AddSingleton<IPhotoProcessor, PhotoProcessor>()
+            .AddSingleton<IPhotoQueueSender, PhotoQueueSender>()
+            .AddScoped<IPhotoProcessor, PhotoProcessor>()
             .AddHostedService<BackgroundPhotoProcessor>();
 
         return services;
     }
 
-    public static IServiceCollection AddValidators(this IServiceCollection services)
+    private static IServiceCollection AddValidators(this IServiceCollection services)
     {
         services
             .AddScoped<IUploadPhotoToGalleryRequestValidator, UploadPhotoToGalleryRequestValidator>();
@@ -36,18 +60,13 @@ internal static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    private static IServiceCollection AddDataAccess(this IServiceCollection services)
     {
-        var azureTablesConnectionString = configuration.GetConnectionString(AzureStorageKey)
-            ?? throw new Exception($"Value for key '{AzureStorageKey}' is null or not found in the configuration.");
+        services.AddAzureTableRepository(new ActiveGalleryTableConfiguration());
+        services.AddScoped<IActiveGalleryRepository, ActiveGalleryRepository>();
 
-        services
-            .AddAzureQueue(azureTablesConnectionString)
-            .AddAzureTables(azureTablesConnectionString)
-            .AddAzureBlobStorage(azureTablesConnectionString);
-
-        services
-            .AddScoped<IPhotoQueueSender, PhotoQueueSender>();
+        services.AddAzureTableRepository(new GalleryPhotoTableConfiguration());
+        services.AddScoped<IGalleryPhotoRepository, GalleryPhotoRepository>();
 
         return services;
     }
