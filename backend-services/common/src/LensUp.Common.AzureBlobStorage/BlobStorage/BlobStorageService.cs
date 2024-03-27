@@ -23,7 +23,19 @@ public sealed class BlobStorageService : IBlobStorageService
 
             string blobName = photo.FileName;
             BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
-            await blobClient.UploadAsync(photo.Content, cancellationToken);
+
+            // TODO: split to separate uploads
+            if (photo.StreamContent != null)
+            {
+                await blobClient.UploadAsync(photo.StreamContent, cancellationToken);
+            }
+            else
+            {
+                using (MemoryStream stream = new MemoryStream(photo.ByteArrayContent))
+                {
+                    await blobClient.UploadAsync(stream, cancellationToken);
+                }
+            }
 
             return new UploadedPhotoInfo(blobName, blobClient.Uri);
         }

@@ -1,5 +1,6 @@
 using LensUp.PhotoCollectorService.API;
 using LensUp.PhotoCollectorService.API.Channels;
+using LensUp.PhotoCollectorService.API.Extensions;
 using LensUp.PhotoCollectorService.API.Requests;
 using LensUp.PhotoCollectorService.API.Validators;
 using Microsoft.AspNetCore.Mvc;
@@ -31,10 +32,10 @@ app.MapPost("/upload-photo/{enterCode}", async (
     IPhotoChannel channel,
     CancellationToken cancellationToken) =>
 {
-    validator.EnsureThatPhotoFileIsValid(request.PhotoFile);
+    string photoFileExtension = validator.EnsureThatPhotoFileIsValid(request.PhotoFile);
     string galleryId = await validator.EnsureThatGalleryIsActivated(enterCode, cancellationToken);    
 
-    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, request.PhotoFile));
+    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, await request.PhotoFile.GetBytes(), photoFileExtension));
     return Results.Accepted();
 }) 
 .DisableAntiforgery() // Need this when you want to upload without a token
