@@ -19,14 +19,10 @@ public sealed class BackgroundPhotoProcessor : BackgroundService
         {
             try
             {
-                // TODO: Read about passing FormFile to new scope
-                Stream photoStream = request.PhotoFile.OpenReadStream();
-                string photoFileExtension = Path.GetExtension(request.PhotoFile.FileName).ToLower();
-
                 using (var scope = this.serviceScopeFactory.CreateScope())
                 {
                     var processor = scope.ServiceProvider.GetRequiredService<IPhotoProcessor>();
-                    await processor.ProcessAsync(request.GalleryId, photoStream, photoFileExtension, stoppingToken);
+                    await processor.ProcessAsync(request, stoppingToken);
                 }
             }
             catch (Exception)

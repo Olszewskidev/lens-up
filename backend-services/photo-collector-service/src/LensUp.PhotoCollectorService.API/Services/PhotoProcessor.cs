@@ -2,13 +2,14 @@
 using LensUp.Common.Types.BlobStorage.Models;
 using LensUp.Common.Types.Id;
 using LensUp.PhotoCollectorService.API.DataAccess.GalleryPhoto;
+using LensUp.PhotoCollectorService.API.Requests;
 using LensUp.PhotoCollectorService.Contracts.Events;
 
 namespace LensUp.PhotoCollectorService.API.Services;
 
 public interface IPhotoProcessor
 {
-    Task ProcessAsync(string galleryId, Stream photoStream, string photoExtension, CancellationToken cancellation);
+    Task ProcessAsync(PhotoProcessorRequest request, CancellationToken cancellationToken);
 }
 
 public sealed class PhotoProcessor : IPhotoProcessor
@@ -30,23 +31,24 @@ public sealed class PhotoProcessor : IPhotoProcessor
         this.idGenerator = idGenerator;
     }
 
-    public async Task ProcessAsync(string galleryId, Stream photoStream, string photoExtension, CancellationToken cancellation)
+    public async Task ProcessAsync(PhotoProcessorRequest request, CancellationToken cancellationToken)
     {
         string photoId = this.idGenerator.Generate();
-        var uploadedPhotoInfo = await this.UploadPhotoToBlob(containerName: galleryId, photoId, photoExtension, photoStream, cancellation);
+        var uploadedPhotoInfo = await this.UploadPhotoToBlob(photoId, request, cancellationToken);
 
-        var galleryPhotoEntity = GalleryPhotoEntity.Create(photoId, galleryId, uploadedPhotoInfo.Uri.AbsoluteUri);
-        await this.galleryPhotoRepository.AddAsync(galleryPhotoEntity, cancellation);
+        var galleryPhotoEntity = GalleryPhotoEntity.Create(photoId, request.GalleryId, uploadedPhotoInfo.Uri.AbsoluteUri);
+        await this.galleryPhotoRepository.AddAsync(galleryPhotoEntity, cancellationToken);
 
-        await this.queueSender.SendAsync(new PhotoUploadedEvent(new PhotoUploadedEventPayload(galleryId, galleryPhotoEntity.PhotoUrl, galleryPhotoEntity.CreatedDate)));
+        await this.queueSender.SendAsync(new PhotoUploadedEvent(new PhotoUploadedEventPayload(request.GalleryId, galleryPhotoEntity.PhotoUrl, galleryPhotoEntity.CreatedDate)));
     }
 
     private string CreateFileName(string id, string fileExtension)
         => $"{id}{fileExtension}";
 
-    private async Task<UploadedPhotoInfo> UploadPhotoToBlob(string containerName, string photoId, string photoExtension, Stream photoStream, CancellationToken cancellationToken)
+    private async Task<UploadedPhotoInfo> UploadPhotoToBlob(string photoId, PhotoProcessorRequest request, CancellationToken cancellationToken)
     {
-        var photoToUpload = PhotoToUpload.Create(this.CreateFileName(photoId, photoExtension), photoStream);
+        string containerName = request.GalleryId;
+        var photoToUpload = PhotoToUpload.Create(this.CreateFileName(photoId, request.PhotoFileExtension), request.PhotoFileByteArray);
         return await this.blobStorageService.UploadPhotoAsync(containerName, photoToUpload, cancellationToken);
     }
 }

@@ -7,7 +7,7 @@ namespace LensUp.PhotoCollectorService.API.Validators;
 
 public interface IUploadPhotoToGalleryRequestValidator
 {
-    void EnsureThatPhotoFileIsValid(IFormFile photoFile);
+    string EnsureThatPhotoFileIsValid(IFormFile photoFile);
     Task<string> EnsureThatGalleryIsActivated(int enterCode, CancellationToken cancellationToken);
 }
 
@@ -19,7 +19,7 @@ public sealed class UploadPhotoToGalleryRequestValidator : IUploadPhotoToGallery
         this.activeGalleryRepository = activeGalleryRepository;
     }
 
-    public void EnsureThatPhotoFileIsValid(IFormFile photoFile)
+    public string EnsureThatPhotoFileIsValid(IFormFile photoFile)
     {
         if (photoFile == null || photoFile.Length == 0)
         {
@@ -31,6 +31,8 @@ public sealed class UploadPhotoToGalleryRequestValidator : IUploadPhotoToGallery
         {
             throw new PhotoExtensionIsNotAllowedException(extension);
         }
+
+        return extension;
     }
 
     public async Task<string> EnsureThatGalleryIsActivated(int enterCode, CancellationToken cancellationToken)
@@ -39,12 +41,13 @@ public sealed class UploadPhotoToGalleryRequestValidator : IUploadPhotoToGallery
 
         if (activeGalleryEntity == null) 
         {
-            throw new Exception();
+            throw new ActiveGalleryNotFoundException(enterCode);
         }
 
-        if (activeGalleryEntity.EndDate < DateTimeOffset.UtcNow)
+        bool isExpired = activeGalleryEntity.EndDate < DateTimeOffset.UtcNow;
+        if (isExpired)
         {
-            throw new Exception();
+            throw new ActiveGalleryIsExpiredException(activeGalleryEntity.GalleryId);
         }
 
         return activeGalleryEntity.GalleryId;
