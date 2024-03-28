@@ -1,4 +1,5 @@
 ﻿using LensUp.Common.Types.BlobStorage.Constants;
+using LensUp.Common.Types.BlobStorage.Enums;
 using LensUp.Common.Types.BlobStorage.Exceptions;
 
 namespace LensUp.Common.Types.BlobStorage.Models;
@@ -11,16 +12,20 @@ public sealed class PhotoToUpload
 
     public byte[]? ByteArrayContent { get; init; }
 
+    public UploadSource UploadSource { get; init; }
+
     private PhotoToUpload(string fileName, Stream content)
     {
         this.FileName = fileName;
         this.StreamContent = content;
+        this.UploadSource = UploadSource.Stream;
     }
 
     private PhotoToUpload(string fileName, byte[] content)
     {
         this.FileName = fileName;
         this.ByteArrayContent = content;
+        this.UploadSource = UploadSource.ByteArray;
     }
 
     public static PhotoToUpload Create(string fileName, Stream content)
