@@ -24,17 +24,16 @@ public sealed class BlobStorageService : IBlobStorageService
             string blobName = photo.FileName;
             BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
 
-            // TODO: split to separate uploads
-            if (photo.StreamContent != null)
+            switch (photo.UploadSource)
             {
-                await blobClient.UploadAsync(photo.StreamContent, cancellationToken);
-            }
-            else
-            {
-                using (MemoryStream stream = new MemoryStream(photo.ByteArrayContent))
-                {
-                    await blobClient.UploadAsync(stream, cancellationToken);
-                }
+                case Types.BlobStorage.Enums.UploadSource.Stream:
+                    await blobClient.UploadAsync(photo.StreamContent, cancellationToken);
+                    break;
+                case Types.BlobStorage.Enums.UploadSource.ByteArray:
+                    await blobClient.UploadAsync(photo.ByteArrayContent!, cancellationToken);
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
 
             return new UploadedPhotoInfo(blobName, blobClient.Uri);
