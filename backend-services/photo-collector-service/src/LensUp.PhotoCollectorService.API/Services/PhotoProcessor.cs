@@ -39,7 +39,7 @@ public sealed class PhotoProcessor : IPhotoProcessor
         var galleryPhotoEntity = GalleryPhotoEntity.Create(photoId, request.GalleryId, uploadedPhotoInfo.Uri.AbsoluteUri);
         await this.galleryPhotoRepository.AddAsync(galleryPhotoEntity, cancellationToken);
 
-        await this.queueSender.SendAsync(new PhotoUploadedEvent(new PhotoUploadedEventPayload(request.GalleryId, galleryPhotoEntity.PhotoUrl, galleryPhotoEntity.CreatedDate)));
+        await this.queueSender.SendAsync(new PhotoUploadedEvent(new PhotoUploadedEventPayload(photoId, request.GalleryId, galleryPhotoEntity.PhotoUrl, galleryPhotoEntity.CreatedDate)));
     }
 
     private string CreateFileName(string id, string fileExtension)
