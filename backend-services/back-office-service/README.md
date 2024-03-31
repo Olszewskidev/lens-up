@@ -1,12 +1,12 @@
 # LensUp.BackOfficeService
 
-- [Project structure](#project-structure)
+- [Intro](#intro)
 
 - [Major responsibilities](#major-responsibilities)
 
 ---
 
-## Project structure
+## Intro
 
 The project has typical .net project folder structure. Inside solution we can find 2 main catalogs- `src` and `tests`. Application code follows `Clean Architecture` approach and we can distinguish the following layers there:
 
@@ -25,6 +25,16 @@ The project has typical .net project folder structure. Inside solution we can fi
 ​		:books:LensUp.BackOfficeService.UnitTests
 
 
+
+**Project Overview:**
+
+- **Technology Stack:** .NET 8
+
+- **Architecture:** Clean Architecture design
+
+- **Functionality:** Gallery management
+
+  
 
 ## Major responsibilities
 
