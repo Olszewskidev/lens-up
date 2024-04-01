@@ -42,7 +42,7 @@ Description:
 
 - Backend services:
 
-  - Photo Collector Service *(.NET Web API)*
+  - [Photo Collector Service (.NET Web API)](backend-services/photo-collector-service)
   - Gallery Service *(.NET Web API + Azure Functions)*
   - [BackOffice Service (.NET Web API)](backend-services/back-office-service) 
 
@@ -92,8 +92,8 @@ Description:
 
 ##### Photo Collector Service:
 
-- [ ] Create project structure
-- [ ] Create add photo and wishes endpoint
+- [x] Create project structure
+- [x] Create add photo and wishes endpoint
 
 
 
