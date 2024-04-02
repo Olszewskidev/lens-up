@@ -1,14 +1,18 @@
 ﻿using FluentValidation;
 using LensUp.BackOfficeService.Application.Abstractions;
+using LensUp.BackOfficeService.Application.Options;
 using LensUp.Common.Types;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LensUp.BackOfficeService.Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddApplicationOptions(configuration);
+
         services.AddMediatR(configuration => 
             configuration.RegisterServicesFromAssemblies(
                 typeof(DependencyInjection).Assembly));
@@ -28,6 +32,14 @@ public static class DependencyInjection
     {
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
+
+        return services;
+    }
+
+    private static IServiceCollection AddApplicationOptions(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.Configure<ApplicationOptions>(
+            configuration.GetSection(ApplicationOptions.Position));
 
         return services;
     }

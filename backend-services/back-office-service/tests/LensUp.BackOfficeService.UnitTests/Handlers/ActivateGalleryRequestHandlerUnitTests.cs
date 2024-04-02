@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
 using LensUp.BackOfficeService.Application.Abstractions;
 using LensUp.BackOfficeService.Application.Commands.ActivateGallery;
+using LensUp.BackOfficeService.Application.Options;
 using LensUp.BackOfficeService.Domain.Entities;
 using LensUp.BackOfficeService.Domain.Exceptions;
 using LensUp.BackOfficeService.Domain.Repositories;
 using LensUp.Common.Types.BlobStorage.Models;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Moq;
 using Xunit;
 
@@ -33,14 +34,10 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
         this.galleryStorageServiceMock = new Mock<IGalleryStorageService>();
         this.userClaimsMock = new Mock<IUserClaims>();
 
-        var inMemorySettings = new Dictionary<string, string>
+        var applicationOptions = new ApplicationOptions()
         {
-                {"GalleryUIUrl", GalleryUIUrl}
+            GalleryUIUrl = GalleryUIUrl,
         };
-
-        IConfiguration configuration = new ConfigurationBuilder()
-            .AddInMemoryCollection(inMemorySettings)
-            .Build();
 
         this.uut = new ActivateGalleryRequestHandler(
             this.enterCodeGeneratorMock.Object,
@@ -48,7 +45,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
             this.galleryStorageServiceMock.Object,
             this.galleryRepositoryMock.Object,
             this.activateGalleryRepositoryMock.Object,
-            configuration,
+            Options.Create<ApplicationOptions>(applicationOptions),
             this.userClaimsMock.Object);
     }
 
