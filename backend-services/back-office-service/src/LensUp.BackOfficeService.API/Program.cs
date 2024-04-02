@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHealthApplicationChecks();
 
 builder.Services
-    .AddApplication()
+    .AddApplication(builder.Configuration)
     .AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();

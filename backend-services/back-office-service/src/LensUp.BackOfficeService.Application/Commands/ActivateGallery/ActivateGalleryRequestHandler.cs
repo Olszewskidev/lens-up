@@ -1,8 +1,9 @@
 ﻿using LensUp.BackOfficeService.Application.Abstractions;
+using LensUp.BackOfficeService.Application.Options;
 using LensUp.BackOfficeService.Domain.Exceptions;
 using LensUp.BackOfficeService.Domain.Repositories;
 using MediatR;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace LensUp.BackOfficeService.Application.Commands.ActivateGallery;
 
@@ -23,7 +24,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         IGalleryStorageService galleryStorageService,
         IGalleryRepository galleryRepository,
         IActiveGalleryRepository activeGalleryRepository,
-        IConfiguration configuration,
+        IOptions<ApplicationOptions> applicationOptions,
         IUserClaims userClaims)
     {
         this.enterCodeGenerator = enterCodeGenerator;
@@ -33,7 +34,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         this.activeGalleryRepository = activeGalleryRepository;
         this.userClaims = userClaims;
 
-        this.galleryUIUrl = configuration.GetValue<string>("GalleryUIUrl") ?? throw new ArgumentNullException(); // TODO: refactor
+        this.galleryUIUrl = applicationOptions.Value.GalleryUIUrl;
     }
 
     public async Task<ActivateGalleryResponse> Handle(ActivateGalleryRequest request, CancellationToken cancellationToken)
