@@ -1,5 +1,5 @@
 import './App.css'
-import { DummyComponent } from '@lens-up/shared-components/src'
+import { DummyComponent } from '@lens-up/shared-components'
 
 function App() {
   return (
