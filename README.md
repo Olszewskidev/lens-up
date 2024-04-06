@@ -48,9 +48,9 @@ Description:
 
 - UI applications:
 
-  - Photo Collector UI *(React.js)*
-  - Gallery UI *(React.js)*
-  - Back Office UI *(React.js)*
+  - [Photo Collector UI (React.js)](ui-applications/packages/photo-collector-ui)
+  - [Gallery UI (React.js)](ui-applications/packages/gallery-ui)
+  - [Back Office UI (React.js)](ui-applications/packages/back-office-ui)
 
 - Azure Services:
 
@@ -65,7 +65,7 @@ Description:
 #### General aspects:
 
 - [x] Set up monorepo infrastructure for backend
-- [ ] Set up monorepo infrastructure for frontend 
+- [x] Set up monorepo infrastructure for frontend 
 
 
 
@@ -99,9 +99,9 @@ Description:
 
 #### Frontend aspects: 
 
-- [ ] Create shared common frontend project
+- [x] Create shared common frontend project
 - [ ] Create coding rule set for frontend applications
-- [ ] Create shared components in shared common frontend project
+- [x] Create shared components in shared common frontend project
 
 ##### Back Office UI:
 
