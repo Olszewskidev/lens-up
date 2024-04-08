@@ -4,7 +4,7 @@ namespace LensUp.PhotoCollectorService.API.Exceptions;
 
 public sealed class PhotoFileIsEmptyException : Exception
 {
-    public PhotoFileIsEmptyException() : base($"{nameof(UploadPhotoToGalleryRequest.PhotoFile)} is empty.")
+    public PhotoFileIsEmptyException() : base($"{nameof(UploadPhotoToGalleryRequest.File)} is empty.")
     {
     }
 }
