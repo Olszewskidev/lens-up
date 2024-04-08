@@ -1,10 +1,12 @@
 import { ChangeEvent, useState } from "react";
+import { useAddPhotoToGalleryMutation } from "../services/PhotoCollectorApi";
 
 const AddPhotoForm = () => {
+    const [addPhoto] = useAddPhotoToGalleryMutation();
     const [photo, setPhoto] = useState<File>();
 
     const handlePhotoInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        // TODO: Add more validation
+        // TODO: Validation
         const fileList = event.target.files
         const isEmpty = !fileList || fileList.length === 0;
         if(isEmpty){
@@ -15,7 +17,14 @@ const AddPhotoForm = () => {
     };
 
     const handleFormSubmit = () => {
-        console.log("Form submit")
+        // TODO: Validation
+        if(!photo){
+            return
+        }
+        const formData = new FormData();
+        formData.append('File', photo);
+        // TODO: Get entercode from URL
+        addPhoto({enterCode: 65380163, formData })
     }
 
     return (

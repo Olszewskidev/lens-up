@@ -14,6 +14,9 @@ builder.Services
     .AddAntiforgery()
     .AddInfrastructure(builder.Configuration);
 
+builder.Services
+    .AddCors();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -25,6 +28,12 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAntiforgery();
 
+// TODO: Adjust on finish
+app.UseCors(options => options
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 app.MapPost("/upload-photo/{enterCode}", async (
     int enterCode,
     [FromForm] UploadPhotoToGalleryRequest request, 
@@ -32,10 +41,10 @@ app.MapPost("/upload-photo/{enterCode}", async (
     IPhotoChannel channel,
     CancellationToken cancellationToken) =>
 {
-    string photoFileExtension = validator.EnsureThatPhotoFileIsValid(request.PhotoFile);
+    string photoFileExtension = validator.EnsureThatPhotoFileIsValid(request.File);
     string galleryId = await validator.EnsureThatGalleryIsActivated(enterCode, cancellationToken);    
 
-    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, await request.PhotoFile.GetBytes(), photoFileExtension));
+    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, await request.File.GetBytes(), photoFileExtension));
     return Results.Accepted();
 }) 
 .DisableAntiforgery() // Need this when you want to upload without a token
