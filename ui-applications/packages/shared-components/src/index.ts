@@ -1,3 +1,5 @@
 import DummyComponent from "./components/DummyComponent";
+import SuccessAlertComponent from "./components/SuccessCardComponent";
+import ErrorCardComponent from "./components/ErrorCardComponent";
 
-export {DummyComponent}
+export { DummyComponent, SuccessAlertComponent, ErrorCardComponent }
