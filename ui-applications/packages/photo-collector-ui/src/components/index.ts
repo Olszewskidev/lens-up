@@ -1,3 +1,5 @@
-import AddPhotoForm from "./AddPhotoForm";
+import AppContainer from "./AppContainer";
+import NotFoundComponent from "./NotFoundComponent";
+import PageRoot from "./PageRoot";
 
-export {AddPhotoForm}
+export { AppContainer, NotFoundComponent, PageRoot }

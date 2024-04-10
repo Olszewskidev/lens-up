@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://localhost:7147',
+    baseUrl: import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL,
 });
 
 export const photoCollectorApi = createApi({
     reducerPath: 'photoCollectorApi',
     baseQuery: baseQuery,
     endpoints: (builder) => ({
-        addPhotoToGallery: builder.mutation<void, { enterCode: number, formData: FormData }>({
+        addPhotoToGallery: builder.mutation<void, { enterCode: string, formData: FormData }>({
             query: (payload) => ({
                 method: 'POST',
                 url: `upload-photo/${payload.enterCode}`,
