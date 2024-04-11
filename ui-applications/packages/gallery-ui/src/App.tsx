@@ -1,15 +1,14 @@
+import { Provider } from 'react-redux'
 import './App.css'
-import { DummyComponent } from '@lens-up/shared-components'
+import { RouterProvider } from 'react-router-dom'
+import { store } from './app/store'
+import { AppRouter } from './pages'
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Hello world tailwind styles!
-      </h1>
-      <div>Gallery UI</div>
-      <DummyComponent></DummyComponent>
-    </>
+    <Provider store={store}>
+      <RouterProvider router={AppRouter} />
+    </Provider>
   )
 }
 
