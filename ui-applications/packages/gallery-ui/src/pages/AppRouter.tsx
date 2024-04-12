@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./Home/HomePage";
 import LoginPage from "./Login/LoginPage";
-import { PageRoot } from "../components";
 
 enum AppRoutes {
     HOME = "/gallery/:enterCode",
@@ -11,7 +10,6 @@ enum AppRoutes {
 const AppRouter = createBrowserRouter([
     {
         path: "/",
-        element: <PageRoot />,
         errorElement: <div>error</div>,
         children: [
             {
