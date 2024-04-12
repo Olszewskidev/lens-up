@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LensUp.GalleryService.Application\LensUp.GalleryService.Application.csproj" />
+    <ProjectReference Include="..\LensUp.GalleryService.Infrastructure\LensUp.GalleryService.Infrastructure.csproj" />
+  </ItemGroup>
+  
+</Project>
