@@ -4,22 +4,27 @@ import LoginPage from "./Login/LoginPage";
 
 enum AppRoutes {
     HOME = "/gallery/:enterCode",
-    LOGIN = "/login"
+    LOGIN = "/login",
+    DEFAULT = "/"
 }
 
 const AppRouter = createBrowserRouter([
     {
-        path: "/",
-        errorElement: <div>error</div>,
+        path: AppRoutes.DEFAULT,
+        errorElement: <div>Error page</div>,
         children: [
             {
-                path: AppRoutes.HOME,
-                element: <HomePage />
+                path: AppRoutes.DEFAULT,
+                element: <LoginPage />
             },
             {
                 path: AppRoutes.LOGIN,
                 element: <LoginPage />
-            }
+            },
+            {
+                path: AppRoutes.HOME,
+                element: <HomePage />
+            },
         ],
     },
 ]);
