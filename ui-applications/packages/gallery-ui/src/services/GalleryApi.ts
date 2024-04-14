@@ -8,7 +8,14 @@ export const galleryApi = createApi({
     reducerPath: 'galleryApi',
     baseQuery: baseQuery,
     endpoints: (builder) => ({
+        loginToGallery: builder.mutation<{ enterCode: string, galleryId: string }, { enterCode: string }>({
+            query: (payload) => ({
+                method: 'POST',
+                url: `login`,
+                body: payload,
+            }),
+        }),
     }),
 })
 
-export const { } = galleryApi
+export const { useLoginToGalleryMutation } = galleryApi

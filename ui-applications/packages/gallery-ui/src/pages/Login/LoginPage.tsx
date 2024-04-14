@@ -1,25 +1,31 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm"
+import { useLoginToGalleryMutation } from "../../services/GalleryApi";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
     const [enterCode, setEnterCode] = useState<string>();
 
-    const handleFormSubmit = () => {
+    const [loginToGallery] = useLoginToGalleryMutation();
+
+    const handleFormSubmit = (event: FormEvent) => {
+        event.preventDefault()
         // TODO: Add validation
         if (!enterCode) {
             return;
         }
 
-        console.log(enterCode)
+        loginToGallery({ enterCode: enterCode })
+            .unwrap()
+            .then((payload) => {
+                navigate(`/gallery/${payload.galleryId}`)
+            })
     }
 
     const handleEnterCodeInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         // TODO: Validation
         const enterCodeValue = event.target.value;
-        if (!enterCodeValue) {
-            return;
-        }
-
         setEnterCode(enterCodeValue);
     };
 
