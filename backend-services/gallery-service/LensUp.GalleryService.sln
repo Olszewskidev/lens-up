@@ -7,17 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{13AAF888-74E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{08FC6804-67EF-47AE-B8D5-63874E95E7B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.GalleryService.API", "src\LensUp.GalleryService.API\LensUp.GalleryService.API.csproj", "{DE19D743-10B5-4DEB-BDAA-11895C3C4943}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.GalleryService.API", "src\LensUp.GalleryService.API\LensUp.GalleryService.API.csproj", "{DE19D743-10B5-4DEB-BDAA-11895C3C4943}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.GalleryService.Application", "src\LensUp.GalleryService.Application\LensUp.GalleryService.Application.csproj", "{DDE73EC1-C3E8-451A-84A8-696052546BCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.GalleryService.Application", "src\LensUp.GalleryService.Application\LensUp.GalleryService.Application.csproj", "{DDE73EC1-C3E8-451A-84A8-696052546BCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.GalleryService.Domain", "src\LensUp.GalleryService.Domain\LensUp.GalleryService.Domain.csproj", "{A6E19363-704F-4FD6-A4EF-0B27B928970C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.GalleryService.Domain", "src\LensUp.GalleryService.Domain\LensUp.GalleryService.Domain.csproj", "{A6E19363-704F-4FD6-A4EF-0B27B928970C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.GalleryService.Infrastructure", "src\LensUp.GalleryService.Infrastructure\LensUp.GalleryService.Infrastructure.csproj", "{EEFDE7D6-6D4F-486D-A84D-F732D77E2713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.GalleryService.Infrastructure", "src\LensUp.GalleryService.Infrastructure\LensUp.GalleryService.Infrastructure.csproj", "{EEFDE7D6-6D4F-486D-A84D-F732D77E2713}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.AzureTableStorage", "..\common\src\LensUp.Common.AzureTableStorage\LensUp.Common.AzureTableStorage.csproj", "{5A42134A-163F-4195-AE44-0148D606A24D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.AzureQueueStorage", "..\common\src\LensUp.Common.AzureQueueStorage\LensUp.Common.AzureQueueStorage.csproj", "{2FE42CC5-9756-407A-9345-DD013D6F7685}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.PhotoCollectorService.Contracts", "..\photo-collector-service\src\LensUp.PhotoCollectorService.Contracts\LensUp.PhotoCollectorService.Contracts.csproj", "{DD9CDD95-B914-40E9-A813-510A16578889}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{5A42134A-163F-4195-AE44-0148D606A24D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A42134A-163F-4195-AE44-0148D606A24D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A42134A-163F-4195-AE44-0148D606A24D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE42CC5-9756-407A-9345-DD013D6F7685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FE42CC5-9756-407A-9345-DD013D6F7685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FE42CC5-9756-407A-9345-DD013D6F7685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE42CC5-9756-407A-9345-DD013D6F7685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9CDD95-B914-40E9-A813-510A16578889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9CDD95-B914-40E9-A813-510A16578889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9CDD95-B914-40E9-A813-510A16578889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9CDD95-B914-40E9-A813-510A16578889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +68,8 @@ Global
 		{EEFDE7D6-6D4F-486D-A84D-F732D77E2713} = {13AAF888-74EE-4332-947B-0B8F38BD92ED}
 		{C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2} = {13AAF888-74EE-4332-947B-0B8F38BD92ED}
 		{5A42134A-163F-4195-AE44-0148D606A24D} = {C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2}
+		{2FE42CC5-9756-407A-9345-DD013D6F7685} = {C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2}
+		{DD9CDD95-B914-40E9-A813-510A16578889} = {C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F13AA330-B97F-4EF0-8D02-911C7D26C498}
