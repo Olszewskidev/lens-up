@@ -6,6 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\photo-collector-service\src\LensUp.PhotoCollectorService.Contracts\LensUp.PhotoCollectorService.Contracts.csproj" />
     <ProjectReference Include="..\LensUp.GalleryService.Application\LensUp.GalleryService.Application.csproj" />
     <ProjectReference Include="..\LensUp.GalleryService.Infrastructure\LensUp.GalleryService.Infrastructure.csproj" />
   </ItemGroup>

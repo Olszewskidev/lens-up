@@ -1,5 +1,6 @@
 using LensUp.GalleryService.Application;
 using LensUp.GalleryService.Infrastructure;
+using LensUp.GalleryService.Infrastructure.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services
     .AddInfrastructure(builder.Configuration);
 
 builder.Services.AddCors();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -30,6 +32,8 @@ app.UseCors(options => options
     .AllowAnyHeader());
 
 app.UseExceptionHandler();
+
+app.MapHub<GalleryHub>("gallery-hub");
 
 app.MapControllers();
 

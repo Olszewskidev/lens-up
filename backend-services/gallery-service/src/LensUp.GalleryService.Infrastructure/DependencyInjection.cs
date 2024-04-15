@@ -1,6 +1,8 @@
 ﻿using LensUp.Common.AzureTableStorage;
+using LensUp.GalleryService.Application.Abstractions;
 using LensUp.GalleryService.Domain.Repositories;
 using LensUp.GalleryService.Infrastructure.Repositories;
+using LensUp.GalleryService.Infrastructure.Services;
 using LensUp.GalleryService.Infrastructure.TableConfigurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ public static class DependencyInjection
         services.AddAzureTables(azureTablesConnectionString);
 
         services.AddActiveGalleryReadOnlyRepository();
+        services.AddScoped<IGalleryNotificationService, GalleryNotificationService>();
 
         return services;
     }
