@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "LensUp.GalleryService.WebhookTriggerSimulator": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7047",
+      "launchBrowser": false
+    }
+  }
+}
