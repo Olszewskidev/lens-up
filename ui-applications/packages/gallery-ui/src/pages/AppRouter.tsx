@@ -3,7 +3,7 @@ import HomePage from "./Home/HomePage";
 import LoginPage from "./Login/LoginPage";
 
 enum AppRoutes {
-    HOME = "/gallery/:enterCode",
+    HOME = "/gallery/:galleryId",
     LOGIN = "/login",
     DEFAULT = "/"
 }
