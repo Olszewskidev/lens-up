@@ -27,13 +27,14 @@ app.UseHttpsRedirection();
 
 // TODO: Adjust on finish
 app.UseCors(options => options
-    .AllowAnyOrigin()
     .AllowAnyMethod()
-    .AllowAnyHeader());
+    .SetIsOriginAllowed((host) => true)
+    .AllowAnyHeader()
+    .AllowCredentials());
 
 app.UseExceptionHandler();
 
-app.MapHub<GalleryHub>("gallery-hub");
+app.MapHub<GalleryHub>("/hubs/gallery");
 
 app.MapControllers();
 
