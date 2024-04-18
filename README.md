@@ -86,9 +86,9 @@ Description:
 
 ##### Gallery Service:
 
-- [ ] Create project structure
+- [x] Create project structure
 - [ ] Create get gallery info endpoint
-- [ ] Create gallery notification hub
+- [x] Create gallery notification hub
 
 ##### Photo Collector Service:
 
@@ -109,9 +109,9 @@ Description:
 
 ##### Gallery UI:
 
-- [ ] Create login to gallery page
+- [x] Create login to gallery page
 - [ ] Create main page with gallery
-- [ ] Handle notifications from backend
+- [x] Handle notifications from backend
 
 ##### Photo Collector UI:
 
