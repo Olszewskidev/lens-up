@@ -8,4 +8,6 @@ public sealed class ActiveGalleryEntity : AzureTableEntityBase
     public string GalleryId { get; init; } = string.Empty;
 
     public DateTimeOffset EndDate { get; init; }
+
+    public string QRCodeUrl { get; init; } = string.Empty;
 }

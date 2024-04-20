@@ -136,6 +136,6 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
         addedActiveGallery.EnterCode.Should().Be(expectedValues.EnterCode);
         addedActiveGallery.EndDate.Should().Be(expectedValues.EndDate);
         addedActiveGallery.GalleryId.Should().Be(expectedValues.GalleryId);
-        addedActiveGallery.QRCodeUri.Should().Be(uploadedPhotoInfo.Uri.AbsoluteUri);
+        addedActiveGallery.QRCodeUrl.Should().Be(uploadedPhotoInfo.Uri.AbsoluteUri);
     }
 }

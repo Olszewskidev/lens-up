@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import LoginForm from "./components/LoginForm"
 import { useLoginToGalleryMutation } from "../../services/GalleryApi";
 import { useNavigate } from "react-router-dom";
+import { saveQRCode } from "../../utils/qRCodeHelper";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -19,7 +20,9 @@ const LoginPage = () => {
         loginToGallery({ enterCode: enterCode })
             .unwrap()
             .then((payload) => {
-                navigate(`/gallery/${payload.galleryId}`)
+                console.log(payload)
+                saveQRCode(payload.qrCodeUrl)
+                return navigate(`/gallery/${payload.galleryId}`)
             })
     }
 
