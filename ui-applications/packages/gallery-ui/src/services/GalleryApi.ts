@@ -19,7 +19,7 @@ export const galleryApi = createApi({
             }),
         }),
         getGalleryPhotos: builder.query<PhotoItem[], string>({
-            queryFn: () => ({ data: DummyPhotos }),
+            queryFn: () => ({ data: [] }),
             async onCacheEntryAdded(galleryId, { cacheDataLoaded, cacheEntryRemoved, updateCachedData },) {
                 try {
                     await cacheDataLoaded;

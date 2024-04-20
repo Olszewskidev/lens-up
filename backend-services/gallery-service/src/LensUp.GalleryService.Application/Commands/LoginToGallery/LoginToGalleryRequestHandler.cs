@@ -28,6 +28,6 @@ public sealed class LoginToGalleryRequestHandler : IRequestHandler<LoginToGaller
             throw new ActiveGallerySecurityException();
         }
 
-        return new LoginToGalleryResponse(request.EnterCode, activeGalleryEntity.GalleryId);
+        return new LoginToGalleryResponse(request.EnterCode, activeGalleryEntity.GalleryId, activeGalleryEntity.QRCodeUrl);
     }
 }

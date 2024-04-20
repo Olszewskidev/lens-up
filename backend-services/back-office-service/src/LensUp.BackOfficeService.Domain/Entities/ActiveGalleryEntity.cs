@@ -4,12 +4,12 @@ namespace LensUp.BackOfficeService.Domain.Entities;
 
 public sealed class ActiveGalleryEntity : AzureTableEntityBase
 {
-    private ActiveGalleryEntity(int enterCode, string galleryId, DateTimeOffset endDate, string qrCodeUri) : base(partitionKey: enterCode.ToString(), rowKey: enterCode.ToString())
+    private ActiveGalleryEntity(int enterCode, string galleryId, DateTimeOffset endDate, string qrCodeUrl) : base(partitionKey: enterCode.ToString(), rowKey: enterCode.ToString())
     {
         this.GalleryId = galleryId;
         this.EndDate = endDate;
         this.EnterCode = enterCode;
-        this.QRCodeUri = qrCodeUri;
+        this.QRCodeUrl = qrCodeUrl;
     }
 
     public string GalleryId { get; init; }
@@ -18,10 +18,10 @@ public sealed class ActiveGalleryEntity : AzureTableEntityBase
 
     public int EnterCode { get; init; }
 
-    public string QRCodeUri { get; init; }
+    public string QRCodeUrl { get; init; }
 
-    internal static ActiveGalleryEntity Create(int enterCode, string galleryId, DateTimeOffset endDate, string qrCodeUri)
+    internal static ActiveGalleryEntity Create(int enterCode, string galleryId, DateTimeOffset endDate, string qrCodeUrl)
     {
-        return new ActiveGalleryEntity(enterCode, galleryId, endDate, qrCodeUri);
+        return new ActiveGalleryEntity(enterCode, galleryId, endDate, qrCodeUrl);
     }
 }

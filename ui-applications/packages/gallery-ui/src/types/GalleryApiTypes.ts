@@ -4,7 +4,8 @@ export interface LoginToGalleryPayload {
 
 export interface LoginToGalleryResponse {
     enterCode: string,
-    galleryId: string
+    galleryId: string,
+    qrCodeUrl: string
 }
 
 export interface PhotoItem {

@@ -1,28 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./Home/HomePage";
 import LoginPage from "./Login/LoginPage";
-
-enum AppRoutes {
-    HOME = "/gallery/:galleryId",
-    LOGIN = "/login",
-    DEFAULT = "/"
-}
+import { AppRoutes } from "../utils/constants" 
 
 const AppRouter = createBrowserRouter([
     {
-        path: AppRoutes.DEFAULT,
+        path: AppRoutes.Default,
         errorElement: <div>Error page</div>,
         children: [
             {
-                path: AppRoutes.DEFAULT,
+                path: AppRoutes.Default,
                 element: <LoginPage />
             },
             {
-                path: AppRoutes.LOGIN,
+                path: AppRoutes.Login,
                 element: <LoginPage />
             },
             {
-                path: AppRoutes.HOME,
+                path: AppRoutes.Home,
                 element: <HomePage />
             },
         ],
