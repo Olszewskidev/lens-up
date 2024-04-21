@@ -6,10 +6,10 @@ export const saveQRCode = (qRCodeUrl: string) => {
 
 export const getQRCodeUrl = () => {
     const url = localStorage.getItem(LocalStorageKeys.QRCodeUrl)
-    if(!url){
+    if (!url) {
         console.error("QR code url not found in local storage.")
         return
     }
-    
+
     return url
 }

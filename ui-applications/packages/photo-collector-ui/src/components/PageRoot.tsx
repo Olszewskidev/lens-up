@@ -1,15 +1,13 @@
-import { NavbarComponent } from "@lens-up/shared-components";
 import { Outlet } from "react-router-dom";
 import AppContainer from "./AppContainer";
 
 const PageRoot = () => {
     return (
-        <>
-            <NavbarComponent />
+        <div className="min-h-screen bg-black">
             <AppContainer>
                 <Outlet />
             </AppContainer>
-        </>
+        </div>
     )
 }
 

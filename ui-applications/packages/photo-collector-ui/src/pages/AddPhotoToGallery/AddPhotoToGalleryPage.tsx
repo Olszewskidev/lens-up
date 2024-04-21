@@ -36,7 +36,8 @@ const AddPhotoToGalleryPage = () => {
                 isUninitialized && <AddPhotoForm
                     handleFormSubmit={handleFormSubmit}
                     handlePhotoInputChange={handlePhotoInputChange}
-                    photo={photo} />
+                    photo={photo}
+                    isLoading={isLoading} />
             }
             {
                 isLoading && <AddPhotoFormSkeleton />
