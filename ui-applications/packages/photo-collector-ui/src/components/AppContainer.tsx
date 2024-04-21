@@ -4,7 +4,7 @@ interface IAppContainerProps {
 
 const AppContainer = ({ children }: IAppContainerProps) => {
     return (
-        <div className="flex items-center justify-center bg-gray-100 h-screen">
+        <div className="flex items-center justify-center h-screen">
             {children}
         </div>
     )
