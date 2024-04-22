@@ -1,4 +1,5 @@
 ﻿using LensUp.GalleryService.Application.Abstractions;
+using LensUp.GalleryService.Application.Models;
 using LensUp.PhotoCollectorService.Contracts.Events;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,9 @@ public sealed class WebhookController : Controller
     [HttpPost]
     public async Task<IActionResult> PhotoUploadedToGalleryHook([FromBody] PhotoUploadedEvent @event)
     {
-        await this.galleryNotificationService.SendPhotoUploadedToGalleryNotification(@event.Payload.GalleryId);
+        var eventPayload = @event.Payload;
+        await this.galleryNotificationService.SendPhotoUploadedToGalleryNotification(eventPayload.GalleryId, new PhotoUploadedNotification(eventPayload.PhotoId, eventPayload.PhotoUrl));
+
         return this.Ok();
     }
 }
