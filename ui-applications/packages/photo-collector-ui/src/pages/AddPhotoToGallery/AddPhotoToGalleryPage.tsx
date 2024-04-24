@@ -40,9 +40,6 @@ const AddPhotoToGalleryPage = () => {
                     isLoading={isLoading} />
             }
             {
-                isLoading && <AddPhotoFormSkeleton />
-            }
-            {
                 isError && <ErrorCardComponent />
             }
             {
