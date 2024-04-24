@@ -43,7 +43,7 @@ Description:
 - Backend services:
 
   - [Photo Collector Service (.NET Web API)](backend-services/photo-collector-service)
-  - Gallery Service *(.NET Web API + Azure Functions)*
+  - [Gallery Service (.NET Web API + Azure Functions)](backend-services/gallery-service)
   - [BackOffice Service (.NET Web API)](backend-services/back-office-service) 
 
 - UI applications:
@@ -115,4 +115,4 @@ Description:
 
 ##### Photo Collector UI:
 
-- [ ] Create single page with add photo and wishes form
+- [x] Create single page with add photo and wishes form
