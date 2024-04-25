@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useAddPhotoToGalleryMutation } from "../../services/PhotoCollectorApi";
-import { AddPhotoForm, AddPhotoFormSkeleton } from "./components"
+import { AddPhotoForm } from "./components"
 import { ErrorCardComponent, SuccessAlertComponent } from "@lens-up/shared-components";
 import { useParams } from "react-router-dom";
 
@@ -38,9 +38,6 @@ const AddPhotoToGalleryPage = () => {
                     handlePhotoInputChange={handlePhotoInputChange}
                     photo={photo}
                     isLoading={isLoading} />
-            }
-            {
-                isLoading && <AddPhotoFormSkeleton />
             }
             {
                 isError && <ErrorCardComponent />
