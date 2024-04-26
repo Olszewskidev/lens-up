@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { useAddPhotoToGalleryMutation } from "../../services/PhotoCollectorApi";
 import { AddPhotoForm } from "./components"
-import { ErrorCardComponent, SuccessAlertComponent } from "@lens-up/shared-components";
+import { ErrorCardComponent, SuccessCardComponent } from "@lens-up/shared-components";
 import { useParams } from "react-router-dom";
 
 const AddPhotoToGalleryPage = () => {
@@ -43,7 +43,7 @@ const AddPhotoToGalleryPage = () => {
                 isError && <ErrorCardComponent />
             }
             {
-                isSuccess && <SuccessAlertComponent />
+                isSuccess && <SuccessCardComponent title="Congratulations!" text="You just joined to the party." />
             }
         </>
     )
