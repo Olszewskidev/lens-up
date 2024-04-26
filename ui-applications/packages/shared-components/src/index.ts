@@ -1,14 +1,14 @@
 import DummyComponent from "./components/DummyComponent";
-import SuccessAlertComponent from "./components/SuccessCardComponent";
-import ErrorCardComponent from "./components/ErrorCardComponent";
+import SuccessCardComponent from "./components/card/SuccessCardComponent";
+import ErrorCardComponent from "./components/card/ErrorCardComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import { FormComponent, SubmitFormButtonComponent } from "./components/form";
 
-export { 
-    DummyComponent, 
-    SuccessAlertComponent, 
-    ErrorCardComponent, 
+export {
+    DummyComponent,
+    SuccessCardComponent,
+    ErrorCardComponent,
     NavbarComponent,
     FormComponent,
-    SubmitFormButtonComponent
+    SubmitFormButtonComponent,
 }
