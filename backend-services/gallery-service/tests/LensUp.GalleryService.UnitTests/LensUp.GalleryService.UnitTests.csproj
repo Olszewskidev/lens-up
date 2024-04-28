@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LensUp.GalleryService.Application\LensUp.GalleryService.Application.csproj" />
+  </ItemGroup>
+</Project>
