@@ -50,14 +50,14 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
     }
 
     [Fact]
-    public async Task Handle_Should_ThrowGalleryAlreadyActivatedException_When_GalleryIsAlreadyActivated()
+    public async Task Handle_Should_Throw_GalleryAlreadyActivatedException_When_GalleryIsAlreadyActivated()
     {
         // Arrange
         var request = new ActivateGalleryRequest(Guid.NewGuid().ToString(), DateTimeOffset.UtcNow.AddHours(2));
         var userId = Guid.NewGuid().ToString();
         var galleryEntity = GalleryEntity.Create(request.GalleryId, "Already Activated Gallery", userId);
         galleryEntity.Activate(userId, DateTimeOffset.UtcNow.AddHours(1), 1234, GalleryUIUrl);
-        var cancellationToken = CancellationToken.None;
+        var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(2)).Token;
 
         this.userClaimsMock
             .Setup(x => x.Id)
@@ -82,7 +82,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
         var request = new ActivateGalleryRequest(expectedValues.GalleryId, expectedValues.EndDate);
         var galleryEntity = GalleryEntity.Create(request.GalleryId, "Gallery to activate", expectedValues.UserId);
         var uploadedPhotoInfo = new UploadedPhotoInfo("blobName", new Uri("https://my-blob-uri-test.com"));
-        var cancellationToken = CancellationToken.None;
+        var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(2)).Token;
 
         GalleryEntity? updatedGalleryEntity = null;
         ActiveGalleryEntity? addedActiveGallery = null;

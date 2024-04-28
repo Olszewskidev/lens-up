@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.AzureQueueSto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.PhotoCollectorService.Contracts", "..\photo-collector-service\src\LensUp.PhotoCollectorService.Contracts\LensUp.PhotoCollectorService.Contracts.csproj", "{DD9CDD95-B914-40E9-A813-510A16578889}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.GalleryService.WebhookTriggerSimulator", "src\LensUp.GalleryService.WebhookTriggerSimulator\LensUp.GalleryService.WebhookTriggerSimulator.csproj", "{7C484866-F7CD-44FA-BBB1-6928435510AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.GalleryService.WebhookTriggerSimulator", "src\LensUp.GalleryService.WebhookTriggerSimulator\LensUp.GalleryService.WebhookTriggerSimulator.csproj", "{7C484866-F7CD-44FA-BBB1-6928435510AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.GalleryService.UnitTests", "tests\LensUp.GalleryService.UnitTests\LensUp.GalleryService.UnitTests.csproj", "{D50ACE58-5417-4243-A2D1-5AC527193FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{7C484866-F7CD-44FA-BBB1-6928435510AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C484866-F7CD-44FA-BBB1-6928435510AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C484866-F7CD-44FA-BBB1-6928435510AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D50ACE58-5417-4243-A2D1-5AC527193FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D50ACE58-5417-4243-A2D1-5AC527193FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D50ACE58-5417-4243-A2D1-5AC527193FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D50ACE58-5417-4243-A2D1-5AC527193FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{2FE42CC5-9756-407A-9345-DD013D6F7685} = {C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2}
 		{DD9CDD95-B914-40E9-A813-510A16578889} = {C0EB9BF4-6CE2-4760-AA25-AF647EC4E9B2}
 		{7C484866-F7CD-44FA-BBB1-6928435510AE} = {13AAF888-74EE-4332-947B-0B8F38BD92ED}
+		{D50ACE58-5417-4243-A2D1-5AC527193FA6} = {08FC6804-67EF-47AE-B8D5-63874E95E7B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F13AA330-B97F-4EF0-8D02-911C7D26C498}

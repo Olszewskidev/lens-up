@@ -28,7 +28,7 @@ public sealed class AddUserRequestHandlerUnitTests
     {
         // Arrange
         var request = new AddUserRequest("John");
-        var cancellationToken = CancellationToken.None;
+        var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(2)).Token;
         var expectedUserId = Guid.NewGuid().ToString();
         UserEntity? addedUser = null;
 

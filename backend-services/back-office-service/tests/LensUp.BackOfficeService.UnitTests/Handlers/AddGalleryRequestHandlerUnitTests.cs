@@ -32,7 +32,7 @@ public sealed class AddGalleryRequestHandlerUnitTests
         // Arrange
         var userId = Guid.NewGuid().ToString();
         var request = new AddGalleryRequest("My Gallery");
-        var cancellationToken = CancellationToken.None;
+        var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(2)).Token;
         var expectedGalleryId = Guid.NewGuid().ToString();
         GalleryEntity? addedGallery = null;
 
