@@ -7,8 +7,36 @@ services:
     container_name: lensup.photocollectorservice.api
     image: lensup.photocollectorservice.api
     build:
-      context: .
-      dockerfile: backend-services/photo-collector-service/Dockerfile
+      context: ./backend-services
+      dockerfile: photo-collector-service/Dockerfile
     ports:
       - "8080:8080"
       - "8081:8081"
+
+  lensup.galleryservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORT=8082
+      - ASPNETCORE_HTTPS_PORT=8083
+    container_name: lensup.galleryservice.api
+    image: lensup.galleryservice.api
+    build:
+      context: ./backend-services
+      dockerfile: gallery-service/Dockerfile
+    ports:
+      - "8082:8082"
+      - "8083:8083"
+
+  lensup.backofficeservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORT=8084
+      - ASPNETCORE_HTTPS_PORT=8085
+    container_name: lensup.backofficeservice.api
+    image: lensup.backofficeservice.api
+    build:
+      context: ./backend-services
+      dockerfile: back-office-service/Dockerfile
+    ports:
+      - "8084:8084"
+      - "8085:8085"
