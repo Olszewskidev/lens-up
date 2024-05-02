@@ -12,7 +12,6 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
-
   lensup.galleryservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
