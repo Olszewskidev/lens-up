@@ -11,6 +11,11 @@
 		<CodeAnalysisRuleSet>../../../StyleCop.ruleset</CodeAnalysisRuleSet>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectName), 'API'))">
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+	</PropertyGroup>
+
 	<ItemGroup>
   
 		<PackageReference Include="StyleCop.Analyzers">

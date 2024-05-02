@@ -9,6 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Development
 WORKDIR /src
 
+COPY ["Directory.Build.props", "/"]
+COPY ["Directory.Packages.props", "/"]
+COPY ["StyleCop.ruleset", "/"]
 COPY ["back-office-service/src/LensUp.BackOfficeService.API/LensUp.BackOfficeService.API.csproj", "LensUp.BackOfficeService.API/"]
 COPY ["back-office-service/src/LensUp.BackOfficeService.Application/LensUp.BackOfficeService.Application.csproj", "LensUp.BackOfficeService.Application/"]
 COPY ["back-office-service/src/LensUp.BackOfficeService.Domain/LensUp.BackOfficeService.Domain.csproj", "LensUp.BackOfficeService.Domain/"]
@@ -21,8 +24,8 @@ RUN dotnet restore "LensUp.BackOfficeService.API/LensUp.BackOfficeService.API.cs
 
 COPY . .
 
-WORKDIR "/src/LensUp.BackOfficeService.API"
-RUN dotent build "LensUp.BackOfficeService.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/back-office-service/src/LensUp.BackOfficeService.API"
+RUN dotnet build "LensUp.BackOfficeService.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build as publish
 ARG BUILD_CONFIGURATION=Development

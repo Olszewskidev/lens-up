@@ -1,10 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFrameworkIdentifier>.NETCoreApp</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>8.0</TargetFrameworkVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" />
     <PackageReference Include="Swashbuckle.AspNetCore" />

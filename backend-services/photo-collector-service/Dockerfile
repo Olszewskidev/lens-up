@@ -9,6 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Development
 WORKDIR /src
 
+COPY ["Directory.Build.props", "/"]
+COPY ["Directory.Packages.props", "/"]
+COPY ["StyleCop.ruleset", "/"]
 COPY ["photo-collector-service/src/LensUp.PhotoCollectorService.API/LensUp.PhotoCollectorService.API.csproj", "LensUp.PhotoCollectorService.API/"]
 COPY ["photo-collector-service/src/LensUp.PhotoCollectorService.Contracts/LensUp.PhotoCollectorService.Contracts.csproj", "LensUp.PhotoCollectorService.Contracts/"]
 COPY ["common/src/LensUp.Common.AzureBlobStorage/LensUp.Common.AzureBlobStorage.csproj", "/common/src/LensUp.Common.AzureBlobStorage/"]
@@ -20,8 +23,8 @@ RUN dotnet restore "LensUp.PhotoCollectorService.API/LensUp.PhotoCollectorServic
 
 COPY . .
 
-WORKDIR "/src/LensUp.PhotoCollectorService.API"
-RUN dotent build "LensUp.PhotoCollectorService.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/photo-collector-service/src/LensUp.PhotoCollectorService.API"
+RUN dotnet build "LensUp.PhotoCollectorService.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build as publish
 ARG BUILD_CONFIGURATION=Development
