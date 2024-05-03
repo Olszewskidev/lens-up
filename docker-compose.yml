@@ -12,6 +12,16 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
+      
+  lensup.photocollectorservice.ui:
+    container_name: lensup.photocollectorservice.ui
+    image: lensup.photocollectorservice.ui
+    build:
+      context: ./ui-applications/packages/photo-collector-ui
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+
   lensup.galleryservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -26,6 +36,15 @@ services:
       - "8082:8082"
       - "8083:8083"
 
+  lensup.galleryservice.ui:
+    container_name: lensup.galleryservice.ui
+    image: lensup.galleryservice.ui
+    build:
+      context: ./ui-applications/packages/gallery-ui
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+
   lensup.backofficeservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -39,3 +58,12 @@ services:
     ports:
       - "8084:8084"
       - "8085:8085"
+
+  lensup.backofficeservice.ui:
+    container_name: lensup.backofficeservice.ui
+    image: lensup.backofficeservice.ui
+    build:
+      context: ./ui-applications/packages/back-office-ui
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
