@@ -32,10 +32,8 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black">
-            <div className="container mx-auto flex flex-wrap flex-col md:flex-row justify-center h-screen items-center">
-                <LoginForm handleFormSubmit={handleFormSubmit} enterCode={enterCode} handleEnterCodeInputChange={handleEnterCodeInputChange} isLoading={isLoading} />
-            </div>
+        <div className="container mx-auto flex flex-wrap flex-col md:flex-row justify-center h-screen items-center">
+            <LoginForm handleFormSubmit={handleFormSubmit} enterCode={enterCode} handleEnterCodeInputChange={handleEnterCodeInputChange} isLoading={isLoading} />
         </div>
     )
 }

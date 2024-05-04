@@ -1,7 +1,6 @@
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { LoginToGalleryPayload, LoginToGalleryResponse, PhotoItem } from '../types/GalleryApiTypes';
-import { DummyPhotos } from '../data/dummyData';
 
 const baseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_GALLERY_SERVICE_URL,
