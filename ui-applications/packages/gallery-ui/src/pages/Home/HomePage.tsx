@@ -11,14 +11,14 @@ const HomePage = () => {
 
     const hasPhotos = data && data.length > 0
     return (
-        <div className="min-h-screen bg-black">
+        <>
             {
                 hasPhotos && (<PhotoGallery photoItems={data} />)
             }
             {
                 qRCodeUrl && <QRCodeCard qRCodeUrl={qRCodeUrl} hasPhotos={hasPhotos} />
             }
-        </div>
+        </>
     )
 }
 
