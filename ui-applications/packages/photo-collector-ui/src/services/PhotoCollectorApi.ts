@@ -8,7 +8,7 @@ export const photoCollectorApi = createApi({
     reducerPath: 'photoCollectorApi',
     baseQuery: baseQuery,
     endpoints: (builder) => ({
-        addPhotoToGallery: builder.mutation<void, { enterCode: string, formData: FormData }>({
+        addPhotoToGallery: builder.mutation<void, { enterCode: string, formData: FormData, author: string }>({
             query: (payload) => ({
                 method: 'POST',
                 url: `upload-photo/${payload.enterCode}`,

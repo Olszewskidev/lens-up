@@ -8,6 +8,7 @@ const AddPhotoToGalleryPage = () => {
     const { enterCode } = useParams();
     const [addPhoto, { isError, isSuccess, isUninitialized, isLoading }] = useAddPhotoToGalleryMutation();
     const [photo, setPhoto] = useState<File>();
+    const [author, setAuthor] = useState<string>();
 
     const handlePhotoInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         // TODO: Validation
@@ -20,14 +21,21 @@ const AddPhotoToGalleryPage = () => {
         setPhoto(photo)
     };
 
+    const handleAuthorInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+        // TODO: Validation
+        const enterCodeValue = event.target.value;
+        setAuthor(enterCodeValue);
+    };
+
     const handleFormSubmit = () => {
         // TODO: Validation
-        if (!photo || !enterCode) {
+        if (!photo || !enterCode || !author) {
             return
         }
         const formData = new FormData();
         formData.append('File', photo);
-        addPhoto({ enterCode, formData })
+        addPhoto({ enterCode, formData, author })
+        console.log({ enterCode, formData, author })
     }
 
     return (
@@ -36,6 +44,8 @@ const AddPhotoToGalleryPage = () => {
                 isUninitialized && <AddPhotoForm
                     handleFormSubmit={handleFormSubmit}
                     handlePhotoInputChange={handlePhotoInputChange}
+                    handleAuthorInputChange={handleAuthorInputChange}
+                    author={author}
                     photo={photo}
                     isLoading={isLoading} />
             }
