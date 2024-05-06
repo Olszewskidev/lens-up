@@ -29,9 +29,9 @@ public sealed class PhotoProcessorUnitTests
         this.idGeneratorMock = new Mock<IIdGenerator>();
 
         this.uut = new PhotoProcessor(
-            this.queueSenderMock.Object, 
-            this.blobStorageServiceMock.Object, 
-            this.galleryPhotoRepositoryMock.Object, 
+            this.queueSenderMock.Object,
+            this.blobStorageServiceMock.Object,
+            this.galleryPhotoRepositoryMock.Object,
             this.idGeneratorMock.Object);
     }
 
@@ -39,12 +39,12 @@ public sealed class PhotoProcessorUnitTests
     public async Task ProcessAsync_Should_Pass_When_InputIsValid()
     {
         // Arrange
-        var expectedValues = new { PhotoId = Guid.NewGuid().ToString(), GalleryId = Guid.NewGuid().ToString(), PhotoUrl = "http://my-photo.com/" };
+        var expectedValues = new { PhotoId = Guid.NewGuid().ToString(), GalleryId = Guid.NewGuid().ToString(), PhotoUrl = "http://my-photo.com/", AuthorName = "Tester", WishesText = "My wishes" };
         var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(5)).Token;
         const string photoFileExtension = ".png";
         byte[] photoByteArray = new byte[69];
 
-        var request = new PhotoProcessorRequest(expectedValues.GalleryId, photoByteArray, photoFileExtension);
+        var request = new PhotoProcessorRequest(expectedValues.GalleryId, photoByteArray, photoFileExtension, expectedValues.AuthorName, expectedValues.WishesText);
         GalleryPhotoEntity? addedGalleryPhotoEntity = null;
         PhotoUploadedEvent? createdEvent = null;
 
@@ -79,6 +79,8 @@ public sealed class PhotoProcessorUnitTests
         addedGalleryPhotoEntity.PartitionKey.Should().Be(expectedValues.GalleryId);
         addedGalleryPhotoEntity.GalleryId.Should().Be(expectedValues.GalleryId);
         addedGalleryPhotoEntity.PhotoUrl.Should().Be(expectedValues.PhotoUrl);
+        addedGalleryPhotoEntity.AuthorName.Should().Be(expectedValues.AuthorName);
+        addedGalleryPhotoEntity.WishesText.Should().Be(expectedValues.WishesText);
 
         this.queueSenderMock.Verify(x => x.SendAsync(It.IsAny<PhotoUploadedEvent>()), Times.Once);
         createdEvent.Should().NotBeNull();
@@ -86,6 +88,8 @@ public sealed class PhotoProcessorUnitTests
         createdEvent.Payload.PhotoId.Should().Be(expectedValues.PhotoId);
         createdEvent.Payload.PhotoUrl.Should().Be(expectedValues.PhotoUrl);
         createdEvent.Payload.GalleryId.Should().Be(expectedValues.GalleryId);
+        createdEvent.Payload.AuthorName.Should().Be(expectedValues.AuthorName);
+        createdEvent.Payload.WishesText.Should().Be(expectedValues.WishesText);
     }
 
     [Fact]
@@ -96,7 +100,7 @@ public sealed class PhotoProcessorUnitTests
         const string photoFileExtension = ".xml";
         byte[] photoByteArray = new byte[69];
 
-        var request = new PhotoProcessorRequest(Guid.NewGuid().ToString(), photoByteArray, photoFileExtension);
+        var request = new PhotoProcessorRequest(Guid.NewGuid().ToString(), photoByteArray, photoFileExtension, "Tester", "My wishes");
 
         this.idGeneratorMock
             .Setup(x => x.Generate())
@@ -117,7 +121,7 @@ public sealed class PhotoProcessorUnitTests
         const string photoFileExtension = ".png";
         byte[]? photoByteArray = null;
 
-        var request = new PhotoProcessorRequest(Guid.NewGuid().ToString(), photoByteArray, photoFileExtension);
+        var request = new PhotoProcessorRequest(Guid.NewGuid().ToString(), photoByteArray, photoFileExtension, "Tester", "My wishes");
 
         this.idGeneratorMock
             .Setup(x => x.Generate())

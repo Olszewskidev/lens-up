@@ -149,4 +149,30 @@ public sealed class UploadPhotoToGalleryRequestValidatorUnitTests
         result.Should().NotBeNull();
         result.Should().Be(result);
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void EnsureThatAuthorNameIsValid_Should_Throws_ArgumentException_When_AuthorNameIsNotValid(string? authorName)
+    {
+        // Act
+        var act = () => this.uut.EnsureThatAuthorNameIsValid(authorName);
+
+        // Assert
+        act.Should().Throw<ArgumentException>();
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData(" ")]
+    public void EnsureThatWishesTextIsValid_Should_Throws_ArgumentException_When_WishesTextIsNotValid(string? wishesText)
+    {
+        // Act
+        var act = () => this.uut.EnsureThatWishesTextIsValid(wishesText);
+
+        // Assert
+        act.Should().Throw<ArgumentException>();
+    }
 }

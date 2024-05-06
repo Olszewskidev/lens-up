@@ -7,6 +7,8 @@ namespace LensUp.PhotoCollectorService.API.Validators;
 
 public interface IUploadPhotoToGalleryRequestValidator
 {
+    void EnsureThatAuthorNameIsValid(string authorName);
+    void EnsureThatWishesTextIsValid(string wishesText);
     string EnsureThatPhotoFileIsValid(IFormFile photoFile);
     Task<string> EnsureThatGalleryIsActivated(int enterCode, CancellationToken cancellationToken);
 }
@@ -51,5 +53,21 @@ public sealed class UploadPhotoToGalleryRequestValidator : IUploadPhotoToGallery
         }
 
         return activeGalleryEntity.GalleryId;
+    }
+
+    public void EnsureThatAuthorNameIsValid(string authorName)
+    {
+        if (string.IsNullOrWhiteSpace(authorName))
+        {
+            throw new ArgumentException(nameof(authorName));
+        }
+    }
+
+    public void EnsureThatWishesTextIsValid(string wishesText)
+    {
+        if (string.IsNullOrWhiteSpace(wishesText))
+        {
+            throw new ArgumentException(nameof(wishesText));
+        }
     }
 }

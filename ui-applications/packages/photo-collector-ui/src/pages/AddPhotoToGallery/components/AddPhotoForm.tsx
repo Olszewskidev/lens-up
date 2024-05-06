@@ -1,25 +1,24 @@
 import { ChangeEvent } from "react";
 import AddPhotoFormContainer from "./AddPhotoFormContainer";
-import { FormComponent, FormInputComponent, SubmitFormButtonComponent } from "@lens-up/shared-components";
+import { FormComponent, FormInputComponent, SubmitFormButtonComponent, FormTextareaComponent } from "@lens-up/shared-components";
 
 interface IAddPhotoFormProps {
     handleFormSubmit: () => void,
-    handlePhotoInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
+    handlePhotoInputChange: (event: ChangeEvent<HTMLInputElement>) => void
+    handleAuthorInputChange: (event: ChangeEvent<HTMLInputElement>) => void
+    handleWishesTextareaChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
     isLoading: boolean
     photo?: File
     author?: string
-    handleAuthorInputChange: (event: ChangeEvent<HTMLInputElement>) => void,
+    wishes?: string
 }
 
-const AddPhotoForm = ({ handleFormSubmit, handlePhotoInputChange, isLoading, photo, handleAuthorInputChange, author }: IAddPhotoFormProps) => {
+const AddPhotoForm = ({ handleFormSubmit, handlePhotoInputChange, isLoading, photo, handleAuthorInputChange, author, handleWishesTextareaChange, wishes }: IAddPhotoFormProps) => {
     return (
         <AddPhotoFormContainer>
             <FormComponent handleFormSubmit={handleFormSubmit}>
                 <div className="px-4 py-6">
-                    <div className="mb-5">
-                        <FormInputComponent label="Author" type="text" required value={author} handleInputChange={handleAuthorInputChange} />
-                    </div>
-                    <div className="max-w-sm p-6 mb-4 items-center mx-auto text-center cursor-pointer ">
+                    <div className="mb-5 items-center mx-auto text-center cursor-pointer ">
                         {!photo && (
                             <>
                                 <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-full">
@@ -36,12 +35,17 @@ const AddPhotoForm = ({ handleFormSubmit, handlePhotoInputChange, isLoading, pho
                         }
                         {
                             photo && (
-                                <div className="bg-white p-4">
+                                <div className="bg-white p-4 rounded-lg">
                                     <img className="w-full h-auto" src={URL.createObjectURL(photo)} />
                                 </div>
                             )
                         }
-
+                    </div>
+                    <div className="mb-5">
+                        <FormInputComponent label="Author" type="text" placeholder="Your name" required value={author} handleInputChange={handleAuthorInputChange} />
+                    </div>
+                    <div className="mb-5">
+                        <FormTextareaComponent label="Your wishes" placeholder="..." required value={wishes} handleTextareaChange={handleWishesTextareaChange} />
                     </div>
                     <div className="flex items-center justify-center">
                         <div className="text-center relative group">
