@@ -41,10 +41,13 @@ app.MapPost("/upload-photo/{enterCode}", async (
     IPhotoChannel channel,
     CancellationToken cancellationToken) =>
 {
+    validator.EnsureThatAuthorNameIsValid(request.AuthorName);
+    validator.EnsureThatWishesTextIsValid(request.WishesText);
+
     string photoFileExtension = validator.EnsureThatPhotoFileIsValid(request.File);
     string galleryId = await validator.EnsureThatGalleryIsActivated(enterCode, cancellationToken);    
 
-    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, await request.File.GetBytes(), photoFileExtension));
+    await channel.PublishAsync(new PhotoProcessorRequest(galleryId, await request.File.GetBytes(), photoFileExtension, request.AuthorName, request.WishesText));
     return Results.Accepted();
 }) 
 .DisableAntiforgery() // Need this when you want to upload without a token

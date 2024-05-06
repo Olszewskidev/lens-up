@@ -12,7 +12,7 @@ const LoginForm = ({ handleFormSubmit, handleEnterCodeInputChange, isLoading, en
     return (
         <FormComponent handleFormSubmit={handleFormSubmit}>
             <div className="mb-5">
-                <FormInputComponent label="Join to your gallery" type="number" required value={enterCode} handleInputChange={handleEnterCodeInputChange} />
+                <FormInputComponent label="Join to your gallery" type="number" placeholder="Enter code" required value={enterCode} handleInputChange={handleEnterCodeInputChange} />
             </div>
             <div className="flex items-center justify-center">
                 <div className="text-center relative group">

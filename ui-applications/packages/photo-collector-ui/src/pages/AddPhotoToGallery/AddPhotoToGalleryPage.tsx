@@ -9,6 +9,7 @@ const AddPhotoToGalleryPage = () => {
     const [addPhoto, { isError, isSuccess, isUninitialized, isLoading }] = useAddPhotoToGalleryMutation();
     const [photo, setPhoto] = useState<File>();
     const [author, setAuthor] = useState<string>();
+    const [wishes, setWhishes] = useState<string>();
 
     const handlePhotoInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         // TODO: Validation
@@ -23,19 +24,26 @@ const AddPhotoToGalleryPage = () => {
 
     const handleAuthorInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         // TODO: Validation
-        const enterCodeValue = event.target.value;
-        setAuthor(enterCodeValue);
+        const author = event.target.value;
+        setAuthor(author);
+    };
+
+    const handleWishesTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        // TODO: Validation
+        const wishes = event.target.value;
+        setWhishes(wishes);
     };
 
     const handleFormSubmit = () => {
         // TODO: Validation
-        if (!photo || !enterCode || !author) {
+        if (!photo || !enterCode || !author || !wishes) {
             return
         }
-        const formData = new FormData();
-        formData.append('File', photo);
-        addPhoto({ enterCode, formData, author })
-        console.log({ enterCode, formData, author })
+        const formData = new FormData()
+        formData.append('File', photo)
+        formData.append('AuthorName', author)
+        formData.append('WishesText', wishes)
+        addPhoto({ enterCode, formData })
     }
 
     return (
@@ -45,6 +53,8 @@ const AddPhotoToGalleryPage = () => {
                     handleFormSubmit={handleFormSubmit}
                     handlePhotoInputChange={handlePhotoInputChange}
                     handleAuthorInputChange={handleAuthorInputChange}
+                    handleWishesTextareaChange={handleWishesTextareaChange}
+                    wishes={wishes}
                     author={author}
                     photo={photo}
                     isLoading={isLoading} />

@@ -36,10 +36,11 @@ public sealed class PhotoProcessor : IPhotoProcessor
         string photoId = this.idGenerator.Generate();
         var uploadedPhotoInfo = await this.UploadPhotoToBlob(photoId, request, cancellationToken);
 
-        var galleryPhotoEntity = GalleryPhotoEntity.Create(photoId, request.GalleryId, uploadedPhotoInfo.Uri.AbsoluteUri);
+        var galleryPhotoEntity = GalleryPhotoEntity.Create(photoId, request.GalleryId, uploadedPhotoInfo.Uri.AbsoluteUri, request.AuthorName, request.WishesText);
         await this.galleryPhotoRepository.AddAsync(galleryPhotoEntity, cancellationToken);
 
-        await this.queueSender.SendAsync(new PhotoUploadedEvent(new PhotoUploadedEventPayload(photoId, request.GalleryId, galleryPhotoEntity.PhotoUrl, galleryPhotoEntity.CreatedDate)));
+        await this.queueSender.SendAsync(new PhotoUploadedEvent(
+            new PhotoUploadedEventPayload(photoId, request.GalleryId, galleryPhotoEntity.PhotoUrl, galleryPhotoEntity.CreatedDate, galleryPhotoEntity.AuthorName, galleryPhotoEntity.WishesText)));
     }
 
     private string CreateFileName(string id, string fileExtension)

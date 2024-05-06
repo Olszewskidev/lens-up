@@ -11,12 +11,14 @@ public sealed class PhotoUploadedEvent : EventMessage<PhotoUploadedEventPayload>
 
 public sealed class PhotoUploadedEventPayload
 {
-    public PhotoUploadedEventPayload(string photoid, string galleryId, string photoUrl, DateTimeOffset createdDate)
+    public PhotoUploadedEventPayload(string photoid, string galleryId, string photoUrl, DateTimeOffset createdDate, string authorName, string wishesText)
     {
         this.PhotoId = photoid;
         this.GalleryId = galleryId;
         this.PhotoUrl = photoUrl;
         this.CreatedDate = createdDate;
+        this.AuthorName = authorName;
+        this.WishesText = wishesText;
     }
 
     public string PhotoId { get; init; }
@@ -24,6 +26,10 @@ public sealed class PhotoUploadedEventPayload
     public string GalleryId { get; init; }
 
     public string PhotoUrl { get; init; }
+
+    public string AuthorName { get; init; }
+
+    public string WishesText { get; init; }
 
     public DateTimeOffset CreatedDate { get; init; }
 }
