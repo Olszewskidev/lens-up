@@ -21,7 +21,9 @@ public sealed class WebhookController : Controller
     public async Task<IActionResult> PhotoUploadedToGalleryHook([FromBody] PhotoUploadedEvent @event)
     {
         var eventPayload = @event.Payload;
-        await this.galleryNotificationService.SendPhotoUploadedToGalleryNotification(eventPayload.GalleryId, new PhotoUploadedNotification(eventPayload.PhotoId, eventPayload.PhotoUrl));
+        await this.galleryNotificationService.SendPhotoUploadedToGalleryNotification(
+            eventPayload.GalleryId, 
+            new PhotoUploadedNotification(eventPayload.PhotoId, eventPayload.PhotoUrl, eventPayload.AuthorName, eventPayload.WishesText));
 
         return this.Ok();
     }
