@@ -1,5 +1,6 @@
 ﻿using Azure.Storage.Queues;
 using LensUp.Common.AzureQueueStorage;
+using LensUp.Common.Types.Constants;
 using LensUp.PhotoCollectorService.Contracts.Events;
 
 namespace LensUp.PhotoCollectorService.API.Services;
@@ -15,5 +16,5 @@ public sealed class PhotoQueueSender : BaseAzureQueueSender<PhotoUploadedEvent>,
     {
     }
 
-    public override string QueueName => "photo-queue";
+    public override string QueueName => QueueNames.PhotoQueue;
 }
