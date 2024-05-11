@@ -18,7 +18,7 @@ COPY ["gallery-service/src/LensUp.GalleryService.Domain/LensUp.GalleryService.Do
 COPY ["gallery-service/src/LensUp.GalleryService.Infrastructure/LensUp.GalleryService.Infrastructure.csproj", "LensUp.GalleryService.Infrastructure/"]
 COPY ["photo-collector-service/src/LensUp.PhotoCollectorService.Contracts/LensUp.PhotoCollectorService.Contracts.csproj", "/photo-collector-service/src/LensUp.PhotoCollectorService.Contracts/"]
 COPY ["common/src/LensUp.Common.AzureTableStorage/LensUp.Common.AzureTableStorage.csproj", "/common/src/LensUp.Common.AzureTableStorage/"]
-COPY ["common/src/LensUp.Common.AzureTableStorage/LensUp.Common.AzureTableStorage.csproj", "/common/src/LensUp.Common.AzureTableStorage/"]
+COPY ["common/src/LensUp.Common.AzureQueueStorage/LensUp.Common.AzureQueueStorage.csproj", "/common/src/LensUp.Common.AzureQueueStorage/"]
 COPY ["common/src/LensUp.Common.Types/LensUp.Common.Types.csproj", "/common/src/LensUp.Common.Types/"]
 
 RUN dotnet restore "LensUp.GalleryService.API/LensUp.GalleryService.API.csproj"
