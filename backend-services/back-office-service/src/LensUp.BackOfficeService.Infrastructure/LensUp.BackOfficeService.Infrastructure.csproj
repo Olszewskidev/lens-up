@@ -5,6 +5,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\common\src\LensUp.Common.AzureBlobStorage\LensUp.Common.AzureBlobStorage.csproj" />
+    <ProjectReference Include="..\..\..\common\src\LensUp.Common.AzureQueueStorage\LensUp.Common.AzureQueueStorage.csproj" />
     <ProjectReference Include="..\..\..\common\src\LensUp.Common.AzureTableStorage\LensUp.Common.AzureTableStorage.csproj" />
     <ProjectReference Include="..\..\..\common\src\LensUp.Common.Types\LensUp.Common.Types.csproj" />
     <ProjectReference Include="..\LensUp.BackOfficeService.Application\LensUp.BackOfficeService.Application.csproj" />

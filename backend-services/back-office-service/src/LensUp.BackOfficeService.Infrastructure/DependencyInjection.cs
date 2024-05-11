@@ -2,24 +2,29 @@
 using LensUp.BackOfficeService.Domain.Repositories;
 using LensUp.BackOfficeService.Infrastructure.BlobStorage;
 using LensUp.BackOfficeService.Infrastructure.Generators;
+using LensUp.BackOfficeService.Infrastructure.Initializers;
 using LensUp.BackOfficeService.Infrastructure.Repositories;
 using LensUp.BackOfficeService.Infrastructure.TableConfigurations;
 using LensUp.Common.AzureBlobStorage;
+using LensUp.Common.AzureQueueStorage;
 using LensUp.Common.AzureTableStorage;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace LensUp.BackOfficeService.Infrastructure;
 
 public static class DependencyInjection
 {
     private const string AzureStorageKey = "AzureStorage";
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
     {
-        var azureTablesConnectionString = configuration.GetConnectionString(AzureStorageKey) 
+        var azureStorageAccountConnectionString = configuration.GetConnectionString(AzureStorageKey) 
             ?? throw new Exception($"Value for key '{AzureStorageKey}' is null or not found in the configuration.");
-        services.AddAzureTables(azureTablesConnectionString)
-                .AddAzureBlobStorage(azureTablesConnectionString);
+        services.AddAzureTables(azureStorageAccountConnectionString)
+                .AddAzureBlobStorage(azureStorageAccountConnectionString)
+                .AddAzureQueue(azureStorageAccountConnectionString);
 
         services
             .AddUserRepository()
@@ -30,6 +35,13 @@ public static class DependencyInjection
             .AddScoped<IQRGenerator, QRGenerator>()
             .AddScoped<IGalleryStorageService, GalleryStorageService>()
             .AddScoped<IEnterCodeGenerator, EnterCodeGenerator>();
+
+        if (env.IsDevelopment())
+        {
+            services
+                .AddHostedService(provider => new AzureTablesInitializer(azureStorageAccountConnectionString))
+                .AddHostedService(provider => new AzureQueueInitializer(azureStorageAccountConnectionString));
+        }
 
         return services;
     }
