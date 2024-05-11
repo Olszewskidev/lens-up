@@ -13,7 +13,7 @@ builder.Services.AddHealthApplicationChecks();
 
 builder.Services
     .AddApplication(builder.Configuration)
-    .AddInfrastructure(builder.Configuration);
+    .AddInfrastructure(builder.Configuration, builder.Environment);
 
 var app = builder.Build();
 

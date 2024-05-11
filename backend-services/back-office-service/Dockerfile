@@ -18,6 +18,7 @@ COPY ["back-office-service/src/LensUp.BackOfficeService.Domain/LensUp.BackOffice
 COPY ["back-office-service/src/LensUp.BackOfficeService.Infrastructure/LensUp.BackOfficeService.Infrastructure.csproj", "LensUp.BackOfficeService.Infrastructure/"]
 COPY ["common/src/LensUp.Common.AzureBlobStorage/LensUp.Common.AzureBlobStorage.csproj", "/common/src/LensUp.Common.AzureBlobStorage/"]
 COPY ["common/src/LensUp.Common.AzureTableStorage/LensUp.Common.AzureTableStorage.csproj", "/common/src/LensUp.Common.AzureTableStorage/"]
+COPY ["common/src/LensUp.Common.AzureQueueStorage/LensUp.Common.AzureQueueStorage.csproj", "/common/src/LensUp.Common.AzureQueueStorage/"]
 COPY ["common/src/LensUp.Common.Types/LensUp.Common.Types.csproj", "/common/src/LensUp.Common.Types/"]
 
 RUN dotnet restore "LensUp.BackOfficeService.API/LensUp.BackOfficeService.API.csproj"

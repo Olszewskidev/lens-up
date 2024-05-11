@@ -1,4 +1,16 @@
 services:
+
+  azurite:
+    container_name: azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    hostname: azurite
+    restart: always
+    ports:
+      - "10000:10000" 
+      - "10001:10001" 
+      - "10002:10002"
+    command: azurite --loose --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
+  
   lensup.photocollectorservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -12,15 +24,6 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
-      
-  lensup.photocollectorservice.ui:
-    container_name: lensup.photocollectorservice.ui
-    image: lensup.photocollectorservice.ui
-    build:
-      context: ./ui-applications/packages/photo-collector-ui
-      dockerfile: Dockerfile
-    ports:
-      - "5002:5002"
 
   lensup.galleryservice.api:
     environment:
@@ -33,17 +36,8 @@ services:
       context: ./backend-services
       dockerfile: gallery-service/Dockerfile
     ports:
-      - "8082:8082"
-      - "8083:8083"
-
-  lensup.galleryservice.ui:
-    container_name: lensup.galleryservice.ui
-    image: lensup.galleryservice.ui
-    build:
-      context: ./ui-applications/packages/gallery-ui
-      dockerfile: Dockerfile
-    ports:
-      - "5001:5001"
+      - "8082:8080"
+      - "8083:8081"
 
   lensup.backofficeservice.api:
     environment:
@@ -56,14 +50,5 @@ services:
       context: ./backend-services
       dockerfile: back-office-service/Dockerfile
     ports:
-      - "8084:8084"
-      - "8085:8085"
-
-  lensup.backofficeservice.ui:
-    container_name: lensup.backofficeservice.ui
-    image: lensup.backofficeservice.ui
-    build:
-      context: ./ui-applications/packages/back-office-ui
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
+      - "8084:8080"
+      - "8085:8081"
