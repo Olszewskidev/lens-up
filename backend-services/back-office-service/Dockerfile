@@ -6,6 +6,10 @@ EXPOSE 8084
 EXPOSE 8085
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+# libgdiplus is required for qr code library
+RUN apt-get update && apt-get install -y libgdiplus
+
 ARG BUILD_CONFIGURATION=Development
 WORKDIR /src
 
