@@ -1,4 +1,5 @@
 using Azure.Storage.Queues.Models;
+using LensUp.Common.Types.Constants;
 using LensUp.PhotoCollectorService.Contracts.Events;
 using Microsoft.Azure.Functions.Worker;
 using System.Text;
@@ -9,13 +10,13 @@ namespace LensUp.GalleryService.WebhookTriggerSimulator;
 // Workaround - simulate webhook trigger
 public sealed class WebhookTriggerSimulatorFunction
 {
-    private const string WebhookUrl = "https://localhost:7018/Webhook";
+    private const string WebhookUrl = "http://localhost:8082/Webhook";
     public WebhookTriggerSimulatorFunction()
     {
     }
 
     [Function(nameof(WebhookTriggerSimulatorFunction))]
-    public async Task Run([QueueTrigger("photo-queue", Connection = "AzureStorageConnectionString")] QueueMessage message)
+    public async Task Run([QueueTrigger(QueueNames.PhotoQueue, Connection = "AzureStorageConnectionString")] QueueMessage message)
     {
 
         if (message?.Body == null)
