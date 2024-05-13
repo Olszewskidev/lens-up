@@ -43,6 +43,19 @@ services:
     depends_on:
       - azurite
 
+  # lensup.galleryservice.webhooktriggersimulator:
+  #   environment:
+  #     - AzureFunctionsJobHost__Http__Port=8086
+  #   container_name: lensup.galleryservice.webhooktriggersimulator
+  #   image: lensup.galleryservice.webhooktriggersimulator
+  #   build:
+  #     context: ./backend-services
+  #     dockerfile: gallery-service/src/LensUp.GalleryService.WebhookTriggerSimulator/Dockerfile
+  #   ports:
+  #     - "8086:8080"
+  #   depends_on:
+  #     - lensup.galleryservice.api
+
   lensup.backofficeservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
