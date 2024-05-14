@@ -19,7 +19,7 @@ public sealed class AzureTablesInitializer : IHostedService
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         var taskList = new List<Task>();
-        foreach (string tableName in TableNames.All)
+        foreach (string tableName in Enum.GetNames(typeof(TableNames)))
         {
             var tableClient = this.tableServiceClient.GetTableClient(tableName);
             taskList.Add(tableClient.CreateIfNotExistsAsync(cancellationToken));
