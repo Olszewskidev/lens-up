@@ -5,6 +5,11 @@
 
 Have you ever attended a wedding or a birthday party? If yes, you probably saw photo booth there. You get in, take a photo and paste it in the guest book - simple and fun. But what if we could bring this fun into the digital world? This is where **LensUp** comes to the rescue. **LensUp** is a web application that serves as a virtual gallery, allowing party guests to upload their photos from the event and also write down their wishes.
 
+- [Project status](#Project status)
+- [100 days roadmap](#100 days roadmap)
+- [How to run LensUp locally](#How to run LensUp locally)
+- [TODO list (100 days)](#TODO list (100 days))
+
 # Project status
 The video shows the project status as of `26.04.2024` and the core functionality of the application.
 [![LensUp state](https://img.youtube.com/vi/73V7og0nS38/maxresdefault.jpg)](https://www.youtube.com/watch?v=73V7og0nS38)
@@ -63,7 +68,31 @@ Description:
   - Queue Storage
   - Blob Storage
 
-  
+
+
+
+## How to run LensUp locally
+
+You can run the project locally on your machine using Docker. All services will be hosted on your WLAN network. Follow the steps below to run the application locally.
+
+1. Before we start you should generate `dev-certs` for LensUp on your machine. This operation is required to hosting ASP.NET Core images with Docker over HTTPS. So generate a certificate and configure the local machine:
+
+   ```bash
+   dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\lens-up.pfx" -p localCertPassword
+   dotnet dev-certs https --trust
+   ```
+
+   **Replace `%USERPROFILE%` with your computer name.** Example `"C:\Users\Kamil\.aspnet\https\lens-up.pfx"`
+
+   **This is necessary step, because docker-compose refers to that certificate**.
+
+2. Install `docker desktop` on your machine (skip if you already done it).
+
+3. Run your `docker desktop` application.
+
+4. To be continued.
+
+
 
 ## TODO list (100 days)
 
