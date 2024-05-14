@@ -23,7 +23,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// TODO: generate https certificate
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 // TODO: Adjust on finish
 app.UseCors(options => options

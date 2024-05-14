@@ -1,4 +1,6 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+# libgdiplus is required for qr code library
+RUN apt-get update && apt-get install -y libgdiplus
 
 WORKDIR /app
 
@@ -6,6 +8,7 @@ EXPOSE 8084
 EXPOSE 8085
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 ARG BUILD_CONFIGURATION=Development
 WORKDIR /src
 

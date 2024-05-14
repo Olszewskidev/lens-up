@@ -24,6 +24,8 @@ services:
     ports:
       - "8080:8080"
       - "8081:8081"
+    depends_on:
+      - azurite
 
   lensup.galleryservice.api:
     environment:
@@ -38,6 +40,21 @@ services:
     ports:
       - "8082:8080"
       - "8083:8081"
+    depends_on:
+      - azurite
+
+  # lensup.galleryservice.webhooktriggersimulator:
+  #   environment:
+  #     - AzureFunctionsJobHost__Http__Port=8086
+  #   container_name: lensup.galleryservice.webhooktriggersimulator
+  #   image: lensup.galleryservice.webhooktriggersimulator
+  #   build:
+  #     context: ./backend-services
+  #     dockerfile: gallery-service/src/LensUp.GalleryService.WebhookTriggerSimulator/Dockerfile
+  #   ports:
+  #     - "8086:8080"
+  #   depends_on:
+  #     - lensup.galleryservice.api
 
   lensup.backofficeservice.api:
     environment:
@@ -52,3 +69,5 @@ services:
     ports:
       - "8084:8080"
       - "8085:8081"
+    depends_on:
+      - azurite
