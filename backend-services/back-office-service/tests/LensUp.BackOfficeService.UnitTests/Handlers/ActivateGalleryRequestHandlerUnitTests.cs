@@ -23,7 +23,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
 
     private readonly ActivateGalleryRequestHandler uut;
 
-    private const string GalleryUIUrl = "http://localhost:3000";
+    private const string PhotoCollectorUIUrl = "http://localhost:5002";
 
     public ActivateGalleryRequestHandlerUnitTests()
     {
@@ -36,7 +36,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
 
         var applicationOptions = new ApplicationOptions()
         {
-            GalleryUIUrl = GalleryUIUrl,
+            PhotoCollectorUIUrl = PhotoCollectorUIUrl,
         };
 
         this.uut = new ActivateGalleryRequestHandler(
@@ -56,7 +56,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
         var request = new ActivateGalleryRequest(Guid.NewGuid().ToString(), DateTimeOffset.UtcNow.AddHours(2));
         var userId = Guid.NewGuid().ToString();
         var galleryEntity = GalleryEntity.Create(request.GalleryId, "Already Activated Gallery", userId);
-        galleryEntity.Activate(userId, DateTimeOffset.UtcNow.AddHours(1), 1234, GalleryUIUrl);
+        galleryEntity.Activate(userId, DateTimeOffset.UtcNow.AddHours(1), 1234, PhotoCollectorUIUrl);
         var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(2)).Token;
 
         this.userClaimsMock

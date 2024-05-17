@@ -16,7 +16,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     private readonly IActiveGalleryRepository activeGalleryRepository;
     private readonly IUserClaims userClaims;
 
-    private readonly string galleryUIUrl;
+    private readonly string photoCollectorUIUrl;
 
     public ActivateGalleryRequestHandler(
         IEnterCodeGenerator enterCodeGenerator, 
@@ -34,7 +34,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         this.activeGalleryRepository = activeGalleryRepository;
         this.userClaims = userClaims;
 
-        this.galleryUIUrl = applicationOptions.Value.GalleryUIUrl;
+        this.photoCollectorUIUrl = applicationOptions.Value.PhotoCollectorUIUrl;
     }
 
     public async Task<ActivateGalleryResponse> Handle(ActivateGalleryRequest request, CancellationToken cancellationToken)
@@ -63,5 +63,5 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     }
 
     private Uri BuildGalleryUIUri(int enterCode)
-        => new Uri($"{this.galleryUIUrl}/{enterCode}");
+        => new Uri($"{this.photoCollectorUIUrl}/{enterCode}");
 }
