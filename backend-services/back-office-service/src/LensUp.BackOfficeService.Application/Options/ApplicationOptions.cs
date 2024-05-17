@@ -4,5 +4,5 @@ public sealed class ApplicationOptions
 {
     public const string Position = "ApplicationOptions";
 
-    public string GalleryUIUrl { get; init; } = string.Empty;
+    public string PhotoCollectorUIUrl { get; init; } = string.Empty;
 }
