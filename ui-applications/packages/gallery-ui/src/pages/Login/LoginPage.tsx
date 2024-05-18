@@ -4,7 +4,7 @@ import { useLoginToGalleryMutation } from "../../services/GalleryApi";
 import { useNavigate } from "react-router-dom";
 import { saveQRCode } from "../../utils/qRCodeHelper";
 
-const LoginPage = () => {
+export const LoginPage = () => {
     const navigate = useNavigate();
     const [enterCode, setEnterCode] = useState<string>();
 
