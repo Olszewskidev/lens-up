@@ -62,6 +62,7 @@ services:
   #   ports:
   #     - "8086:8080"
   #   depends_on:
+  #     - azurite
   #     - lensup.galleryservice.api
 
   lensup.backofficeservice.api:
