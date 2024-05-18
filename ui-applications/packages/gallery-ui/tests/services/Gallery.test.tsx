@@ -1,7 +1,7 @@
-import {fireEvent, render, screen} from '@testing-library/react'
-import {expect, it} from '@jest/globals';
+import { fireEvent, render } from '@testing-library/react'
+import { expect, it } from '@jest/globals';
 import { LoginPage } from '../../src/pages/Login/LoginPage';
-import { galleryApi, useLoginToGalleryMutation } from '../../src/services/GalleryApi';
+import { galleryApi } from '../../src/services/GalleryApi';
 import { LoginToGalleryPayload } from '../../src/types/GalleryApiTypes';
 
 it('Login must be accepted for the gallery', () => {
