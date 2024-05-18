@@ -15,3 +15,15 @@ it('Entered code must change in the form', () => {
     
     expect(firstRender).toMatchSnapshot(asFragment());
   });
+
+it('Form must be handled successfully', () => {
+    const {getByText, asFragment} = render(
+        <LoginPage />,
+    );
+
+    const firstRender = asFragment();
+
+    fireEvent.submit(getByText("Join"));
+    
+    expect(firstRender).toMatchSnapshot(asFragment());
+  });
