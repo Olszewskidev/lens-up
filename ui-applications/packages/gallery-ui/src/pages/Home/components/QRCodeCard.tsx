@@ -1,3 +1,5 @@
+import { memo } from "react"
+
 interface IQRCodeCardProps {
     qRCodeUrl: string
     hasPhotos?: boolean
@@ -14,4 +16,4 @@ const QRCodeCard = ({ qRCodeUrl, hasPhotos }: IQRCodeCardProps) => {
     )
 }
 
-export default QRCodeCard
+export default memo(QRCodeCard)
