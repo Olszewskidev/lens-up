@@ -54,6 +54,8 @@ services:
   # lensup.galleryservice.webhooktriggersimulator:
   #   environment:
   #     - AzureFunctionsJobHost__Http__Port=8086
+  #     - AzureWebJobsAzureStorageConnectionString=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://host.docker.internal:10001/devstoreaccount1;
+  #     - WebhookUrl=http://host.docker.internal:8082/Webhook
   #   container_name: lensup.galleryservice.webhooktriggersimulator
   #   image: lensup.galleryservice.webhooktriggersimulator
   #   build:
