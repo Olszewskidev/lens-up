@@ -1,0 +1,6 @@
+{
+    "private": true,
+    "compilerOptions": {
+        "types": ["vitest/globals"]
+    }
+}

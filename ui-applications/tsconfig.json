@@ -3,7 +3,7 @@
       "target": "es2020",
       "useDefineForClassFields": true,
       "lib": ["es2020", "DOM", "DOM.Iterable"],
-      "module": "es2020",
+      "module": "esnext",
       "skipLibCheck": true,
   
       /* Bundler mode */
@@ -21,10 +21,52 @@
       "noFallthroughCasesInSwitch": true,
       "esModuleInterop": true,
       "types": [
-        "jest"
-      ]
+        "jest", "vitest/globals"
+      ],
     },
-    "include": ["packages/**/*"],
-    "exclude": ["node_modules"]
+    "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue", "tests", "packages/**/*", "packages/gallery-ui", "packages/gallery-ui/tests", "packages/gallery-ui/tests/app"],
+    "exclude": ["node_modules"],
+    "jest": {
+      "moduleNameMapper": {
+        "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+        "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
+      },
+      "preset": "./node_modules/vite-jest/jest-preset.js",
+      "transform": {
+        // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
+        // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
+        "^.+\\.tsx?$": [
+          "ts-jest",
+          {
+            "useESM": true,
+          },
+          "esbuild-jest",
+          {
+            "define": {
+              "import.meta.env": "{}"
+            }
+          },
+          {
+            "diagnostics": {
+              "ignoreCodes": [1343]
+            },
+            "astTransformers": {
+              "before": [
+                {
+                  "path": "node_modules/ts-jest-mock-import-meta",  // or, alternatively, 'ts-jest-mock-import-meta' directly, without node_modules.
+                  "options": { "metaObjectReplacement": { "url": "https://www.url.com" } }
+                }
+              ]
+            }
+          }
+        ],
+        "^.+\\.[t|j]sx?$": "babel-jest",
+      },
+      "transformIgnorePatterns": [
+        "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper)/)"
+      ],
+      "extensionsToTreatAsEsm": [".ts", ".tsx"],
+      "testEnvironment": "jest-environment-jsdom"
+    }
   }
   

@@ -20,13 +20,14 @@ it('Login must be accepted for the gallery', () => {
     expect(firstRender).toMatchSnapshot(asFragment());
   });
 
+/**
+ * @jest-environment jsdom
+ */
 it('Gallery should show photos', () => {
     const {getByText, asFragment} = render(
         <LoginPage />,
     );
-
-    let payload = { enterCode: "BCD" } as LoginToGalleryPayload;
-
+    
     galleryApi.endpoints.getGalleryPhotos.initiate("test");
 
     const firstRender = asFragment();

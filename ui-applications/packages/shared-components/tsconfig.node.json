@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "target": "es2020",
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
+    "module": "es2020",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true

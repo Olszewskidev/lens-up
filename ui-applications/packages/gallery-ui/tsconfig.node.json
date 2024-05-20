@@ -4,9 +4,9 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "module": "es2020",
-    "moduleResolution": "node",
-    "target": "es2020",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
     "esModuleInterop": true,
     "types": [
       "jest"

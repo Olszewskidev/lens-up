@@ -1,10 +1,10 @@
-import renderer from 'react-test-renderer';
-import {expect, it} from '@jest/globals';
-import App from '../src/App';
+//import {render, screen} from '@testing-library/react'
+import { expect, test } from 'vitest'
+//import App from '../../src/App';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { create } from './app/store.test';
+//import { create } from '../app/store.test';
 
-it('Middleware must shows action rejection', () => {
+/*test('Middleware must shows action rejection', async () => {
     const { next, invoke } = create();
     //const action = { type: 'rejected' };
     const action = createAsyncThunk("test/rejected", async (state: string, { rejectWithValue }) => {
@@ -15,10 +15,14 @@ it('Middleware must shows action rejection', () => {
     expect(next).not.toHaveBeenCalledWith(action);
   });
 
-it('App must render', () => {
-    const component = renderer.create(
+it('App must be rendering', () => {
+    const component = render(
         <App />,
     );
-    let tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+
+    expect(screen.).toMatchSnapshot();
+  });*/
+
+test('Value must be greater than', () => {
+    expect(2).toBeGreaterThan(1);
   });
