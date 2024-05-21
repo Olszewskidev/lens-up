@@ -28,43 +28,4 @@
   "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue", "tests", "**/*", "gallery-ui", "gallery-ui/tests", "gallery-ui/tests/app", "src/**/*", "src/**/*.vue", "tests", "src/**/*"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "jest": {
-    "moduleNameMapper": {
-     "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-     "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
-    },
-    "transform": {
-      // '^.+\\.[tj]sx?$' to process js/ts with `ts-jest`
-      // '^.+\\.m?[tj]sx?$' to process js/ts/mjs/mts with `ts-jest`
-      "^.+\\.tsx?$": [
-        "ts-jest",
-        {
-          "useESM": true,
-        },
-        "esbuild-jest",
-        {
-          "define": {
-            "import.meta.env": "{}"
-          }
-        },
-        {
-          "diagnostics": {
-            "ignoreCodes": [1343]
-          },
-          "astTransformers": {
-            "before": [
-              {
-                "path": "node_modules/ts-jest-mock-import-meta",  // or, alternatively, 'ts-jest-mock-import-meta' directly, without node_modules.
-                "options": { "metaObjectReplacement": { "url": "https://www.url.com" } }
-              }
-            ]
-          }
-        }
-      ],
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper)/)"
-    ],
-    "extensionsToTreatAsEsm": [".ts", ".tsx"]
-  }
 }

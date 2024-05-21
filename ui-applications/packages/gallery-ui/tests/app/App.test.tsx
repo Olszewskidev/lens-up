@@ -1,28 +1,31 @@
-//import {render, screen} from '@testing-library/react'
-import { expect, test } from 'vitest'
-//import App from '../../src/App';
+import { render, screen } from '@testing-library/react'
+import { vi, expect, test } from 'vitest'
+import App from '../../src/App';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-//import { create } from '../app/store.test';
+import { create } from './store';
 
-/*test('Middleware must shows action rejection', async () => {
+/**
+* @vitest-environment jsdom
+*/
+test('Middleware must log api failure', async () => {
     const { next, invoke } = create();
-    //const action = { type: 'rejected' };
-    const action = createAsyncThunk("test/rejected", async (state: string, { rejectWithValue }) => {
+    const consoleMock = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const action = createAsyncThunk("test/accepted", async (state: string, { rejectWithValue }) => {
         if (state != "accepted")
-        return rejectWithValue('No user found');
+          return rejectWithValue("Console must read api failure");
       });
     invoke(action);
-    expect(next).not.toHaveBeenCalledWith(action);
+    expect(consoleMock).toHaveBeenCalledOnce();
+    expect(consoleMock).toHaveBeenLastCalledWith('API Failed!');
   });
 
-it('App must be rendering', () => {
-    const component = render(
+/**
+* @vitest-environment jsdom
+*/
+test('App must render according to snapshot', () => {
+    render(
         <App />,
     );
 
-    expect(screen.).toMatchSnapshot();
-  });*/
-
-test('Value must be greater than', () => {
-    expect(2).toBeGreaterThan(1);
+    expect(screen).toMatchSnapshot();
   });

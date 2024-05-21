@@ -11,16 +11,20 @@
     "target": "esnext",
     "esModuleInterop": true,
     "types": [
-      "jest"
-    ]
+      "jest",
+      "vitest/globals"
+    ],
+    "jsx": "react"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
     "@jest/globals": "^29.7.0",
+    "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
+    "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
@@ -57,52 +61,5 @@
     "react-dom": "18.3.1",
     "react-scripts": "^5.0.1",
     "vite-jest": "^0.1.4"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
-    },
-    "preset": "./node_modules/vite-jest/jest-preset.js",
-    "transform": {
-      "^.+\\.tsx?$": [
-        "ts-jest",
-        {
-          "useESM": true
-        },
-        "esbuild-jest",
-        {
-          "define": {
-            "import.meta.env": "{}"
-          }
-        },
-        {
-          "diagnostics": {
-            "ignoreCodes": [
-              1343
-            ]
-          },
-          "astTransformers": {
-            "before": [
-              {
-                "path": "node_modules/ts-jest-mock-import-meta",
-                "options": {
-                  "metaObjectReplacement": {
-                    "url": "https://www.url.com"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-iphone-x-helper)/)"
-    ],
-    "extensionsToTreatAsEsm": [
-      ".ts",
-      ".tsx"
-    ]
   }
 }

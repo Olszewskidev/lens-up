@@ -1,9 +1,15 @@
 import { fireEvent, render } from '@testing-library/react'
-import { expect, it } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { LoginPage } from '../../src/pages/Login/LoginPage';
+import { AppMock } from '../AppMock.tsx';
 
-it('Entered code must change in the form', () => {
-    const {getByText, asFragment} = render(
+/**
+* @vitest-environment jsdom
+*/
+test('Entered code must change in the form', async () => {
+    AppMock();
+
+    const {asFragment, getByText} = render(
         <LoginPage />,
     );
 
@@ -14,7 +20,10 @@ it('Entered code must change in the form', () => {
     expect(firstRender).toMatchSnapshot(asFragment());
   });
 
-it('Form must be handled successfully', () => {
+/**
+* @vitest-environment jsdom
+*/
+test('Form must be handled successfully', () => {
     const {getByText, asFragment} = render(
         <LoginPage />,
     );
@@ -25,3 +34,18 @@ it('Form must be handled successfully', () => {
     
     expect(firstRender).toMatchSnapshot(asFragment());
   });
+
+/**
+* @vitest-environment jsdom
+*/
+test('Login must set gallery successfuly', () => {
+  const {getByText, asFragment} = render(
+      <LoginPage />,
+  );
+
+  const firstRender = asFragment();
+
+  fireEvent.submit(getByText("Join"));
+  
+  expect(firstRender).toMatchSnapshot(asFragment());
+});

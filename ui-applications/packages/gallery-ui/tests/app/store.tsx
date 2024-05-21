@@ -1,10 +1,9 @@
-
 import { galleryApiMiddleware } from '../../src/app/store/middlewares/GalleryApiMiddleware'
-import {/*describe, expect, test, */jest} from '@jest/globals';
 import { store } from '../../src/app/store/store';
+import { vi } from "vitest"
 
 export const create = () => {
-  const next = jest.fn()
+  const next = vi.fn();
 
   const invoke = (action: unknown) => galleryApiMiddleware(store)(next)(action)
 

@@ -1,10 +1,13 @@
 import { fireEvent, render } from '@testing-library/react'
-import { expect, it } from '@jest/globals';
+import { expect, test } from 'vitest';
 import { LoginPage } from '../../src/pages/Login/LoginPage';
 import { galleryApi } from '../../src/services/GalleryApi';
 import { LoginToGalleryPayload } from '../../src/types/GalleryApiTypes';
 
-it('Login must be accepted for the gallery', () => {
+/**
+* @vitest-environment jsdom
+*/
+test('Login must be accepted for the gallery', () => {
     const {getByText, asFragment} = render(
         <LoginPage />,
     );
@@ -23,7 +26,7 @@ it('Login must be accepted for the gallery', () => {
 /**
  * @jest-environment jsdom
  */
-it('Gallery should show photos', () => {
+test('Gallery should show photos', () => {
     const {getByText, asFragment} = render(
         <LoginPage />,
     );
