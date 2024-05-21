@@ -3,6 +3,7 @@ import { Options, userEvent } from "@testing-library/user-event"
 import { expect, test, describe } from 'vitest';
 import App from "../../src/App";
 import { userEventApi } from "@testing-library/user-event/dist/cjs/setup/api.js";
+import { loginSubmit } from "./Login";
 
 /**
 * @vitest-environment jsdom
@@ -15,5 +16,13 @@ describe("Router test", () => {
         expect(global.window.location.pathname).equals("/");
 
         
+    })
+
+    test("Check home route", async () => {
+        render(<App />);
+        loginSubmit();
+
+        const user = userEvent.setup();
+        expect(global.window.location.pathname).equals("/gallery/0");
     })
 })

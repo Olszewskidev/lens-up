@@ -2,6 +2,7 @@ import { fireEvent, render } from '@testing-library/react'
 import { expect, test } from 'vitest';
 import { LoginPage } from '../../src/pages/Login/LoginPage';
 import { AppMock } from '../AppMock.tsx';
+import { loginSubmit } from './Login.tsx';
 
 /**
 * @vitest-environment jsdom
@@ -39,6 +40,9 @@ test('Form must be handled successfully', () => {
 * @vitest-environment jsdom
 */
 test('Login must set gallery successfuly', () => {
+  loginSubmit();
+
+  
   const {getByText, asFragment} = render(
       <LoginPage />,
   );
