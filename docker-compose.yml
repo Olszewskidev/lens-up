@@ -31,6 +31,22 @@ services:
     depends_on:
       - azurite
 
+  lensup.photocollectorservice.ui:
+    build:
+      context: ./ui-applications
+      dockerfile: Dockerfile
+      args:
+        SERVICE: photo-collector-ui
+    image: lensup.photocollectorservice.ui
+    container_name: lensup.photocollectorservice.ui
+    ports:
+      - "5002:5002"
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev
+    depends_on:
+      - lensup.photocollectorservice.api
+
   lensup.galleryservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -65,6 +81,22 @@ services:
       - "8086:8080"
     depends_on:
       - azurite
+      - lensup.galleryservice.api
+
+  lensup.galleryservice.ui:
+    build:
+      context: ./ui-applications
+      dockerfile: Dockerfile
+      args:
+        SERVICE: gallery-ui
+    image: lensup.galleryservice.ui
+    container_name: lensup.galleryservice.ui
+    ports:
+      - "5001:5001"
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev
+    depends_on:
       - lensup.galleryservice.api
 
   lensup.backofficeservice.api:
