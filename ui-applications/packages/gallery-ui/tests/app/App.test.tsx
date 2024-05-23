@@ -23,9 +23,11 @@ test('Middleware must log api failure', async () => {
 * @vitest-environment jsdom
 */
 test('App must render according to snapshot', () => {
-    render(
+    const {getByText, asFragment} = render(
         <App />,
     );
 
-    expect(screen).toMatchSnapshot();
+    const firstRender = asFragment();
+
+    expect(firstRender).toMatchSnapshot();
   });

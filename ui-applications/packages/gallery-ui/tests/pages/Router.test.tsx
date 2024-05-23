@@ -19,8 +19,8 @@ describe("Router test", () => {
     })
 
     test("Check home route", async () => {
-        render(<App />);
-        loginSubmit();
+        //render(<App />);
+        await loginSubmit();
 
         const user = userEvent.setup();
         expect(global.window.location.pathname).equals("/gallery/0");
