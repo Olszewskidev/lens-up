@@ -1,24 +1,30 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { expect, test } from 'vitest';
 import { LoginPage } from '../../src/pages/Login/LoginPage';
-import { AppMock } from '../AppMock.tsx';
+import { Provider } from 'react-redux'
 import { loginSubmit } from './Login.tsx';
+import { BrowserRouter, RouterProvider } from 'react-router-dom';
+import AppRouter from '../../src/pages/AppRouter.tsx';
+import { JSX } from 'react/jsx-runtime';
+import { store } from '../../src/app/store/store.ts';
 
 /**
 * @vitest-environment jsdom
 */
 test('Entered code must change in the form', async () => {
-    AppMock();
-
-    const {asFragment, getByText} = render(
-        <LoginPage />,
+    const {getByPlaceholderText, asFragment} = render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <LoginPage />
+        </BrowserRouter>
+      </Provider>
     );
 
     const firstRender = asFragment();
 
-    fireEvent.change(getByText("Join to your gallery"));
-    
-    expect(firstRender).toMatchSnapshot(asFragment());
+    fireEvent.change(getByPlaceholderText("Enter code"), {target: {input: "0"}});
+
+    expect(asFragment()).toMatchObject(firstRender);
   });
 
 /**
@@ -26,7 +32,11 @@ test('Entered code must change in the form', async () => {
 */
 test('Form must be handled successfully', () => {
     const {getByText, asFragment} = render(
-        <LoginPage />,
+      <Provider store={store}>
+        <BrowserRouter>
+          <LoginPage />
+        </BrowserRouter>
+      </Provider>
     );
 
     const firstRender = asFragment();
@@ -44,7 +54,11 @@ test('Login must set gallery successfuly', () => {
 
   
   const {getByText, asFragment} = render(
-      <LoginPage />,
+    <Provider store={store}>
+      <BrowserRouter>
+        <LoginPage />
+      </BrowserRouter>
+    </Provider>
   );
 
   const firstRender = asFragment();
@@ -53,3 +67,7 @@ test('Login must set gallery successfuly', () => {
   
   expect(firstRender).toMatchSnapshot(asFragment());
 });
+
+function renderWithRouter(arg0: JSX.Element, arg1: { route: string; }) {
+  throw new Error('Function not implemented.');
+}
