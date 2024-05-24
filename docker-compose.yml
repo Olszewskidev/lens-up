@@ -31,6 +31,22 @@ services:
     depends_on:
       - azurite
 
+  lensup.photocollectorservice.ui:
+    build:
+      context: ./ui-applications
+      dockerfile: Dockerfile
+      args:
+        SERVICE: photo-collector-ui
+    image: lensup.photocollectorservice.ui
+    container_name: lensup.photocollectorservice.ui
+    ports:
+      - "5002:5002"
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev
+    depends_on:
+      - lensup.photocollectorservice.api
+
   lensup.galleryservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -51,19 +67,37 @@ services:
     depends_on:
       - azurite
 
-  # lensup.galleryservice.webhooktriggersimulator:
-  #   environment:
-  #     - AzureFunctionsJobHost__Http__Port=8086
-  #   container_name: lensup.galleryservice.webhooktriggersimulator
-  #   image: lensup.galleryservice.webhooktriggersimulator
-  #   build:
-  #     context: ./backend-services
-  #     dockerfile: gallery-service/src/LensUp.GalleryService.WebhookTriggerSimulator/Dockerfile
-  #   ports:
-  #     - "8086:8080"
-  #   depends_on:
-  #     - azurite
-  #     - lensup.galleryservice.api
+  lensup.galleryservice.webhooktriggersimulator:
+    environment:
+      - AzureFunctionsJobHost__Http__Port=8086
+      - AzureWebJobsAzureStorageConnectionString=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://host.docker.internal:10001/devstoreaccount1;
+      - WebhookUrl=http://host.docker.internal:8082/Webhook
+    container_name: lensup.galleryservice.webhooktriggersimulator
+    image: lensup.galleryservice.webhooktriggersimulator
+    build:
+      context: ./backend-services
+      dockerfile: gallery-service/src/LensUp.GalleryService.WebhookTriggerSimulator/Dockerfile
+    ports:
+      - "8086:8080"
+    depends_on:
+      - azurite
+      - lensup.galleryservice.api
+
+  lensup.galleryservice.ui:
+    build:
+      context: ./ui-applications
+      dockerfile: Dockerfile
+      args:
+        SERVICE: gallery-ui
+    image: lensup.galleryservice.ui
+    container_name: lensup.galleryservice.ui
+    ports:
+      - "5001:5001"
+    environment:
+      - NODE_ENV=dev
+    command: npm run dev
+    depends_on:
+      - lensup.galleryservice.api
 
   lensup.backofficeservice.api:
     environment:
