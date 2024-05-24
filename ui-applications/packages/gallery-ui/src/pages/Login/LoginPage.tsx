@@ -10,7 +10,7 @@ export const LoginPage = () => {
 
     const [loginToGallery, { isLoading }] = useLoginToGalleryMutation();
 
-    const handleFormSubmit = () => {
+    const handleFormSubmit = async () => {
         // TODO: Add validation
         if (!enterCode) {
             return;

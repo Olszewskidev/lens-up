@@ -5,30 +5,34 @@ import userEvent from '@testing-library/user-event';
 import { LoginPage } from '../../src/pages/Login/LoginPage';
 import { store } from '../../src/app/store/store.ts';
 import { AppMock } from '../AppMock.tsx';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HomePage } from '../../src/pages/index.ts';
+import App from '../../src/App.tsx';
 
 export const loginInput = async () => {
-    const {getByPlaceholderText, asFragment, baseElement} = render(
-        <Provider store={store}>
-          <BrowserRouter>
-            <LoginPage />
-          </BrowserRouter>
-        </Provider>
-    );
+  const { getByPlaceholderText, asFragment, baseElement } = render(
+    <App />
+  );
 
-    fireEvent.change(screen.getByPlaceholderText("Enter code"), {target: {value: "0"}});
+  fireEvent.change(screen.getByPlaceholderText("Enter code"), { target: { value: "0" } });
 
-    return {asFragment, baseElement};
+  return { asFragment, baseElement };
 }
 
 export const loginSubmit = async () => {
-    const {asFragment, baseElement} = await loginInput();
+  const { asFragment, baseElement } = await loginInput();
 
-    const firstRender = asFragment();
+  await fireEvent.submit(getByText(baseElement as HTMLElement, "Join"));
 
-    const element = (firstRender).children[0];
+  return { asFragment, baseElement };
+}
 
-    fireEvent.submit(getByText(element as HTMLElement, "Join"));
+export const loginSubmitLoaded = async () => {
+  const { asFragment, baseElement } = await loginInput();
+
+  await fireEvent.submit(getByText(baseElement as HTMLElement, "Join"));
+
+  return { asFragment, baseElement };
 }
 
 /*

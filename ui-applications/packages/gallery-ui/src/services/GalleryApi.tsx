@@ -13,7 +13,7 @@ export const galleryApi = createApi({
         loginToGallery: builder.mutation<LoginToGalleryResponse, LoginToGalleryPayload>({
             query: (payload) => ({
                 method: 'POST',
-                url: `login`,
+                url: '/login',
                 body: payload,
             }),
         }),
