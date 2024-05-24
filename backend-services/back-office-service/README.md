@@ -10,19 +10,19 @@
 
 The project has typical .net project folder structure. Inside solution we can find 2 main catalogs- `src` and `tests`. Application code follows `Clean Architecture` approach and we can distinguish the following layers there:
 
-​	:open_file_folder:**src** *(contains the actual source code for the application)*
+​	**src** *(contains the actual source code for the application)*
 
-​		:books:LensUp.BackOfficeService.API
+​		 - LensUp.BackOfficeService.API
 
-​		:books:LensUp.BackOfficeService.Application
+​		 - LensUp.BackOfficeService.Application
 
-​		:books:LensUp.BackOfficeService.Domain
+​		 - LensUp.BackOfficeService.Domain
 
-​		:books:LensUp.BackOfficeService.Infrastructure
+​		 - LensUp.BackOfficeService.Infrastructure
 
-​	:open_file_folder:**tests** *(contains test projects)*
+​    **tests** *(contains test projects)*
 
-​		:books:LensUp.BackOfficeService.UnitTests
+​		 -  LensUp.BackOfficeService.UnitTests
 
 
 

@@ -18,4 +18,4 @@ The main purpose of this UI is to upload user photo and wishes to backend servic
 
 Route: **/upload-photo/{enterCode}**
 
-![lens-up-photo-collector-ui-form](../../../docs/lens-up-photo-collector-ui-form.png)
+![lens-up-photo-collector-ui-form](../../../docs/lens-up-upload-photo-form.png)

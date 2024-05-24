@@ -5,17 +5,12 @@
 
 Have you ever attended a wedding or a birthday party? If yes, you probably saw photo booth there. You get in, take a photo and paste it in the guest book - simple and fun. But what if we could bring this fun into the digital world? This is where **LensUp** comes to the rescue. **LensUp** is a web application that serves as a virtual gallery, allowing party guests to upload their photos from the event and also write down their wishes.
 
-- [Project status](#project-status)
-- [100 days roadmap](#100-days-roadmap)
-- [How to run LensUp locally](#how-to-run-lensup-locally)
-- [TODO list (100 days)](#todo-list-(100-days))
-
-# Project status
+# :mega: Project status
 The video shows the project status as of `26.04.2024` and the core functionality of the application.
 [![LensUp state](https://img.youtube.com/vi/73V7og0nS38/maxresdefault.jpg)](https://www.youtube.com/watch?v=73V7og0nS38)
 
 
-# 100 days roadmap
+# :rocket: 100 days roadmap
 
 **Conclusion:** The main goal of 100 days plan is to deliver [core functionality](#core-functionality) related to adding photos and wishes. I also want to do that without any extra cost for Azure services. So whole app should works on local environment with azure simulators like Azurite. This fact forces certain application architecture decisions, because not all Azure services can be simulated locally. Additionally MVP version doesn't focus on authentication, authorization and security.
 
@@ -71,7 +66,7 @@ Description:
 
 
 
-## How to run LensUp locally
+## :bomb: How to run LensUp locally
 
 You can run the project locally on your machine using Docker. Follow the steps below to run the application locally:
 
@@ -153,7 +148,7 @@ You can run the project locally on your machine using Docker. Follow the steps b
 
    ![lens-up-upload-flow](/docs/lens-up-upload-flow.gif)
 
-## TODO list (100 days)
+## :clipboard: 100 days TODO list
 
 #### General aspects:
 
