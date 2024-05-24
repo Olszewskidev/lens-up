@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@lens-up/shared-components": "file:../shared-components",
+    "@microsoft/signalr": "^8.0.0",
     "@reduxjs/toolkit": "^2.2.3",
     "framer-motion": "^11.1.7",
     "localforage": "^1.10.0",

@@ -5,10 +5,10 @@
 
 Have you ever attended a wedding or a birthday party? If yes, you probably saw photo booth there. You get in, take a photo and paste it in the guest book - simple and fun. But what if we could bring this fun into the digital world? This is where **LensUp** comes to the rescue. **LensUp** is a web application that serves as a virtual gallery, allowing party guests to upload their photos from the event and also write down their wishes.
 
-- [Project status](#Project status)
-- [100 days roadmap](#100 days roadmap)
-- [How to run LensUp locally](#How to run LensUp locally)
-- [TODO list (100 days)](#TODO list (100 days))
+- [Project status](#project-status)
+- [100 days roadmap](#100-days-roadmap)
+- [How to run LensUp locally](#how-to-run-lensup-locally)
+- [TODO list (100 days)](#todo-list-(100-days))
 
 # Project status
 The video shows the project status as of `26.04.2024` and the core functionality of the application.
@@ -73,26 +73,85 @@ Description:
 
 ## How to run LensUp locally
 
-You can run the project locally on your machine using Docker. All services will be hosted on your WLAN network. Follow the steps below to run the application locally.
+You can run the project locally on your machine using Docker. Follow the steps below to run the application locally:
 
-1. Before we start you should generate `dev-certs` for LensUp on your machine. This operation is required to hosting ASP.NET Core images with Docker over HTTPS. So generate a certificate and configure the local machine:
+1. Before we start you should generate `dev-certs` for **LensUp** on your machine. This operation is required to hosting ASP.NET Core images with Docker over HTTPS. So generate a certificate using these commands:
 
    ```bash
    dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\lens-up.pfx" -p localCertPassword
    dotnet dev-certs https --trust
    ```
 
-   **Replace `%USERPROFILE%` with your computer name.** Example `"C:\Users\Kamil\.aspnet\https\lens-up.pfx"`
+   **Replace `%USERPROFILE%` with your computer name.** Example `"C:\Users\Dell Precision 7520\.aspnet\https\lens-up.pfx"`
 
-   **This is necessary step, because docker-compose refers to that certificate**.
+   **For local development purposes, we will use the password `localCertPassword`. Do not change this, as the same password is used in the `docker-compose.yml` file.**
 
-2. Install `docker desktop` on your machine (skip if you already done it).
+   The above commands should generate a `lens-up.pfx` certificate, and should place it in the directory as shown in the screenshot below.
+
+   ![lens-up-cert](/docs/lens-up-cert.png)
+
+   **This is necessary step, because docker-compose refers to that certificate!**
+
+2. Install `docker desktop` on your machine *(skip if you already done it)*.
 
 3. Run your `docker desktop` application.
 
-4. To be continued.
+4. In the main project directory (`lens-up`), where the `docker-compose.yml` file is located, run the command `docker-compose build`. This will build 7 necessary LensUp images. After completing these steps, you should see new images in the Docker Desktop application.
+
+   ![lens-up-docker-images](/docs/lens-up-docker-images.png)
+
+5. After the build command, run the `docker-compose up` to start the entire infrastructure. You should see in Docker Desktop that 7 containers related to LensUp have been started.
+
+   ![lens-up-containers](/docs/lens-up-containers.png)
+
+6. Now the entire application is running on your machine. You can use the following addresses:
+
+   - Backend services:
+
+     - `LensUp.BackOfficeService.API` swagger - https://localhost:8085/swagger/index.html
+     - `LensUp.GalleryService.API` swagger - https://localhost:8083/swagger/index.html
+     - `LensUp.GalleryService.WebhookTriggerSimulator` - http://localhost:8086/
+     - `LensUp.PhotoCollectorService.API` swagger - https://localhost:8081/swagger/index.html
+
+   - UI applications:
+
+     - `LensUp.GalleryService.UI` - http://localhost:5001/
+
+     - `LensUp.PhotoCollectorService.UI` - http://localhost:5002/
+
+       *On LensUp.PhotoCollectorService.UI you will see error page, because you need to navigate to the view associated with a specific gallery, which you haven't created yet.*
 
 
+
+**How to create your first gallery and have fun with LensUp?**
+
+1. Go to `LensUp.BackOfficeService.API` - https://localhost:8085/swagger/index.html
+
+2. Use `Create` endpoint to create your gallery. The endpoint returns the gallery identifier after it is created **(1)**.
+
+   ![lens-up-create-endpoint](/docs/lens-up-create-endpoint.png)
+
+3. Before using the gallery, we need to activate it. In that case use `Activate` endpoint and pass `galleryId` and `endDate` in request body. Remember the `endDate` is validated and must be greater than the current time. Otherwise, your gallery will be treated as expired. The endpoint returns the gallery `enterCode` after it is activated **(1)**.
+
+   ![lens-up-activate-endpoint](/docs/lens-up-activate-endpoint.png)
+
+4. With your gallery `enterCode` you can open your gallery using `LensUp.GalleryService.UI` - http://localhost:5001/
+
+   Log in to your gallery using `enterCode`.
+
+   ![lens-up-login-form](/docs/lens-up-login-form.png)
+
+5. Now you can scan gallery QR code and upload photos to it. The code redirects to a form for adding photos to the gallery. You can use browser tool to scan QR code or if it doesn't work you can just go to `http://localhost:5002/upload-photo/{enterCode}`.
+
+   ![lens-up-gallery-qr-code](/docs/lens-up-gallery-qr-code.png)
+
+6. QR Code redirects you to add photo and wishes form. Now you can upload your data to gallery.
+
+   ![lens-up-gallery-qr-code](/docs/lens-up-upload-photo-form.png)
+
+7. After successfully completing the form, we should see success notification and the photo should appear in the gallery.
+
+   ![lens-up-upload-flow](/docs/lens-up-upload-flow.gif)
 
 ## TODO list (100 days)
 
