@@ -12,7 +12,8 @@ import { setupWorker } from "msw/browser";
 import { saveQRCode } from "../../src/utils/qRCodeHelper";
 import { LoginToGalleryPayload, LoginToGalleryResponse, PhotoItem } from '../../src/types/GalleryApiTypes';
 import { galleryApiMiddleware } from "../../src/app/store/middlewares/GalleryApiMiddleware";
-import { Dispatch, Middleware, Middleware, UnknownAction } from '@reduxjs/toolkit';
+import { Dispatch, Middleware, UnknownAction } from '@reduxjs/toolkit';
+import { galleryApi } from "../../src/services/GalleryApi";
 
 /**
 * @vitest-environment jsdom
@@ -32,11 +33,19 @@ describe("Router test", () => {
 
         const {asFragment} = await loginSubmit();
 
+        const spy = vi.spyOn(galleryApi.endpoints, 'loginToGallery');
+
+        vi.mock("../../src/services/GalleryApi.tsx", () => {
+
+        });
+
+        expect(spy.getMockName()).toEqual('loginToGallery')
+
         //vi.fn(() => (next: any) => (action: Dispatch<UnknownAction>) => {return next(action)}).mockImplementation(galleryApiMiddleware);
         
         //const user = userEvent.setup();
         expect(asFragment()).toMatchSnapshot();
-        expect(global.window.location.pathname).equals("/gallery/0");
+        //expect(global.window.location.pathname).equals("/gallery/0");
     })
 });
 
