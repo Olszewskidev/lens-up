@@ -5,6 +5,7 @@ import { getQRCodeUrl } from "../../utils/qRCodeHelper";
 import QRCodeCard from "./components/QRCodeCard";
 
 const HomePage = () => {
+    const temp = global.window.location.href;
     const { galleryId } = useParams();
     const { data } = useGetGalleryPhotosQuery(galleryId || "", { skip: !galleryId });
     const qRCodeUrl = getQRCodeUrl()
