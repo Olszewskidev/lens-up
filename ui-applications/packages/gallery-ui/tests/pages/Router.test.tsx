@@ -1,6 +1,6 @@
-import { screen, render, fireEvent } from "@testing-library/react"
+import { screen, render, fireEvent, waitFor } from "@testing-library/react"
 import { Options, userEvent } from "@testing-library/user-event"
-import { expect, test, describe, vi } from 'vitest';
+import { expect, test, describe, vi, beforeAll, afterAll } from 'vitest';
 import App from "../../src/App";
 import { loginSubmit } from "./Login";
 import { HttpResponse, http } from "msw";
@@ -13,25 +13,27 @@ import { galleryApi } from "../../src/services/GalleryApi";
 * @vitest-environment jsdom
 */
 describe("Router test", () => {
-    test("Check login route", async () => {
-        render(<App />)
+    const server = setupServer(...handlers);
 
-        const user = userEvent.setup();
+    beforeAll(() => {
+        server.listen()
+    })
+    afterAll(() => {
+        server.close()
+    })
+
+    test("Check default route", async () => {
+        render(<App />);
+
         expect(global.window.location.pathname).equals("/");
     })
 
     test("Check home route on submit", async () => {
-        console.log(global.window.location.host);
-        const server = setupServer(...handlers);
-        server.listen();
+        await loginSubmit();
 
-        const { asFragment, baseElement } = await loginSubmit();
-
-        //vi.fn(() => (next: any) => (action: Dispatch<UnknownAction>) => {return next(action)}).mockImplementation(galleryApiMiddleware);
-
-        const url = global.window.location.href;
-        expect(baseElement.baseURI).contains("/gallery/0");
-        const vrib = global.window.location.href;
+        await waitFor(() => {
+            expect(global.window.location.pathname).contains("/gallery/0");
+        });
     })
 });
 

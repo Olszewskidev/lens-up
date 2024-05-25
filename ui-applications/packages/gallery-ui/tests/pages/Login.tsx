@@ -16,7 +16,6 @@ export const loginSubmit = async () => {
   const { asFragment, baseElement } = loginInput();
 
   fireEvent.submit(getByText(baseElement as HTMLElement, "Join"))
-  //fireEvent.submit(getByText(baseElement as HTMLElement, "Join"));
 
   return { asFragment, baseElement };
 }
