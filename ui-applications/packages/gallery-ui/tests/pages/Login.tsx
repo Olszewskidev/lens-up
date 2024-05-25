@@ -1,15 +1,8 @@
 import { fireEvent, getByText, render, screen } from '@testing-library/react'
-import { expect, test } from 'vitest';
-import { Provider } from 'react-redux'
-import userEvent from '@testing-library/user-event';
-import { LoginPage } from '../../src/pages/Login/LoginPage';
-import { store } from '../../src/app/store/store.ts';
-import { AppMock } from '../AppMock.tsx';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { HomePage } from '../../src/pages/index.ts';
 import App from '../../src/App.tsx';
+import userEvent from '@testing-library/user-event';
 
-export const loginInput = async () => {
+export const loginInput = () => {
   const { getByPlaceholderText, asFragment, baseElement } = render(
     <App />
   );
@@ -20,9 +13,10 @@ export const loginInput = async () => {
 }
 
 export const loginSubmit = async () => {
-  const { asFragment, baseElement } = await loginInput();
+  const { asFragment, baseElement } = loginInput();
 
-  await fireEvent.submit(getByText(baseElement as HTMLElement, "Join"));
+  fireEvent.submit(getByText(baseElement as HTMLElement, "Join"))
+  //fireEvent.submit(getByText(baseElement as HTMLElement, "Join"));
 
   return { asFragment, baseElement };
 }
