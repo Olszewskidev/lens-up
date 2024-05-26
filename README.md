@@ -154,8 +154,10 @@ You can run the project locally on your machine using Docker. Follow the steps b
 
 - [x] Set up monorepo infrastructure for backend
 - [x] Set up monorepo infrastructure for frontend 
-- [ ] Create LensUp running scripts
-- [ ] Create documentation how to run LensUp locally
+- [x] Create LensUp running scripts
+- [x] Create documentation how to run LensUp locally
+- [ ] Create movie tutorial "How to run LensUp locally"
+- [ ] Create documentation how to run LensUp locally in WLAN network.
 
 
 
