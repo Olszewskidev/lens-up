@@ -1,13 +1,10 @@
-import { screen, render, fireEvent, waitFor } from "@testing-library/react"
-import { Options, userEvent } from "@testing-library/user-event"
-import { expect, test, describe, vi, beforeAll, afterAll } from 'vitest';
+import { render, waitFor, cleanup } from "@testing-library/react"
+import { expect, test, describe, vi, beforeAll, afterAll, afterEach } from 'vitest';
 import App from "../../src/App";
-import { loginSubmit } from "./Login";
+import { loginSubmit } from "./Login/Login";
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 import { LoginToGalleryResponse } from '../../src/types/GalleryApiTypes';
-import { Resolver } from "dns";
-import { galleryApi } from "../../src/services/GalleryApi";
 
 /**
 * @vitest-environment jsdom
@@ -18,6 +15,7 @@ describe("Router test", () => {
     beforeAll(() => {
         server.listen()
     })
+    afterEach(cleanup);
     afterAll(() => {
         server.close()
     })
@@ -38,7 +36,7 @@ describe("Router test", () => {
 });
 
 const handlers = [
-    http.post('https://localhost:3000/login', async () => {
+    http.post(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/login`, async () => {
         let response: LoginToGalleryResponse = { enterCode: '0', galleryId: '0', qrCodeUrl: 'QRCodeUrl' };
         let res = await HttpResponse.json(response);
         return res;

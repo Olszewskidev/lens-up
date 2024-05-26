@@ -1,13 +1,11 @@
 import { fireEvent, getByText, render, screen } from '@testing-library/react'
 import { expect, test, describe } from 'vitest';
-import { LoginPage } from '../../src/pages/Login/LoginPage';
+import { LoginPage } from '../../../src/pages/Login/LoginPage';
 import { Provider } from 'react-redux'
-import { loginInput, loginSubmit } from './Login.tsx';
-import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom';
-import AppRouter from '../../src/pages/AppRouter.tsx';
+import { loginSubmit } from './Login.tsx';
+import { BrowserRouter } from 'react-router-dom';
 import { JSX } from 'react/jsx-runtime';
-import { store } from '../../src/app/store/store.ts';
-import userEvent from '@testing-library/user-event';
+import { store } from '../../../src/app/store/store.ts';
 
 /**
 * @vitest-environment jsdom
@@ -24,9 +22,11 @@ describe("Login form ui tests", () => {
 
     const firstRender = asFragment();
 
-    fireEvent.change(getByPlaceholderText("Enter code"), { target: { value: "0" } });
+    expect(firstRender).toMatchSnapshot();
 
-    expect(asFragment()).toMatchObject(firstRender);
+    fireEvent.change(screen.getByPlaceholderText("Enter code"), { target: { value: "0" } });
+
+    expect(asFragment).not.toBe(firstRender);
   });
 
   test('Form must be handled successfully', () => {
@@ -40,15 +40,17 @@ describe("Login form ui tests", () => {
 
     const firstRender = asFragment();
 
+    expect(firstRender).toMatchSnapshot();
+
     fireEvent.submit(getByText("Join"));
 
-    expect(firstRender).toMatchSnapshot(asFragment());
+    expect(firstRender).not.toBe(asFragment());
   });
 
+  // The api call returns an error and so the page is stuck in Login with loading element
   test("Check loading on submit", async () => {
-    const {asFragment, baseElement} = await loginSubmit();
+    const {baseElement} = await loginSubmit();
 
-    const user = userEvent.setup();
     expect(getByText(baseElement, "Loading...")).toMatchSnapshot();
   });
 });

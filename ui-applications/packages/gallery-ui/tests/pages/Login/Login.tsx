@@ -1,5 +1,5 @@
 import { fireEvent, getByText, render, screen } from '@testing-library/react'
-import App from '../../src/App.tsx';
+import App from '../../../src/App.tsx';
 import userEvent from '@testing-library/user-event';
 
 export const loginInput = () => {
