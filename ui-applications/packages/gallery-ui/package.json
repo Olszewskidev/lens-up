@@ -20,19 +20,25 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
+    "socket.io": "^4.7.5",
+    "socket.io-client": "^4.7.5",
     "sort-by": "^0.0.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.6",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "babel-jest": "^29.7.0",
+    "chai": "^5.1.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "file-loader": "^6.2.0",
+    "mocha": "^10.4.0",
     "react-test-renderer": "^18.3.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
@@ -47,5 +53,9 @@
       "jest",
       "vitest/globals"
     ]
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.8",
+    "utf-8-validate": "^5.0.10"
   }
 }
