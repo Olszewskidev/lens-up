@@ -91,7 +91,7 @@ You can run the project locally on your machine using Docker. Follow the steps b
 
 3. Run your `docker desktop` application.
 
-4. In the main project directory (`lens-up`), where the `docker-compose.yml` file is located, run the command `docker-compose build`. This will build 7 necessary LensUp images. After completing these steps, you should see new images in the Docker Desktop application.
+4. In the main project directory (`lens-up`), where the `docker-compose.yml` file is located, run the command `docker-compose build`. This will build 7 necessary LensUp images. **The first time build may take a few minutes (up to 10 minutes).** After completing these steps, you should see new images in the Docker Desktop application.
 
    ![lens-up-docker-images](/docs/lens-up-docker-images.png)
 
