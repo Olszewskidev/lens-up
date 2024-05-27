@@ -29,7 +29,7 @@ describe("Login form ui tests", () => {
     expect(asFragment).not.toBe(firstRender);
   });
 
-  test('Form must be handled successfully', () => {
+  test("Form must be handled successfully", () => {
     const { getByText, asFragment } = render(
       <Provider store={store}>
         <BrowserRouter>

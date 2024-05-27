@@ -7,7 +7,7 @@ import { LoginToGalleryPayload } from '../../src/types/GalleryApiTypes';
 /**
 * @vitest-environment jsdom
 */
-test('Login must be accepted for the gallery', () => {
+test("Login must be accepted for the gallery", () => {
     const {getByText, asFragment} = render(
         <LoginPage />,
     );
@@ -26,7 +26,7 @@ test('Login must be accepted for the gallery', () => {
 /**
  * @jest-environment jsdom
  */
-test('Gallery should show photos', () => {
+test("Gallery should show photos", () => {
     const {getByText, asFragment} = render(
         <LoginPage />,
     );

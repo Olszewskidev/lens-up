@@ -48,13 +48,13 @@ describe("Home page with no photos", async () => {
       server.close()
   })
 
-  test('No photo hub must show qr code card in home page', async () => {
+  test("No photo hub must show qr code card in home page", async () => {
     const firstRender = asFragment();
 
     expect(firstRender).toMatchSnapshot();
   });
 
-  test('No photo hub must have qr-code url in image source', async () => {
+  test("No photo hub must have qr-code url in image source", async () => {
     const firstRender = asFragment();
 
     expect(getByAltText(baseElement, "QR code").getAttribute("src")).toEqual(getQRCodeUrl());
@@ -94,7 +94,7 @@ describe("Home page with photos", async () => {
       Sserver.close()
   })
 
-  test('Photo gallery must be shown', async () => {
+  test("Photo gallery must be shown", async () => {
     clientSocket.emit("multiply-by-2", 5);
 
     const promises = [
