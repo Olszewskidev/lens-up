@@ -34,7 +34,7 @@ export const galleryApi = createApi({
                     socket.on("PhotoUploadedToGallery", (message: PhotoItem) => {
                         console.log("PhotoUploadedToGallery notification")
                         updateCachedData((draft) => {
-                            draft.push(message);
+                            return [...draft, message];
                         });
                     });
 
