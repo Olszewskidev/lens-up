@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, getAllByAltText, getByAltText, getByText, render, screen, waitFor } from '@testing-library/react'
 import { expect, test, describe, beforeAll, beforeEach ,afterEach, afterAll } from 'vitest';
 import { setupServer } from 'msw/node';
-import { loginSubmit } from '../Login/Login.tsx';
+import { loginSubmit } from '../../utils/LoginEvents.tsx';
 import { getQRCodeUrl } from '../../../src/utils/qRCodeHelper.ts';
 import { HttpResponse, http as mswhttp } from 'msw';
 import { LoginToGalleryResponse } from '../../../src/types/GalleryApiTypes.ts';
@@ -54,7 +54,7 @@ describe("Home page with no photos", async () => {
     expect(firstRender).toMatchSnapshot();
   });
 
-  test("No photo hub must have qr-code url in image source", async () => {
+  test("No photo hub must have qr code url in image source", async () => {
     const firstRender = asFragment();
 
     expect(getByAltText(baseElement, "QR code").getAttribute("src")).toEqual(getQRCodeUrl());

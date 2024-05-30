@@ -24,7 +24,7 @@
         "jest", "vitest/globals"
       ],
     },
-    "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue", "tests", "packages/**/*", "packages/gallery-ui", "packages/gallery-ui/tests", "packages/gallery-ui/tests/app", "packages/gallery-ui/tests/**/*"],
+    "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue", "tests", "packages/**/*"],
     "exclude": ["node_modules"],
   }
   

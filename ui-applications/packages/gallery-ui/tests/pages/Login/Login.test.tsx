@@ -2,9 +2,8 @@ import { fireEvent, getByText, render, screen } from '@testing-library/react'
 import { expect, test, describe } from 'vitest';
 import { LoginPage } from '../../../src/pages/Login/LoginPage';
 import { Provider } from 'react-redux'
-import { loginSubmit } from './Login.tsx';
+import { loginSubmit } from '../../utils/LoginEvents.tsx';
 import { BrowserRouter } from 'react-router-dom';
-import { JSX } from 'react/jsx-runtime';
 import { store } from '../../../src/app/store/store.ts';
 
 /**

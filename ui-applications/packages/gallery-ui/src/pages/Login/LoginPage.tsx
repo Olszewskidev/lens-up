@@ -3,7 +3,6 @@ import LoginForm from "./components/LoginForm"
 import { useLoginToGalleryMutation } from "../../services/GalleryApi";
 import { useNavigate } from "react-router-dom";
 import { saveQRCode } from "../../utils/qRCodeHelper";
-import { handleLoginToGallery } from "../../utils/login";
 
 export const LoginPage = () => {
     const navigate = useNavigate();

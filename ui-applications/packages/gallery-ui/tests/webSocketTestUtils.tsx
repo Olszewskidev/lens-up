@@ -1,5 +1,5 @@
 import http, { IncomingMessage, ServerResponse } from "http";
-import createWebSocketServer from "./creteWebSocketServer";
+import createWebSocketServer from "./createWebSocketServer";
 
 function startServer(port: any): Promise<http.Server<typeof IncomingMessage, typeof ServerResponse>> {
     const server = http.createServer();

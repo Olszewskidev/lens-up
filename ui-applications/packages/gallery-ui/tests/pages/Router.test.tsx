@@ -1,7 +1,7 @@
 import { render, waitFor, cleanup } from "@testing-library/react"
 import { expect, test, describe, vi, beforeAll, afterAll, afterEach } from 'vitest';
 import App from "../../src/App";
-import { loginSubmit } from "./Login/Login";
+import { loginSubmit } from '../utils/LoginEvents';
 import { HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 import { LoginToGalleryResponse } from '../../src/types/GalleryApiTypes';
@@ -9,7 +9,7 @@ import { LoginToGalleryResponse } from '../../src/types/GalleryApiTypes';
 /**
 * @vitest-environment jsdom
 */
-describe("Router test", () => {
+describe("Router path tests", () => {
     const server = setupServer(...handlers);
 
     beforeAll(() => {

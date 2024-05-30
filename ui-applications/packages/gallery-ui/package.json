@@ -32,7 +32,6 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
-    "babel-jest": "^29.7.0",
     "chai": "^5.1.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -50,7 +49,6 @@
     "target": "",
     "esModuleInterop": true,
     "types": [
-      "jest",
       "vitest/globals"
     ]
   },

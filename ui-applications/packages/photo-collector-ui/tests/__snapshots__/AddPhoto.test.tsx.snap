@@ -1,0 +1,140 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Add photo to gallery page tests > Photo must upload 1`] = `
+<DocumentFragment>
+  <div
+    class="container w-full mx-auto items-center py-32"
+  >
+    <div
+      class="max-w-sm mx-auto overflow-hidden items-center"
+    >
+      <div>
+        <img
+          alt="LensUp logo."
+          height="147"
+          src="/@fs/C:/Users/safronov/source/lens-up/ui-applications/packages/shared-components/src/images/lens-up-logo.png"
+          width="379"
+        />
+        <form
+          class="px-7 py-4 bg-black rounded-lg leading-none border-double border-4 border-white shadow-lg max-w-sm mx-auto"
+        >
+          <div
+            class="px-4 py-6"
+          >
+            <div
+              class="mb-5 items-center mx-auto text-center cursor-pointer "
+            >
+              <label
+                class="flex flex-col items-center justify-center w-full"
+                for="dropzone-file"
+              >
+                <div
+                  class="flex flex-col items-center justify-center text-white"
+                >
+                  <svg
+                    class="w-8 h-8 mb-4"
+                    fill="none"
+                    height="24"
+                    stroke="#ffffff"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      height="18"
+                      rx="2"
+                      width="18"
+                      x="3"
+                      y="3"
+                    />
+                    <circle
+                      cx="8.5"
+                      cy="8.5"
+                      r="1.5"
+                    />
+                    <path
+                      d="M20.4 14.5L16 10 4 20"
+                    />
+                  </svg>
+                  <p
+                    class="mb-2 text-sm"
+                  >
+                    <span
+                      class="font-semibold"
+                    >
+                      Click to upload your photo
+                    </span>
+                  </p>
+                </div>
+                <input
+                  class="hidden"
+                  id="dropzone-file"
+                  type="file"
+                />
+              </label>
+            </div>
+            <div
+              class="mb-5"
+            >
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-50 dark:text-white"
+                  for=":r0:"
+                >
+                  Author:
+                </label>
+                <input
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  id=":r0:"
+                  placeholder="Your name"
+                  required=""
+                  type="text"
+                  value="author"
+                />
+              </div>
+            </div>
+            <div
+              class="mb-5"
+            >
+              <div>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-50 dark:text-white"
+                  for=":r1:"
+                >
+                  Your wishes:
+                </label>
+                <textarea
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  id=":r1:"
+                  placeholder="..."
+                  required=""
+                  rows="4"
+                >
+                  happy
+                </textarea>
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-center"
+            >
+              <div
+                class="text-center relative group"
+              >
+                <button
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 inline-flex items-center justify-center"
+                  type="submit"
+                >
+                  Upload
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
