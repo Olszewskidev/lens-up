@@ -10,7 +10,7 @@ interface IPhotoGalleryProps {
 
 const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
 
-    const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
+    const [positionIndexes, setPositionIndexes] = useState(photoItems.map((_, index) => index));
     const handleNext = () => {
         setPositionIndexes((prevIndexes) => {
             const updatedIndexes = prevIndexes.map(
@@ -28,7 +28,7 @@ const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
         return () => {
             clearInterval(interval);
         };
-    }, []);
+    }, [photoItems]);
 
 
     const variants = useMemo(() => {
