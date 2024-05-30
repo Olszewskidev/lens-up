@@ -1,7 +1,7 @@
 services:
 
-  azurite:
-    container_name: azurite
+  azurite.lensup:
+    container_name: azurite.lensup
     image: mcr.microsoft.com/azure-storage/azurite
     hostname: azurite
     restart: always
@@ -29,7 +29,7 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     depends_on:
-      - azurite
+      - azurite.lensup
 
   lensup.photocollectorservice.ui:
     build:
@@ -65,7 +65,7 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     depends_on:
-      - azurite
+      - azurite.lensup
 
   lensup.galleryservice.webhooktriggersimulator:
     environment:
@@ -80,7 +80,7 @@ services:
     ports:
       - "8086:8080"
     depends_on:
-      - azurite
+      - azurite.lensup
       - lensup.galleryservice.api
 
   lensup.galleryservice.ui:
@@ -117,4 +117,4 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
     depends_on:
-      - azurite
+      - azurite.lensup

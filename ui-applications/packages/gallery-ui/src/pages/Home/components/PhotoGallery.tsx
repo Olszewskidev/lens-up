@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { PhotoItem } from "../../../types/GalleryApiTypes"
 import { motion } from "framer-motion";
+import { getPhotoVariants } from "../utils/photoGalleryHelper";
+import { Position } from "../utils/constants";
 
 interface IPhotoGalleryProps {
     photoItems: PhotoItem[]
@@ -28,15 +30,11 @@ const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
         };
     }, []);
 
-    const positions = ["center", "left1", "left", "right", "right1"];
 
-    const imageVariants = {
-        center: { x: "0%", scale: 1, zIndex: 5 },
-        left1: { x: "-50%", scale: 0.7, zIndex: 3 },
-        left: { x: "-90%", scale: 0.5, zIndex: 2 },
-        right: { x: "90%", scale: 0.5, zIndex: 1 },
-        right1: { x: "50%", scale: 0.7, zIndex: 3 },
-    };
+    const variants = useMemo(() => {
+        return getPhotoVariants(photoItems.length);
+    }, [photoItems])
+    const positions = Object.keys(variants);
 
     return (
         <div className="bg-black h-screen justify-center flex items-center flex-col">
@@ -46,9 +44,9 @@ const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
                     src={image.url}
                     alt={image.id}
                     className="bg-white p-4 shadow-md"
-                    initial="center"
+                    initial={Position.Center}
                     animate={positions[positionIndexes[index]]}
-                    variants={imageVariants}
+                    variants={variants}
                     transition={{ duration: 0.75 }}
                     style={{ width: "40%", position: "absolute" }}
                 />
