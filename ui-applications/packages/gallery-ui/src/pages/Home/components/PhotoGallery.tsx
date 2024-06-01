@@ -2,15 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import { PhotoItem } from "../../../types/GalleryApiTypes"
 import { motion } from "framer-motion";
 import { getPhotoVariants } from "../utils/photoGalleryHelper";
-import { Position } from "../utils/constants";
+import { Position, pageSize, positionIndexesArray } from "../utils/constants";
 
 interface IPhotoGalleryProps {
     photoItems: PhotoItem[]
 }
 
 const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
+    const [positionIndexes, setPositionIndexes] = useState(positionIndexesArray);
 
-    const [positionIndexes, setPositionIndexes] = useState([0, 1, 2, 3, 4]);
     const handleNext = () => {
         setPositionIndexes((prevIndexes) => {
             const updatedIndexes = prevIndexes.map(
@@ -21,14 +21,16 @@ const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
     };
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            handleNext();
-        }, 5000);
+        if (photoItems.length === pageSize) {
+            const interval = setInterval(() => {
+                handleNext();
+            }, 5000);
 
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
+            return () => {
+                clearInterval(interval);
+            };
+        }
+    }, [photoItems]);
 
 
     const variants = useMemo(() => {
@@ -47,10 +49,11 @@ const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
                     initial={Position.Center}
                     animate={positions[positionIndexes[index]]}
                     variants={variants}
-                    transition={{ duration: 0.75 }}
+                    transition={{ duration: 1 }}
                     style={{ width: "40%", position: "absolute" }}
                 />
-            ))}
+            )
+            )}
         </div>
     )
 }
