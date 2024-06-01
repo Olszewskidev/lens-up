@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
-import LoginForm from "./components/LoginForm"
 import { useLoginToGalleryMutation } from "../../services/GalleryApi";
 import { useNavigate } from "react-router-dom";
 import { saveQRCode } from "../../utils/qRCodeHelper";
+import { LoginForm } from "./components";
 
 const LoginPage = () => {
     const navigate = useNavigate();
