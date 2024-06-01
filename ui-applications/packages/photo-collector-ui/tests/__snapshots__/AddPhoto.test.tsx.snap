@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Add photo to gallery page tests > Photo must upload 1`] = `
+exports[`Add photo to gallery page tests unsuccessfully > Photo must upload and render error card 1`] = `
 <DocumentFragment>
   <div
     class="bg-white rounded-lg shadow-md overflow-hidden items-center"
@@ -12,10 +12,10 @@ exports[`Add photo to gallery page tests > Photo must upload 1`] = `
         class="flex justify-center"
       >
         <div
-          class="rounded-full p-6 bg-green-200"
+          class="rounded-full p-6 bg-red-200"
         >
           <div
-            class="flex h-16 w-16 items-center justify-center rounded-full p-4 bg-green-500"
+            class="flex h-16 w-16 items-center justify-center rounded-full p-4 bg-red-500"
           >
             <svg
               class="h-8 w-8 text-white"
@@ -37,61 +37,12 @@ exports[`Add photo to gallery page tests > Photo must upload 1`] = `
       <h3
         class="my-4 text-center text-3xl font-semibold text-gray-700"
       >
-        Congratulations!
+        Error!
       </h3>
       <p
         class="w-[230px] text-center font-normal text-gray-600"
       >
-        You just joined to the party.
-      </p>
-    </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Add photo to gallery page tests > Photo must upload 2`] = `
-<DocumentFragment>
-  <div
-    class="bg-white rounded-lg shadow-md overflow-hidden items-center"
-  >
-    <div
-      class="px-16 py-14"
-    >
-      <div
-        class="flex justify-center"
-      >
-        <div
-          class="rounded-full p-6 bg-green-200"
-        >
-          <div
-            class="flex h-16 w-16 items-center justify-center rounded-full p-4 bg-green-500"
-          >
-            <svg
-              class="h-8 w-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4.5 12.75l6 6 9-13.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-      <h3
-        class="my-4 text-center text-3xl font-semibold text-gray-700"
-      >
-        Congratulations!
-      </h3>
-      <p
-        class="w-[230px] text-center font-normal text-gray-600"
-      >
-        You just joined to the party.
+        Something went wrong, sorry.
       </p>
     </div>
   </div>
