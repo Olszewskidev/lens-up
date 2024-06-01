@@ -1,9 +1,9 @@
 export enum Position {
     Center = "center",
-    Left =  "left",
-    Right =  "right",
-    Left1 =  "left1",
-    Right1 =  "right1",
+    Left = "left",
+    Right = "right",
+    Left1 = "left1",
+    Right1 = "right1",
 }
 
 export type PhotoVariant = {
@@ -19,3 +19,6 @@ export const imageVariants: Record<Position, PhotoVariant> = {
     [Position.Left1]: { x: "-50%", scale: 0.7, zIndex: 3 },
     [Position.Right1]: { x: "50%", scale: 0.7, zIndex: 3 },
 };
+
+export const pageSize = 5
+export const positionIndexesArray = [0, 1, 2, 3, 4]
