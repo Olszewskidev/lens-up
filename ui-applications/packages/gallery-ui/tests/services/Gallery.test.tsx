@@ -11,33 +11,33 @@ import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { loginSubmit } from '../utils/LoginEvents';
 
-let response: LoginToGalleryResponse = { enterCode: '0', galleryId: '0', qrCodeUrl: 'QRCodeUrl' };
+let expected: LoginToGalleryResponse = { enterCode: '0', galleryId: '0', qrCodeUrl: 'QRCodeUrl' };
 let actual: LoginToGalleryResponse;
 
 const handlers = [
   http.post(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/login`, async () => {
-    let res = await HttpResponse.json(response);
+    let res = await HttpResponse.json(expected);
     return res;
   }),
   http.post(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/gallery/0`, () => {
-    let photo: PhotoItem[] = [{ id: "0", url: "url", authorName: "Author", wishesText: "Best wishes"}];
+    let photo: PhotoItem[] = [{ id: "0", url: "url", authorName: "Author", wishesText: "Best wishes" }];
     return HttpResponse.json(photo);
-  } )
+  })
 ]
 
 const LoginComponent = () => {
   const [loginToGallery, { isLoading }] = useLoginToGalleryMutation();
 
   const handleLoginTest = () => {
-      loginToGallery({ enterCode: '0' })
-          .unwrap()
-          .then((payload) => {
-              actual = payload;
-          });
+    loginToGallery({ enterCode: '0' })
+      .unwrap()
+      .then((payload) => {
+        actual = payload;
+      });
   }
 
   return (
-      <div data-testid="test-component" onClick={(e) => { e.preventDefault(); handleLoginTest() }} />
+    <div data-testid="test-component" onClick={(e) => { e.preventDefault(); handleLoginTest() }} />
   )
 }
 
@@ -55,17 +55,17 @@ afterAll(() => {
 * @vitest-environment jsdom
 */
 test("Login muttation must match login api request", async () => {
-  const {getByTestId} = render(
+  const { getByTestId } = render(
     <Provider store={store}>
       <BrowserRouter>
         <LoginComponent />
       </BrowserRouter>
     </Provider>
   );
-    
+
   fireEvent.click(getByTestId("test-component"));
   await waitFor(() => {
-    expect(actual).toEqual(response);
+    expect(actual).toEqual(expected);
   });
 });
 
@@ -74,7 +74,7 @@ test("Login muttation must match login api request", async () => {
  */
 test("Gallery should show photos", async () => {
   /*const { asFragment, baseElement } = */await loginSubmit();
-  
+
   /*const { getByText, asFragment } = render(
     <Provider store={store}>
       <BrowserRouter>
