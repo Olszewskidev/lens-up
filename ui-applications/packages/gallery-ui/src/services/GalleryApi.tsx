@@ -38,8 +38,6 @@ export const galleryApi = createApi({
                         });
                     });
 
-                    socket.send("PhotoUploadedToGallery", new File(["happy"], "happy.png", { type: "image/png" }))
-
                     await cacheEntryRemoved;
 
                     socket.off('connect');

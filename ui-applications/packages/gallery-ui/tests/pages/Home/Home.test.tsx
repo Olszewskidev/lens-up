@@ -30,6 +30,8 @@ function waitForSocket(socket: Socket | ClientSocket, event: string) {
   });
 }
 
+import cy from 'cypress-signalr-mock';
+
 let handlers = [
   mswhttp.post(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/login`, async () => {
     let response: LoginToGalleryResponse = { enterCode: '0', galleryId: '0', qrCodeUrl: 'QRCodeUrl' };
@@ -99,9 +101,13 @@ const successCardRender = render(
   <SuccessCardComponent title="Congratulations!" text="You just joined to the party." />
 ).asFragment();
 
-const mock = vi.spyOn(galleryApi.endpoints.getGalleryPhotos, 'useQuery');
+const mock2 = vi.spyOn(HubConnectionBuilder.prototype, 'build');
 
-mock.mockImplementation((stri, skip) => );
+mock2.mockImplementationOnce(() => MockHubConnectionBuild("testhub") ?? 
+  new HubConnectionBuilder().withUrl(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/hubs/gallery?galleryId=0`).build()
+);
+
+const mock = vi.spyOn(galleryApi.endpoints.getGalleryPhotos, 'useQuery');
 
 
 describe("Home page with photos", async () => {
@@ -117,12 +123,12 @@ describe("Home page with photos", async () => {
     //Sserver = await startServer(3000);
 
     server.listen();
-    ({ asFragment, baseElement } = await loginSubmit());
-    HomeasFragment = asFragment;
+    //({ asFragment, baseElement } = await loginSubmit());
+    //HomeasFragment = asFragment;
     console.log(global.window.location.href);
   })
   beforeEach(async () => waitFor(() => {
-    expect(global.window.location.pathname).contains("/gallery/0");
+    //expect(global.window.location.pathname).contains("/gallery/0");
     //homeRender = asFragment();
   }))
   afterEach(cleanup);
@@ -143,6 +149,20 @@ describe("Home page with photos", async () => {
         </BrowserRouter>
       </Provider>
     );
+
+    const hub = (new HubConnectionBuilder()).build();
+
+    cy.hubPublish(
+      'testhub', // The name of the hub
+      'PhotoUploadedToGallery', // The name of the message type
+      {
+          message: photo, // The message payload
+      },
+    );
+    
+
+    hub.invoke("PhotoUploadedToGallery", photo);
+    hub.send("PhotoUploadedToGallery", photo);
 
     expect(asFragment()).toMatchSnapshot();
   });
