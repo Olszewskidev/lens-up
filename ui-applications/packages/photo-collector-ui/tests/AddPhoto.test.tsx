@@ -11,16 +11,16 @@ import App from "../src/App";
 import AppRouter from "../src/pages/AppRouter";
 import { ErrorCardComponent, SuccessCardComponent } from "@lens-up/shared-components";
 
-let file = new File(["happy"], "happy.png", { type: "image/png" });
+const photo = new File(["happy"], "happy.png", { type: "image/png" });
 
 let handlers = [
     http.post(`${import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL}/upload-photo/0`, async () => {
         return new Response(null, {
             status: 200,
             headers: {
-              Allow: 'GET,HEAD,POST',
+                Allow: 'GET,HEAD,POST',
             },
-          })
+        })
     })
 ]
 
@@ -55,7 +55,9 @@ describe("Add photo to gallery page tests", () => {
 
     test("Photo must upload and render success card", async () => {
         URL.createObjectURL = vi.fn();
-        const { container, baseElement, asFragment } = render(
+        console.log(global.window.location.href);
+        const { container, baseElement, getByPlaceholderText, getByRole, asFragment } = render(
+
             <Provider store={store}>
                 <BrowserRouter>
                     <Routes>
@@ -64,11 +66,13 @@ describe("Add photo to gallery page tests", () => {
                     <Navigate to="/upload-photo/0" replace={true} />
                 </BrowserRouter>
             </Provider>
+
         );
+        console.log(global.window.location.href);
 
         const element = container.querySelector("#dropzone-file") as HTMLElement;
 
-        fireEvent.change(element, { target: { files: [file] } });
+        fireEvent.change(element, { target: { files: [photo] } });
 
         fireEvent.change(screen.getByPlaceholderText("Your name"), { target: { value: "author" } });
 
@@ -96,9 +100,9 @@ describe("Add photo to gallery page tests unsuccessfully", () => {
             return new Response(null, {
                 status: 400,
                 headers: {
-                  Allow: 'GET,HEAD,POST',
+                    Allow: 'GET,HEAD,POST',
                 },
-              })
+            })
         })
     ]
 
@@ -114,7 +118,7 @@ describe("Add photo to gallery page tests unsuccessfully", () => {
 
     test("Photo must upload and render error card", async () => {
         URL.createObjectURL = vi.fn();
-        const { container, baseElement, asFragment } = render(
+        const { container, baseElement, getByPlaceholderText, getByRole, asFragment } = render(
             <Provider store={store}>
                 <BrowserRouter>
                     <Routes>
@@ -127,7 +131,7 @@ describe("Add photo to gallery page tests unsuccessfully", () => {
 
         const element = container.querySelector("#dropzone-file") as HTMLElement;
 
-        fireEvent.change(element, { target: { files: [file] } });
+        fireEvent.change(element, { target: { files: [photo] } });
 
         fireEvent.change(screen.getByPlaceholderText("Your name"), { target: { value: "author" } });
 

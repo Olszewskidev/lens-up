@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import { AddPhotoForm } from '../../src/pages/AddPhotoToGallery/components';
 import { SuccessCardComponent } from '@lens-up/shared-components';
 
-let photo = new File(["happy"], "happy.png", { type: "image/png" });
+const photo = new File(["happy"], "../happy.png", { type: "image/png" });
 
 const handlers = [
     http.post(`${import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL}/upload-photo/0`, async () => {
