@@ -8,10 +8,6 @@ import { HttpResponse, http as mswhttp } from 'msw';
 import { LoginToGalleryResponse } from '../../../src/types/GalleryApiTypes.ts';
 import { Server, Socket } from "socket.io";
 import { io as ioc, Socket as ClientSocket } from "socket.io-client";
-import { IncomingMessage, ServerResponse } from "http";
-import http from "http";
-import { AddressInfo } from 'node:net';
-import { startServer } from "../../webSocketTestUtils.tsx";
 import { store } from '../../../src/app/store/store.ts';
 import { store as photoStore } from '../../../../photo-collector-ui/src/app/store.ts';
 import { Provider } from 'react-redux'
@@ -20,6 +16,8 @@ import AddPhotoToGalleryPage from "../../../../photo-collector-ui/src/pages/AddP
 import { ErrorCardComponent, SuccessCardComponent } from '@lens-up/shared-components';
 import { HomePage, LoginPage } from '../../../src/pages/index.ts';
 import { galleryApi, useGetGalleryPhotosQuery } from '../../../src/services/GalleryApi.tsx';
+import { useCypressSignalRMock as MockHubConnectionBuild } from 'cypress-signalr-mock';
+import PhotoGallery from '../../../src/pages/Home/components/PhotoGallery.tsx';
 
 const photo = new File(["happy"], "happy.png", { type: "image/png" });
 
@@ -36,15 +34,11 @@ let handlers = [
     return res;
   }),
   mswhttp.post(`${import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL}/upload-photo/0`, async () => {
-    const socket = new HubConnectionBuilder().withUrl(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/hubs/gallery?galleryId=0`).build();
+    const socket = MockHubConnectionBuild("testhub", {
+      enableForVitest: true,
+    });
 
-    await socket.start().then(() => {
-      console.log("Connected to socket.")
-    }).catch(() => {
-      console.error("Failed during socket connection.")
-    })
-
-    socket.send("PhotoUploadedToGallery", photo);
+    socket?.send("PhotoUploadedToGallery", photo);
 
     return new Response(null, {
       status: 200,
@@ -98,6 +92,10 @@ const successCardRender = render(
   <SuccessCardComponent title="Congratulations!" text="You just joined to the party." />
 ).asFragment();
 
+const galleryRender = render(
+  <PhotoGallery photoItems={[{ id: '0', url: 'happy.png', authorName: "Author", wishesText: "happy.png" }]} />
+).asFragment();
+
 describe("Home page with photos", async () => {
   const server = setupServer(...handlers);
 
@@ -125,17 +123,20 @@ describe("Home page with photos", async () => {
           <Routes>
             <Route path="/gallery/:enterCode" element={<HomePage />} />
           </Routes>
-          <Navigate to="/gallery/0" replace={true} />
+          <Navigate to="/gallery/0" />
         </BrowserRouter>
       </Provider>
     );
 
-    const hub = (new HubConnectionBuilder()).build();
+    const socket = MockHubConnectionBuild("testhub", {
+      enableForVitest: true,
+    });
 
-    hub.invoke("PhotoUploadedToGallery", photo);
-    hub.send("PhotoUploadedToGallery", photo);
+    socket?.send("PhotoUploadedToGallery", photo);
 
-    expect(asFragment()).toMatchSnapshot();
+    await waitFor(() => {
+      expect(asFragment()).toEqual(galleryRender);
+    }, { timeout: 50000 }).then(() => expect(asFragment()).toMatchSnapshot());
   });
 
   test("Photo gallery must be shown", async () => {
