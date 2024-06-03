@@ -1,6 +1,5 @@
 import { buildQueries, cleanup, fireEvent, getByAltText, getSuggestedQuery, render, screen, waitFor } from '@testing-library/react'
 import { expect, test, describe, vi, beforeAll, beforeEach, afterEach, afterAll } from 'vitest';
-import { useCypressSignalRMock as MockHubConnectionBuild } from 'cypress-signalr-mock';
 import { HubConnectionBuilder } from '@microsoft/signalr';
 import { setupServer } from 'msw/node';
 import { loginSubmit } from '../../utils/LoginEvents.tsx';
@@ -29,8 +28,6 @@ function waitForSocket(socket: Socket | ClientSocket, event: string) {
     socket.once(event, resolve);
   });
 }
-
-import cy from 'cypress-signalr-mock';
 
 let handlers = [
   mswhttp.post(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/login`, async () => {
@@ -101,26 +98,10 @@ const successCardRender = render(
   <SuccessCardComponent title="Congratulations!" text="You just joined to the party." />
 ).asFragment();
 
-const mock2 = vi.spyOn(HubConnectionBuilder.prototype, 'build');
-
-mock2.mockImplementationOnce(() => MockHubConnectionBuild("testhub") ?? 
-  new HubConnectionBuilder().withUrl(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/hubs/gallery?galleryId=0`).build()
-);
-
-const mock = vi.spyOn(galleryApi.endpoints.getGalleryPhotos, 'useQuery');
-
-
 describe("Home page with photos", async () => {
-  let io: Server;
-
-  let serverSocket: Socket | undefined;
-  let clientSocket: ClientSocket;
-
   const server = setupServer(...handlers);
-  var Sserver: http.Server<typeof IncomingMessage, typeof ServerResponse>;
 
   beforeAll(async () => {
-    //Sserver = await startServer(3000);
 
     server.listen();
     //({ asFragment, baseElement } = await loginSubmit());
@@ -134,7 +115,6 @@ describe("Home page with photos", async () => {
   afterEach(cleanup);
   afterAll(() => {
     server.close()
-    //Sserver.close()
   })
 
   test("Photo gallery must be shown in home", async () => {
@@ -151,15 +131,6 @@ describe("Home page with photos", async () => {
     );
 
     const hub = (new HubConnectionBuilder()).build();
-
-    cy.hubPublish(
-      'testhub', // The name of the hub
-      'PhotoUploadedToGallery', // The name of the message type
-      {
-          message: photo, // The message payload
-      },
-    );
-    
 
     hub.invoke("PhotoUploadedToGallery", photo);
     hub.send("PhotoUploadedToGallery", photo);
@@ -201,7 +172,5 @@ describe("Home page with photos", async () => {
       successRender = asFragment();
       expect(successRender).toEqual(successCardRender);
     }, { timeout: 50000 }).then(() => expect(asFragment()).toMatchSnapshot());
-
-    //const [response] = await Promise.all(promises);
   }, { timeout: 50000 });
 })
