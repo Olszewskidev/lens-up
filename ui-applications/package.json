@@ -18,5 +18,8 @@
   },
   "scripts": {
     "dev": "lerna run dev"
+  },
+  "dependencies": {
+    "swiper": "^11.1.4"
   }
 }
