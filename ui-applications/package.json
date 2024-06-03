@@ -57,6 +57,7 @@
     "test": "vitest run --pool=forks"
   },
   "dependencies": {
+    "swiper": "^11.1.4",
     "framer": "^2.4.1",
     "framer-motion": "^11.2.10",
     "node-fetch": "^2.7.0",
