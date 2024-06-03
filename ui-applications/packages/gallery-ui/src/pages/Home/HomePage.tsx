@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetGalleryPhotosQuery } from "../../services/GalleryApi";
 import { getQRCodeUrl } from "../../utils/qRCodeHelper";
-import { PhotoGallery, QRCodeCard } from "./components";
+import { PhotoGalleryWithCarousel, QRCodeCard } from "./components";
 
 const HomePage = () => {
     const { galleryId } = useParams();
@@ -12,7 +12,7 @@ const HomePage = () => {
     return (
         <>
             {
-                hasPhotos && (<PhotoGallery photoItems={data} />)
+                hasPhotos && (<PhotoGalleryWithCarousel photoItems={data} />)
             }
             {
                 qRCodeUrl && <QRCodeCard qRCodeUrl={qRCodeUrl} hasPhotos={hasPhotos} />
