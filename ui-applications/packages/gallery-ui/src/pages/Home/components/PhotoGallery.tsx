@@ -1,59 +1,47 @@
-import { useEffect, useMemo, useState } from "react";
 import { PhotoItem } from "../../../types/GalleryApiTypes"
 import { motion } from "framer-motion";
-import { getPhotoVariants } from "../utils/photoGalleryHelper";
-import { Position, pageSize, positionIndexesArray } from "../utils/constants";
 
 interface IPhotoGalleryProps {
     photoItems: PhotoItem[]
 }
 
 const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
-    const [positionIndexes, setPositionIndexes] = useState(positionIndexesArray);
-
-    const handleNext = () => {
-        setPositionIndexes((prevIndexes) => {
-            const updatedIndexes = prevIndexes.map(
-                (prevIndex) => (prevIndex + 1) % photoItems.length
-            );
-            return updatedIndexes;
-        });
-    };
-
-    useEffect(() => {
-        if (photoItems.length === pageSize) {
-            const interval = setInterval(() => {
-                handleNext();
-            }, 5000);
-
-            return () => {
-                clearInterval(interval);
-            };
-        }
-    }, [photoItems]);
-
-
-    const variants = useMemo(() => {
-        return getPhotoVariants(photoItems.length);
-    }, [photoItems])
-    const positions = Object.keys(variants);
-
     return (
         <div className="bg-black h-screen justify-center flex items-center flex-col">
-            {photoItems.map((image, index) => (
-                <motion.img
-                    key={image.id}
-                    src={image.url}
-                    alt={image.id}
-                    className="bg-white p-4 shadow-md"
-                    initial={Position.Center}
-                    animate={positions[positionIndexes[index]]}
-                    variants={variants}
-                    transition={{ duration: 1 }}
-                    style={{ width: "40%", position: "absolute" }}
-                />
-            )
-            )}
+            <div className="container mx-auto px-2 py-2 lg:px-4 lg:pt-8">
+                <motion.ul className="-m-1 flex flex-wrap md:-m-2">
+                    {photoItems.map((image) => (
+
+                        <motion.li className="flex w-1/4 flex-wrap"
+                            layoutId={image.id}
+                            key={image.id}
+                            animate="visible"
+                            exit="hidden"
+                            transition={{ duration: 1 }}
+                            initial={{
+                                opacity: 0,
+                            }}
+                            whileInView={{
+                                opacity: 1,
+                                transition: {
+                                    duration: 1
+                                }
+                            }}
+                            viewport={{ once: true }}
+                        >
+                            <div className="w-full p-1 md:p-2">
+                                <img
+                                    src={image.url}
+                                    alt={image.id}
+                                    className="bg-white p-4 shadow-md"
+                                    style={{ width: "80%" }}
+                                />
+                            </div>
+                        </motion.li>
+                    )
+                    )}
+                </motion.ul>
+            </div>
         </div>
     )
 }

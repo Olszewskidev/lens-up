@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useGetGalleryPhotosQuery } from "../../services/GalleryApi";
-import PhotoGallery from "./components/PhotoGallery";
 import { getQRCodeUrl } from "../../utils/qRCodeHelper";
-import QRCodeCard from "./components/QRCodeCard";
+import { PhotoGallery, QRCodeCard } from "./components";
 
 const HomePage = () => {
     const { galleryId } = useParams();
