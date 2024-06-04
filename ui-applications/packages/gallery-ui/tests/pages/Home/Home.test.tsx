@@ -8,14 +8,6 @@ import { HttpResponse, http as mswhttp } from 'msw';
 import { LoginToGalleryResponse } from '../../../src/types/GalleryApiTypes.ts';
 import { Server, Socket } from "socket.io";
 import { io as ioc, Socket as ClientSocket } from "socket.io-client";
-import { store } from '../../../src/app/store/store.ts';
-import { store as photoStore } from '../../../../photo-collector-ui/src/app/store.ts';
-import { Provider } from 'react-redux'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import AddPhotoToGalleryPage from "../../../../photo-collector-ui/src/pages/AddPhotoToGallery/AddPhotoToGalleryPage.tsx";
-import { ErrorCardComponent, SuccessCardComponent } from '@lens-up/shared-components';
-import { HomePage, LoginPage } from '../../../src/pages/index.ts';
-import { galleryApi, useGetGalleryPhotosQuery } from '../../../src/services/GalleryApi.tsx';
 import { useCypressSignalRMock as MockHubConnectionBuild, hubPublish } from 'cypress-signalr-mock';
 import PhotoGallery from '../../../src/pages/Home/components/PhotoGallery.tsx';
 import PhotoGalleryWithCarousel from '../../../src/pages/Home/components/PhotoGalleryWithCarousel.tsx';
@@ -36,7 +28,7 @@ let handlers = [
     return res;
   }),
   mswhttp.post(`${import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL}/upload-photo/0`, async () => {
-    const socket = MockHubConnectionBuild("testhub", {
+    MockHubConnectionBuild("testhub", {
       enableForVitest: true,
     });
 
@@ -47,8 +39,6 @@ let handlers = [
         value: { id: '0', url: 'happy.png', authorName: "Author", wishesText: "happy.png" }
       }
     );
-
-    //socket?.send("PhotoUploadedToGallery", photo);
 
     return new Response(null, {
       status: 200,
