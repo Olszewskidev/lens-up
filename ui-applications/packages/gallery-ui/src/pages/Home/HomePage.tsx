@@ -6,7 +6,7 @@ import { PhotoGalleryWithCarousel, QRCodeCard } from "./components";
 const HomePage = () => {
     const { galleryId } = useParams();
     const { data } = useGetGalleryPhotosQuery(galleryId || "", { skip: !galleryId });
-    const qRCodeUrl = getQRCodeUrl()
+    const qRCodeUrl = getQRCodeUrl();
 
     const hasPhotos = data && data.length > 0
     return (

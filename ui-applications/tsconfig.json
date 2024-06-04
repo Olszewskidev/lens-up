@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
-      "target": "ES2020",
+      "target": "es2020",
       "useDefineForClassFields": true,
-      "lib": ["ES2020", "DOM", "DOM.Iterable"],
-      "module": "ESNext",
+      "lib": ["es2020", "DOM", "DOM.Iterable"],
+      "module": "esnext",
       "skipLibCheck": true,
   
       /* Bundler mode */
-      "moduleResolution": "bundler",
+      "moduleResolution": "node",
       "allowImportingTsExtensions": true,
       "resolveJsonModule": true,
       "isolatedModules": true,
@@ -18,9 +18,13 @@
       "strict": true,
       "noUnusedLocals": true,
       "noUnusedParameters": true,
-      "noFallthroughCasesInSwitch": true
+      "noFallthroughCasesInSwitch": true,
+      "esModuleInterop": true,
+      "types": [
+        "jest", "vitest/globals"
+      ],
     },
-    "include": ["packages/**/*"],
-    "exclude": ["node_modules"]
+    "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue", "tests", "packages/**/*"],
+    "exclude": ["node_modules"],
   }
   

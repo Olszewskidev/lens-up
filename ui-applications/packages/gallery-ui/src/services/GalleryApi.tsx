@@ -13,7 +13,7 @@ export const galleryApi = createApi({
         loginToGallery: builder.mutation<LoginToGalleryResponse, LoginToGalleryPayload>({
             query: (payload) => ({
                 method: 'POST',
-                url: `login`,
+                url: 'login',
                 body: payload,
             }),
         }),
@@ -22,7 +22,7 @@ export const galleryApi = createApi({
             async onCacheEntryAdded(galleryId, { cacheDataLoaded, cacheEntryRemoved, updateCachedData },) {
                 try {
                     await cacheDataLoaded;
-
+                    
                     const socket = new HubConnectionBuilder().withUrl(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/hubs/gallery?galleryId=${galleryId}`).build();
 
                     await socket.start().then(() => {

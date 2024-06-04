@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home page with photos > Photo gallery must be shown in home 1`] = `
+<DocumentFragment>
+  <div
+    class="absolute top-1/2 left-1/2 transform -translate-x-1/2"
+  >
+    <figure>
+      <img
+        alt="QR code"
+        class="rounded-lg w-64 h-64"
+        src="QRCodeUrl"
+      />
+      <figcaption
+        class="font-bold text-base mb-2 text-center text-white"
+      >
+        Scan this and join.
+      </figcaption>
+    </figure>
+  </div>
+</DocumentFragment>
+`;

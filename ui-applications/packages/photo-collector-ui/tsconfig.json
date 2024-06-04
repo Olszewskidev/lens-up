@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
   },
-  "include": ["src/**/*"],
+  "include": ["vite-env.d.ts", "src/**/*", "src/**/*.vue", "tests", "**/*", "photo-collector-ui", "photo-collector-ui/tests", "photo-collector-ui/tests/app", "src/**/*", "src/**/*.vue", "src/**/*"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
