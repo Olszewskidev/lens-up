@@ -1,8 +1,7 @@
 import { HubConnectionBuilder } from '@microsoft/signalr';
-import { useCypressSignalRMock as MockHubConnectionBuild } from 'cypress-signalr-mock';
+import { useCypressSignalRMock as MockHubConnectionBuild, hubPublish } from 'cypress-signalr-mock';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { LoginToGalleryPayload, LoginToGalleryResponse, PhotoItem } from '../types/GalleryApiTypes';
-import cy from "cypress-signalr-mock";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_GALLERY_SERVICE_URL,
@@ -30,14 +29,6 @@ export const galleryApi = createApi({
                     }) ??
                         new HubConnectionBuilder().withUrl(`${import.meta.env.VITE_GALLERY_SERVICE_URL}/hubs/gallery?galleryId=${galleryId}`).build();
 
-                    cy.hubPublish(
-                        'testhub',
-                        'PhotoUploadedToGallery',
-                        {
-                            value: { id: '0', url: 'happy.png', authorName: "Author", wishesText: "happy.png" }
-                        }
-                    );
-
                     await socket.start().then(() => {
                         console.log("Connected to socket.")
                     }).catch(() => {
@@ -50,7 +41,7 @@ export const galleryApi = createApi({
                             return [...draft, message];
                         });
                     });
-
+                    
                     await cacheEntryRemoved;
 
                     socket.off('connect');

@@ -1,0 +1,103 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Home page with no photos > No photo hub must have qr code url in image source 1`] = `
+<DocumentFragment>
+  <div
+    class="min-h-screen bg-black"
+  >
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2"
+    >
+      <figure>
+        <img
+          alt="QR code"
+          class="rounded-lg w-64 h-64"
+          src="QRCodeUrl"
+        />
+        <figcaption
+          class="font-bold text-base mb-2 text-center text-white"
+        >
+          Scan this and join.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Home page with no photos > No photo hub must show qr code card in home page 1`] = `
+<DocumentFragment>
+  <div
+    class="min-h-screen bg-black"
+  >
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2"
+    >
+      <figure>
+        <img
+          alt="QR code"
+          class="rounded-lg w-64 h-64"
+          src="QRCodeUrl"
+        />
+        <figcaption
+          class="font-bold text-base mb-2 text-center text-white"
+        >
+          Scan this and join.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Home page with photos > Photo gallery must be shown in home 1`] = `
+<DocumentFragment>
+  <div
+    class="min-h-screen bg-black"
+  >
+    <div
+      class="bg-black h-screen justify-center flex items-center flex-col"
+    >
+      <div
+        class="container mx-auto px-2 py-2 lg:px-4 lg:pt-8"
+      >
+        <div
+          class="swiper swiper-initialized swiper-horizontal"
+        >
+          <div
+            class="swiper-wrapper"
+            style="transition-duration: 0ms; transition-delay: 0ms; transform: translate3d(NaNpx, 0px, 0px);"
+          >
+            <div
+              class="swiper-slide"
+            >
+              <img
+                alt="0"
+                class="bg-white p-4 shadow-md"
+                src="happy.png"
+                style="width: 80%;"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="absolute bottom-0 end-5"
+    >
+      <figure>
+        <img
+          alt="QR code"
+          class="rounded-lg w-32 h-32"
+          src="QRCodeUrl"
+        />
+        <figcaption
+          class="font-bold text-base mb-2 text-center text-white"
+        >
+          Scan this and join.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</DocumentFragment>
+`;
