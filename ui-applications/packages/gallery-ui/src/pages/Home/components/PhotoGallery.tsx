@@ -9,7 +9,7 @@ interface IPhotoGalleryProps {
 
 const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
     return (
-        <div className="bg-black h-screen justify-center flex items-center flex-col">
+        <div className="bg-black max-h-full justify-center flex items-center">
             <div className="container mx-auto px-2 py-2 lg:px-4 lg:pt-8">
                 {
                     photoItems.length === 1 && (

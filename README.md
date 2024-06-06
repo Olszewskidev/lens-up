@@ -186,6 +186,7 @@ You can run the project locally on your machine using Docker. Follow the steps b
 
 - [x] Create project structure
 - [x] Create add photo and wishes endpoint
+- [ ] Create image resizer
 
 
 
