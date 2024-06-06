@@ -1,8 +1,17 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "module": "es2020",
+    "target": "es2020",
+    "moduleResolution": "bundler"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "jest": {
+    "moduleNameMapper": {
+         "\\.(jpg|ico|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/mocks/fileMock.js",
+         "\\.(css|less)$": "<rootDir>/mocks/fileMock.js"
+       }
+   }
 }

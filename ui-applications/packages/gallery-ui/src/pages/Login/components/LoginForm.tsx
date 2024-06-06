@@ -23,4 +23,4 @@ const LoginForm = ({ handleFormSubmit, handleEnterCodeInputChange, isLoading, en
     )
 }
 
-export default LoginForm
+export default LoginForm;

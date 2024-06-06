@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { saveQRCode } from "../../utils/qRCodeHelper";
 import { LoginForm } from "./components";
 
-const LoginPage = () => {
+export const LoginPage = () => {
     const navigate = useNavigate();
     const [enterCode, setEnterCode] = useState<string>();
 

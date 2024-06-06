@@ -4,6 +4,8 @@ const baseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL,
 });
 
+const temp = import.meta.env.VITE_PHOTO_COLLECTOR_SERVICE_URL;
+
 export const photoCollectorApi = createApi({
     reducerPath: 'photoCollectorApi',
     baseQuery: baseQuery,
