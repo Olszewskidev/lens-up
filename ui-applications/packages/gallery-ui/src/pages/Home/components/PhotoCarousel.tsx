@@ -15,8 +15,7 @@ interface IPhotoGalleryProps {
 const PhotoCarousel = ({ photoItems }: IPhotoGalleryProps) => {
     return (
         <Swiper
-            spaceBetween={30}
-            slidesPerView={'auto'}
+            slidesPerView={1}
             loop={true}
             autoplay={{
                 delay: carouselOptions.delay,
@@ -30,7 +29,7 @@ const PhotoCarousel = ({ photoItems }: IPhotoGalleryProps) => {
                 depth: 100,
                 modifier: 2.5,
             }}
-            className="py-8 relative"
+            className="h-4/5 w-4/5 object-contain items-center justify-center" 
         >
             {photoItems.map((image) => (
                 <SwiperSlide key={image.id}>
