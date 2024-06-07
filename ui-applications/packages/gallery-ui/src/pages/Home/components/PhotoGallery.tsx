@@ -13,7 +13,7 @@ const PhotoGallery = ({ photoItems }: IPhotoGalleryProps) => {
             <div className="container mx-auto h-screen w-screen flex justify-center items-center overflow-hidden">
                 {
                     photoItems.length === 1 && (
-                        <div className="h-4/5 w-4/5 object-contain items-center justify-center">
+                        <div className="relative h-4/5 w-4/5 object-contain items-center justify-center">
                             <PhotoCard photoItem={photoItems[0]} />
                         </div>
                     )
