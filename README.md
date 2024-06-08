@@ -6,8 +6,10 @@
 Have you ever attended a wedding or a birthday party? If yes, you probably saw photo booth there. You get in, take a photo and paste it in the guest book - simple and fun. But what if we could bring this fun into the digital world? This is where **LensUp** comes to the rescue. **LensUp** is a web application that serves as a virtual gallery, allowing party guests to upload their photos from the event and also write down their wishes.
 
 # :mega: Project status
-The video shows the project status as of `26.04.2024` and the core functionality of the application.
-[![LensUp state](https://img.youtube.com/vi/73V7og0nS38/maxresdefault.jpg)](https://www.youtube.com/watch?v=73V7og0nS38)
+The video shows the project status as of `08.06.2024` and the core functionality of the application.
+[![LensUp state](https://img.youtube.com/vi/_exXjulBKqI/maxresdefault.jpg)](https://www.youtube.com/watch?v=_exXjulBKqI)
+
+Previous status video: [26.04.2024](https://www.youtube.com/watch?v=73V7og0nS38)
 
 
 # :rocket: 100 days roadmap
