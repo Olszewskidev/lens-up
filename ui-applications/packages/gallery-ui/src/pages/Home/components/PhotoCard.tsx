@@ -13,7 +13,7 @@ const PhotoCard = ({ photoItem }: IPhotoCardProps) => {
                 alt={photoItem.id}
                 className="h-full w-full object-contain"
             />
-            <div className="absolute bottom-20 right-20 bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
+            <div className="absolute bottom-20 right-28 bg-white py-6 px-6 rounded-3xl w-64 my-4 shadow-xl">
                 <div className="text-white flex items-center absolute rounded-full py-4 px-4 shadow-xl bg-gray-300 left-4 -top-6">
                     <p className=" text-xl">
                         &#128204;
