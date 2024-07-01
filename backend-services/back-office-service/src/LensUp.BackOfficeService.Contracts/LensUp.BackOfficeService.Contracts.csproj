@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\common\src\LensUp.Common.Types\LensUp.Common.Types.csproj" />
+  </ItemGroup>
+</Project>
