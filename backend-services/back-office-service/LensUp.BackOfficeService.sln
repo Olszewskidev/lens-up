@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.AzureBlobStor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LensUp.Common.AzureQueueStorage", "..\common\src\LensUp.Common.AzureQueueStorage\LensUp.Common.AzureQueueStorage.csproj", "{3A378C57-D99C-492E-BF1F-3D5F4C05B66C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LensUp.BackOfficeService.Contracts", "src\LensUp.BackOfficeService.Contracts\LensUp.BackOfficeService.Contracts.csproj", "{4D3C9B65-41A5-439D-9BD0-2A5B0B615D73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{3A378C57-D99C-492E-BF1F-3D5F4C05B66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A378C57-D99C-492E-BF1F-3D5F4C05B66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A378C57-D99C-492E-BF1F-3D5F4C05B66C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D3C9B65-41A5-439D-9BD0-2A5B0B615D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D3C9B65-41A5-439D-9BD0-2A5B0B615D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D3C9B65-41A5-439D-9BD0-2A5B0B615D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D3C9B65-41A5-439D-9BD0-2A5B0B615D73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{B7AA23C4-82B9-4AC7-B62F-F5C468B6E916} = {9FB7AA3E-0F06-4C6E-8566-469A86509DEF}
 		{D16AC144-16D7-42FE-9329-7D26F11371A2} = {45BBB491-93B4-4997-B9C4-A44296D6F93F}
 		{3A378C57-D99C-492E-BF1F-3D5F4C05B66C} = {45BBB491-93B4-4997-B9C4-A44296D6F93F}
+		{4D3C9B65-41A5-439D-9BD0-2A5B0B615D73} = {A6DCD9E8-5A0B-4CDA-8D3D-BE00387930B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35CB7969-9AD1-42D8-B03C-C802B94FB3F2}
