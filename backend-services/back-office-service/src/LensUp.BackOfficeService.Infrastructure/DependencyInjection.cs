@@ -3,6 +3,7 @@ using LensUp.BackOfficeService.Domain.Repositories;
 using LensUp.BackOfficeService.Infrastructure.BlobStorage;
 using LensUp.BackOfficeService.Infrastructure.Generators;
 using LensUp.BackOfficeService.Infrastructure.Initializers;
+using LensUp.BackOfficeService.Infrastructure.QueueSenders;
 using LensUp.BackOfficeService.Infrastructure.Repositories;
 using LensUp.BackOfficeService.Infrastructure.TableConfigurations;
 using LensUp.Common.AzureBlobStorage;
@@ -34,7 +35,8 @@ public static class DependencyInjection
         services
             .AddScoped<IQRGenerator, QRGenerator>()
             .AddScoped<IGalleryStorageService, GalleryStorageService>()
-            .AddScoped<IEnterCodeGenerator, EnterCodeGenerator>();
+            .AddScoped<IEnterCodeGenerator, EnterCodeGenerator>()
+            .AddSingleton<IGalleryQueueSender, GalleryQueueSender>();
 
         if (env.IsDevelopment())
         {

@@ -15,6 +15,7 @@ WORKDIR /src
 COPY ["Directory.Build.props", "/"]
 COPY ["Directory.Packages.props", "/"]
 COPY ["StyleCop.ruleset", "/"]
+COPY ["back-office-service/src/LensUp.BackOfficeService.Contracts/LensUp.BackOfficeService.Contracts.csproj", "LensUp.BackOfficeService.Contracts/"]
 COPY ["back-office-service/src/LensUp.BackOfficeService.API/LensUp.BackOfficeService.API.csproj", "LensUp.BackOfficeService.API/"]
 COPY ["back-office-service/src/LensUp.BackOfficeService.Application/LensUp.BackOfficeService.Application.csproj", "LensUp.BackOfficeService.Application/"]
 COPY ["back-office-service/src/LensUp.BackOfficeService.Domain/LensUp.BackOfficeService.Domain.csproj", "LensUp.BackOfficeService.Domain/"]

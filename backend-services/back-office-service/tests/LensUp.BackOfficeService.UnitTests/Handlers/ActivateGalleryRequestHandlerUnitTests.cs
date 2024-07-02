@@ -2,6 +2,7 @@
 using LensUp.BackOfficeService.Application.Abstractions;
 using LensUp.BackOfficeService.Application.Commands.ActivateGallery;
 using LensUp.BackOfficeService.Application.Options;
+using LensUp.BackOfficeService.Contracts.Events;
 using LensUp.BackOfficeService.Domain.Entities;
 using LensUp.BackOfficeService.Domain.Exceptions;
 using LensUp.BackOfficeService.Domain.Repositories;
@@ -20,6 +21,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
     private readonly Mock<IQRGenerator> qrGeneratorMock;
     private readonly Mock<IGalleryStorageService> galleryStorageServiceMock;
     private readonly Mock<IUserClaims> userClaimsMock;
+    private readonly Mock<IGalleryQueueSender> queueSenderMock;
 
     private readonly ActivateGalleryRequestHandler uut;
 
@@ -33,6 +35,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
         this.qrGeneratorMock = new Mock<IQRGenerator>();
         this.galleryStorageServiceMock = new Mock<IGalleryStorageService>();
         this.userClaimsMock = new Mock<IUserClaims>();
+        this.queueSenderMock = new Mock<IGalleryQueueSender>();
 
         var applicationOptions = new ApplicationOptions()
         {
@@ -46,7 +49,8 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
             this.galleryRepositoryMock.Object,
             this.activateGalleryRepositoryMock.Object,
             Options.Create<ApplicationOptions>(applicationOptions),
-            this.userClaimsMock.Object);
+            this.userClaimsMock.Object,
+            this.queueSenderMock.Object);
     }
 
     [Fact]
@@ -86,6 +90,7 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
 
         GalleryEntity? updatedGalleryEntity = null;
         ActiveGalleryEntity? addedActiveGallery = null;
+        GalleryActivatedEvent? createdEvent = null;
 
         this.userClaimsMock
             .Setup(x => x.Id)
@@ -121,6 +126,11 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
             .Callback<ActiveGalleryEntity, CancellationToken>((x, _) => addedActiveGallery = x)
             .Returns(Task.CompletedTask);
 
+        this.queueSenderMock
+            .Setup(x => x.SendAsync(It.IsAny<GalleryActivatedEvent>()))
+            .Callback<GalleryActivatedEvent>(x => createdEvent = x)
+            .Returns(Task.CompletedTask);
+
         // Act
         await this.uut.Handle(request, cancellationToken);
 
@@ -137,5 +147,13 @@ public sealed class ActivateGalleryRequestHandlerUnitTests
         addedActiveGallery.EndDate.Should().Be(expectedValues.EndDate);
         addedActiveGallery.GalleryId.Should().Be(expectedValues.GalleryId);
         addedActiveGallery.QRCodeUrl.Should().Be(uploadedPhotoInfo.Uri.AbsoluteUri);
+
+        this.queueSenderMock.Verify(x => x.SendAsync(It.IsAny<GalleryActivatedEvent>()), Times.Once);
+        createdEvent.Should().NotBeNull();
+        createdEvent!.Payload.Should().NotBeNull();
+        createdEvent.Payload.QRCodeUrl.Should().Be(uploadedPhotoInfo.Uri.AbsoluteUri);
+        createdEvent.Payload.EndDate.Should().Be(expectedValues.EndDate);
+        createdEvent.Payload.GalleryId.Should().Be(expectedValues.GalleryId);
+        createdEvent.Payload.EnterCode.Should().Be(expectedValues.EnterCode);
     }
 }

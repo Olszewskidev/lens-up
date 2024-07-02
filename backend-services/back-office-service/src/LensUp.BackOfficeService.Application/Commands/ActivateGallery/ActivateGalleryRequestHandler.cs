@@ -1,5 +1,6 @@
 ﻿using LensUp.BackOfficeService.Application.Abstractions;
 using LensUp.BackOfficeService.Application.Options;
+using LensUp.BackOfficeService.Contracts.Events;
 using LensUp.BackOfficeService.Domain.Exceptions;
 using LensUp.BackOfficeService.Domain.Repositories;
 using MediatR;
@@ -15,6 +16,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
     private readonly IGalleryRepository galleryRepository;
     private readonly IActiveGalleryRepository activeGalleryRepository;
     private readonly IUserClaims userClaims;
+    private readonly IGalleryQueueSender queueSender;
 
     private readonly string photoCollectorUIUrl;
 
@@ -25,7 +27,8 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         IGalleryRepository galleryRepository,
         IActiveGalleryRepository activeGalleryRepository,
         IOptions<ApplicationOptions> applicationOptions,
-        IUserClaims userClaims)
+        IUserClaims userClaims,
+        IGalleryQueueSender queueSender)
     {
         this.enterCodeGenerator = enterCodeGenerator;
         this.qrGenerator = qrGenerator;
@@ -35,6 +38,7 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
         this.userClaims = userClaims;
 
         this.photoCollectorUIUrl = applicationOptions.Value.PhotoCollectorUIUrl;
+        this.queueSender = queueSender;
     }
 
     public async Task<ActivateGalleryResponse> Handle(ActivateGalleryRequest request, CancellationToken cancellationToken)
@@ -58,6 +62,8 @@ public sealed class ActivateGalleryRequestHandler : IRequestHandler<ActivateGall
 
         await this.galleryRepository.UpdateAsync(galleryEntity, cancellationToken);
         await this.activeGalleryRepository.AddAsync(activeGalleryEntity, cancellationToken);
+        await this.queueSender.SendAsync(new GalleryActivatedEvent(
+            new GalleryActivatedEventPayload(activeGalleryEntity.GalleryId, activeGalleryEntity.EndDate, activeGalleryEntity.EnterCode, activeGalleryEntity.QRCodeUrl)));
 
         return new ActivateGalleryResponse(galleryEntity.RowKey, galleryEnterCode);
     }
