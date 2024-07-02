@@ -6,6 +6,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\common\src\LensUp.Common.Types\LensUp.Common.Types.csproj" />
+    <ProjectReference Include="..\LensUp.BackOfficeService.Contracts\LensUp.BackOfficeService.Contracts.csproj" />
     <ProjectReference Include="..\LensUp.BackOfficeService.Domain\LensUp.BackOfficeService.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
