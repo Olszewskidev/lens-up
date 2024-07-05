@@ -1,4 +1,5 @@
-﻿using LensUp.PhotoCollectorService.Contracts.Events;
+﻿using LensUp.BackOfficeService.Contracts.Events;
+using LensUp.PhotoCollectorService.Contracts.Events;
 
 namespace LensUp.WebhooksTriggerSimulator;
 
@@ -11,5 +12,6 @@ internal static class Subscribers
 
     public static readonly Dictionary<string, Uri[]> GalleryQueueWebhooks = new Dictionary<string, Uri[]>()
     {
+         { nameof(GalleryActivatedEvent), [] }
     };
 }

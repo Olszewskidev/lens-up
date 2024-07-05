@@ -18,12 +18,14 @@
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.16.4" />
     <PackageReference Include="Microsoft.ApplicationInsights.WorkerService" Version="2.21.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="1.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\back-office-service\src\LensUp.BackOfficeService.Contracts\LensUp.BackOfficeService.Contracts.csproj" />
     <ProjectReference Include="..\common\src\LensUp.Common.Types\LensUp.Common.Types.csproj" />
     <ProjectReference Include="..\photo-collector-service\src\LensUp.PhotoCollectorService.Contracts\LensUp.PhotoCollectorService.Contracts.csproj" />
   </ItemGroup>

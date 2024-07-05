@@ -1,4 +1,8 @@
-﻿namespace LensUp.WebhooksTriggerSimulator;
+﻿using LensUp.Common.Types.Events;
+using Newtonsoft.Json.Linq;
+using System.Text;
+
+namespace LensUp.WebhooksTriggerSimulator;
 
 public interface IEventProcessor
 {
@@ -7,14 +11,51 @@ public interface IEventProcessor
 
 internal sealed class EventProcessor : IEventProcessor
 {
+    private readonly HttpClient httpClient;
+
+    public EventProcessor(IHttpClientFactory httpClientFactory)
+    {
+        this.httpClient = httpClientFactory.CreateClient();
+    }
+
     public async Task Process(BinaryData messageBody, Dictionary<string, Uri[]> queueWebhooks)
     {
         var @event = messageBody.ToString();
         if (string.IsNullOrWhiteSpace(@event))
         {
+            // Log error
             return;
         }
 
-        // TODO: Call webhooks
+        JObject? parsedEvent = JObject.Parse(@event);
+        JToken? eventNameJToken = parsedEvent?.GetValue(nameof(EventMessage<object>.EventName), StringComparison.OrdinalIgnoreCase);
+        string? eventName = eventNameJToken?.Value<string>();
+
+        if (string.IsNullOrWhiteSpace(eventName)) 
+        {
+            // Log error
+            return;
+        }
+
+        bool eventIsInQueueWebhooksDictionary = queueWebhooks.ContainsKey(eventName);
+        if (!eventIsInQueueWebhooksDictionary) 
+        {
+            // Log error
+            return;
+        }
+        
+        var webHooks = queueWebhooks[eventName];
+        bool hasWebHooks = webHooks.Any();
+        if (!hasWebHooks)
+        {
+            // Log info
+            return;
+        }
+
+        var content = new StringContent(@event, Encoding.UTF8, "application/json");
+        foreach (var webHook in webHooks) 
+        { 
+            await this.httpClient.PostAsync(webHook.AbsolutePath, content);
+        }
     }
 }
