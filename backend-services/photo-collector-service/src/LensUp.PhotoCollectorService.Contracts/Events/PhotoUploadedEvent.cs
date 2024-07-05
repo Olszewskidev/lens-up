@@ -4,8 +4,11 @@ namespace LensUp.PhotoCollectorService.Contracts.Events;
 
 public sealed class PhotoUploadedEvent : EventMessage<PhotoUploadedEventPayload>
 {
+    public override string EventName { get; protected set; }
+
     public PhotoUploadedEvent(PhotoUploadedEventPayload payload) : base(payload)
     {
+        this.EventName = nameof(PhotoUploadedEvent);
     }
 }
 

@@ -4,8 +4,10 @@ namespace LensUp.BackOfficeService.Contracts.Events;
 
 public sealed class GalleryActivatedEvent : EventMessage<GalleryActivatedEventPayload>
 {
+    public override string EventName { get; protected set; }
     public GalleryActivatedEvent(GalleryActivatedEventPayload payload) : base(payload)
     {
+        this.EventName = nameof(GalleryActivatedEvent);
     }
 }
 
