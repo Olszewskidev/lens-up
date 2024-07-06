@@ -31,19 +31,19 @@ internal sealed class EventProcessor : IEventProcessor
         JToken? eventNameJToken = parsedEvent?.GetValue(nameof(EventMessage<object>.EventName), StringComparison.OrdinalIgnoreCase);
         string? eventName = eventNameJToken?.Value<string>();
 
-        if (string.IsNullOrWhiteSpace(eventName)) 
+        if (string.IsNullOrWhiteSpace(eventName))
         {
             // Log error
             return;
         }
 
         bool eventIsInQueueWebhooksDictionary = queueWebhooks.ContainsKey(eventName);
-        if (!eventIsInQueueWebhooksDictionary) 
+        if (!eventIsInQueueWebhooksDictionary)
         {
             // Log error
             return;
         }
-        
+
         var webHooks = queueWebhooks[eventName];
         bool hasWebHooks = webHooks.Any();
         if (!hasWebHooks)
@@ -53,9 +53,9 @@ internal sealed class EventProcessor : IEventProcessor
         }
 
         var content = new StringContent(@event, Encoding.UTF8, "application/json");
-        foreach (var webHook in webHooks) 
-        { 
-            await this.httpClient.PostAsync(webHook.AbsolutePath, content);
+        foreach (var webHook in webHooks)
+        {
+            await this.httpClient.PostAsync(webHook.AbsoluteUri, content);
         }
     }
 }
