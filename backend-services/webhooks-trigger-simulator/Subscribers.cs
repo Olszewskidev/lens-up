@@ -12,6 +12,6 @@ internal static class Subscribers
 
     public static readonly Dictionary<string, Uri[]> GalleryQueueWebhooks = new Dictionary<string, Uri[]>()
     {
-         { nameof(GalleryActivatedEvent), [new Uri($"http://localhost:8082/Webhook/{nameof(GalleryActivatedEvent)}")] }
+         { nameof(GalleryActivatedEvent), [new Uri($"{Environment.GetEnvironmentVariable(AppSettingsKeys.GalleryServiceWebhookUrl)}/{nameof(GalleryActivatedEvent)}")] }
     };
 }
