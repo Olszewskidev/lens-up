@@ -19,6 +19,7 @@ public sealed class WebhookController : Controller
     }
 
     [HttpPost]
+    [Route(nameof(PhotoUploadedEvent))]
     public async Task<IActionResult> PhotoUploadedEventHook([FromBody] PhotoUploadedEvent @event)
     {
         var eventPayload = @event.Payload;

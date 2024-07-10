@@ -10,7 +10,22 @@ services:
       - "10001:10001" 
       - "10002:10002"
     command: azurite --loose --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
-  
+
+  lensup.webhooktriggersimulator:
+    environment:
+      - AzureFunctionsJobHost__Http__Port=8086
+      - AzureWebJobsAzureStorageConnectionString=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://host.docker.internal:10001/devstoreaccount1;
+      - GalleryServiceWebhookUrl=http://host.docker.internal:8082/Webhook
+    container_name: lensup.webhooktriggersimulator
+    image: lensup.webhooktriggersimulator
+    build:
+      context: ./backend-services
+      dockerfile: webhooks-trigger-simulator/Dockerfile
+    ports:
+      - "8086:8080"
+    depends_on:
+      - azurite.lensup
+
   lensup.photocollectorservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -67,21 +82,22 @@ services:
     depends_on:
       - azurite.lensup
 
-  lensup.galleryservice.webhooktriggersimulator:
-    environment:
-      - AzureFunctionsJobHost__Http__Port=8086
-      - AzureWebJobsAzureStorageConnectionString=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://host.docker.internal:10001/devstoreaccount1;
-      - WebhookUrl=http://host.docker.internal:8082/Webhook
-    container_name: lensup.galleryservice.webhooktriggersimulator
-    image: lensup.galleryservice.webhooktriggersimulator
-    build:
-      context: ./backend-services
-      dockerfile: gallery-service/src/LensUp.GalleryService.WebhookTriggerSimulator/Dockerfile
-    ports:
-      - "8086:8080"
-    depends_on:
-      - azurite.lensup
-      - lensup.galleryservice.api
+# TODO: Remove all code related to lensup.galleryservice.webhooktriggersimulator
+  # lensup.galleryservice.webhooktriggersimulator:
+  #   environment:
+  #     - AzureFunctionsJobHost__Http__Port=8086
+  #     - AzureWebJobsAzureStorageConnectionString=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;QueueEndpoint=http://host.docker.internal:10001/devstoreaccount1;
+  #     - WebhookUrl=http://host.docker.internal:8082/Webhook
+  #   container_name: lensup.galleryservice.webhooktriggersimulator
+  #   image: lensup.galleryservice.webhooktriggersimulator
+  #   build:
+  #     context: ./backend-services
+  #     dockerfile: gallery-service/src/LensUp.GalleryService.WebhookTriggerSimulator/Dockerfile
+  #   ports:
+  #     - "8086:8080"
+  #   depends_on:
+  #     - azurite.lensup
+  #     - lensup.galleryservice.api
 
   lensup.galleryservice.ui:
     build:
