@@ -15,7 +15,7 @@ internal sealed class EventProcessor : IEventProcessor
 
     public EventProcessor(IHttpClientFactory httpClientFactory)
     {
-        this.httpClient = httpClientFactory.CreateClient();
+        this.httpClient = httpClientFactory.CreateClient(AppConstants.EventProcessorHttpClientName);
     }
 
     public async Task Process(BinaryData messageBody, Dictionary<string, Uri[]> queueWebhooks)

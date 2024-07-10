@@ -10,7 +10,10 @@ var host = new HostBuilder()
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         services.AddScoped<IEventProcessor, EventProcessor>();
-        services.AddHttpClient();
+        services.AddHttpClient(AppConstants.EventProcessorHttpClientName).ConfigurePrimaryHttpMessageHandler(_ => new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+        });
     })
     .Build();
 
