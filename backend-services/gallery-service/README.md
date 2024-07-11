@@ -16,11 +16,10 @@ The project has typical .net project folder structure. Inside solution we can fi
 
 ​		- LensUp.GalleryService.Application
 
-​	    - LensUp.GalleryService.Domain
+​	  - LensUp.GalleryService.Domain
 
-​	    - LensUp.GalleryService.Infrastructure
+​	  - LensUp.GalleryService.Infrastructure
 
-​		- LensUp.GalleryService.WebhookTriggerSimulator
 
 ​	**tests** *(contains test projects)*
 
@@ -57,10 +56,3 @@ curl -X 'POST' \
   "enterCode": "number"
 }'
 ```
-
-
-
-**WebhookTriggerSimulatorFunction:**
-
-- Azure function created in `LensUp.GalleryService.WebhookTriggerSimulator` to read events from Azure Queue storage.
-

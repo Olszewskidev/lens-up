@@ -50,8 +50,9 @@ Description:
 - Backend services:
 
   - [Photo Collector Service (.NET Web API)](backend-services/photo-collector-service)
-  - [Gallery Service (.NET Web API + Azure Functions)](backend-services/gallery-service)
+  - [Gallery Service (.NET Web API)](backend-services/gallery-service)
   - [BackOffice Service (.NET Web API)](backend-services/back-office-service) 
+  - [Webhooks Trigger Simulator (Azure Function)](backend-services/webhooks-trigger-simulator)
 
 - UI applications:
 
