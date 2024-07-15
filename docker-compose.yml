@@ -11,6 +11,19 @@ services:
       - "10002:10002"
     command: azurite --loose --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
 
+  lensup.database:
+    image: postgres:latest
+    container_name: lensup.database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=LensUpDb
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - ./.container/lens-up-db:/var/lib/postgresql/data
+  
   lensup.webhooktriggersimulator:
     environment:
       - AzureFunctionsJobHost__Http__Port=8086
