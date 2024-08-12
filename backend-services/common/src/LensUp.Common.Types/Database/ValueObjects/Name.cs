@@ -14,7 +14,7 @@ public sealed class Name : ValueObject
 
     public string Value { get; }
 
-    public Name Create(string name)
+    public static Name Create(string name)
     {
         if (name.Length > MaxLength)
         {
