@@ -38,7 +38,7 @@ public sealed class WebhookControllerUnitTests
             .Returns(Task.CompletedTask);
 
         // Act
-        await this.uut.PhotoUploadedToGalleryHook(@event);
+        await this.uut.PhotoUploadedEventHook(@event);
 
         // Assert
         this.notificationServiceMock.Verify(x => x.SendPhotoUploadedToGalleryNotification(It.Is<string>(x => x == eventPayload.GalleryId), It.IsAny<PhotoUploadedNotification>()), Times.Once);
